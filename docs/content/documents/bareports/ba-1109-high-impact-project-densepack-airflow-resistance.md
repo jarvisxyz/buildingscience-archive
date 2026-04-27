@@ -1,0 +1,50 @@
+[Christopher Schumacher](/users/cschumacher)
+Effective Date
+November 30, 2011
+Abstract
+Historically, weatherization programs have required that cellulose insulation materials be dense-packed to a minimum installed density of 3.5 pcf. This density limit was, in part, required to realize beneficial reductions in air leakage. The Building Performance Institute (BPI) currently has under development two standards that will set requirements for the airflow resistance of insulations used in retrofit cavity (i.e. dense-pack) installations and define acceptable test methods to measure the airflow resistance of insulation materials used in dense-pack applications. An experimental apparatus and test method were developed for the purpose of measuring the airflow resistance of dense-packed fiber insulation installed as a retrofit to empty wood-frame wall cavities.
+Text
+### **1 Introduction and Background**
+#### 1.1 Introduction
+Since the beginnings of weatherization, blown loose fill insulations have been added to stud and rafter cavities to improve the thermal performance of wall and roof assemblies. Pioneers of the weatherization movement developed insertion tube methods to prevent insulation voids and ensure that cavities were completely filled with higher densities of cellulose insulation. Fitzgerald, Nelson & Shen provided one of the earliest explanations of the dense-pack insulation technique in an article for the January 1990 Home Energy Magazine (HEM 1990).
+The U.S. Department of Energy's (DOE) Weatherization Assistance Program (WAP) and many state-run weatherization programs have since adopted the technique, advocating the use of cellulose insulation, dense-packed to a minimum of 3.5 pcf, to improve thermal performance by reducing both conductive heat loss and air leakage through wall and roof assemblies. However, two recent developments have raised questions about this practice. First, the required use of cellulose insulation has been questioned; alternative fibrous insulation materials (e.g. fiberglass) have recently been developed specifically for use in dense-pack applications. Second, the minimum density of 3.5 pcf has been questioned; insulation manufacturers and building scientists have pointed out that the term dense-pack has no real meaning or definition.
+#### 1.2 Background
+Jacobson, Harrje & Dutt conducted some of the earliest organized research on the airflow resistance of cellulose-insulated assemblies in 1984 (EDU 1986).
+In a January 1990 Home Energy Magazine article, Fitzgerald, Nelson & Shen reported pre- and post-retrofit blower door test results for four houses that were retrofit using only dense-pack cellulose insulation: air leakage rates (i.e. cfm50) were reduced by at least 39.6% and as much as 54% (HEM 1990).
+The industry is currently working towards the development of standards to set the maximum allowable air permeance for dense-pack insulations of all types (e.g. cellulose, glass fiber, mineral fiber, etc.) and to establish the requirements for measuring the air permeance these materials. These efforts will provide better understanding and regulation of the material properties and methods necessary to ensure adequate energy performance.
+#### 1.3 Scope of this Work
+This report describes the development of an apparatus and test method that will form the basis for test standard, BPI-103 and inform material standards BPI-102.
+An experimental program was established to demonstrate the use of the apparatus and application of the test method through testing of over 30 test wall specimens prepared using cellulose materials from 10 different insulation manufacturers. This work will inform future round robin testing and the final BPI-103 standard.
+Finally, it is a goal of this work to estimate the airflow resistance of a generic cellulose insulation material that is dense-packed to 3.5 pcf. This scenario represents most dense-pack applications implemented over the last three decades. The estimates will inform the final BPI-102 standard.
+### **2 Experimental Apparatus & Method**
+This section of the report describes the experimental apparatus and method that were developed to measure the airflow resistance of dense-packed fiber insulation when installed as a retrofit to empty wood-frame wall cavities. Fabrication details of the test apparatus are provided, along with manufacturer names and model numbers of the components used to construct the test apparatus that was employed in the testing undertaken for this BA task. Recommendations are made for minimum equipment requirements for future testing work.
+#### 2.1 Apparatus
+The necessary apparatus equipment can be divided into three groups:
+  * The empty test wall assembly
+  * Equipment for preparing the test specimen
+  * Equipment for measuring the airflow resistance
+
+
+Each of these is explained in great detail in the sections that follow.
+*2.1.1 Test Wall Assembly*
+The test wall assembly is designed to be representative of typical uninsulated wood-frame wall assemblies that are encountered in retrofit and weatherization work in all regions of the United States. The assembly, pictured in Figure 1, comprises three full-height 2x4 stud bays that each have inside (i.e. clear) dimensions of 14.5 in. wide x 94 in. high.
+![](https://www.buildingscience.com/sites/default/files/public/ba-1109_figure_01.jpg?itok=eQFy3tnC)
+**Figure 1:** Empty Test Wall Assembly as seen from front (left image) and back (right image)
+The test wall assembly can be separated into two pieces: the ‘front panel’ and the ‘back panel’. Eight (8) under-center draw latches (around the perimeter) and fourteen (14) wing nuts (in the field) secure the back panel to the front panel. The latches and wing nuts can be quickly and easily opened to permit the removal of insulation and cleaning of the test wall assembly between tests.
+*Front Panel*  
+The front includes the 2x4 @ 16 in. O/C wood stud wall frame. It is finished with 1/4 in. thick polycarbonate plastic sheets (one upper & one lower) and a built-up plywood flange (located at mid-height). The flange and both of the plastic sheets are fixed & sealed to the wood studs to form the ‘front panel’. Two (2) 36 in. long 2x4 and plywood feet, visible in Figure 2, are attached at the bottom of the front panel to stand the test wall assembly vertical and prevent it from tipping over during use.
+Nine (9) 2.5 in. dia. install holes were drilled through the polycarbonate sheets to permit various options for installing the insulation in the test wall assembly. Three holes (1 in each studspace) are located at the ‘lower’ position, 24 in. up from the bottom of the front panel; three are located at the ‘upper’ position, 24 in. down from the top of the panel; and three are located at the ‘top’ position, 6 in. down from the top of the panel. The nine install holes can be seen in the photograph of Figure 2.
+![](https://www.buildingscience.com/sites/default/files/public/ba-1109_figure_02.jpg?itok=UleRucLn)
+**Figure 2:** Install holes in front panel as seen from back (with back panel removed)
+The transparent polycarbonate sheets allow the installer to see the progress of the dense-packing. Stakeholders debated the use of the polycarbonate sheet during development of the apparatus and methodology for preparing test specimens. Installers would not have the advantage of a seethrough wall assembly in the field; however, researchers from the glass fiber and cellulose industries both agreed that it was a desirable feature for the wall test assembly as it would permit the identification of problem samples prior to testing, thus saving precious laboratory time.
+Each polycarbonate sheet is fixed to the stud frame with forty two (42) No. 8 x 1-1/2 in. wood screws around the perimeter and four (4) No. 8 x 2 in. wood screws in the field. Two 1/16 in. thick washers were installed as spacers on the four screws in the field to create a 1/8 in. high gap between the polycarbonate sheet and the wood frame as pictured in the right image of Figure 3. This controlled and repeatable gap is intended to be representative of the gaps between the wood framing and sheathing commonly found in existing wall assemblies. The gap plays a critical role in the preparation of the test specimen as it allows air to move between one studspace and the next when the wall is pressurized by the fiber moving equipment.
+![](https://www.buildingscience.com/sites/default/files/public/ba-1109_figure_03.jpg?itok=YEfR-T88)
+**Figure 3:** No. 8 x 2" wood screw (left) and two 1/16" washers (right) to fix and gap plastic sheet
+The gap between the polycarbonate and the frame is maintained at the perimeter of through the use of a 1/2 in. wide x 1/8 in. thick closed-cell foam gasket. The gasket, visible in Figure 4, also provides backup for a wet sealed joint that prevents air leakage between the perimeter of the polycarbonate sheet and the wood frame.
+![](https://www.buildingscience.com/sites/default/files/public/ba-1109_figure_04.jpg?itok=pcXBYv51)
+**Figure 4:** Closed-cell foam gasket & wet seal around perimeter of polycarbonate sheet
+![](https://www.buildingscience.com/sites/default/files/public/ba-1109_figure_05.jpg?itok=mdVnhsdA)
+**Figure 5:** Exit orifice plate with 1" wide slot opening
+The built-up plywood flange serves two functions: first it provides structural support for and seal to the air pressure manifold that gets attached to the test wall assembly during the airflow measurement portion of the test; second, the manifold permits the installation of custom air outlet orifices. A 1 in. wide slot, visible in Figure 5, was used for the testing undertaken in this BA task. The inside of the slot was finished with a 1/8 x 1/8 in. plastic screen.
+In the case of our test wall assembly, the flange is built-up using two layers of 3/4 in. thick . . .
+Download complete report [here](/file/5797).

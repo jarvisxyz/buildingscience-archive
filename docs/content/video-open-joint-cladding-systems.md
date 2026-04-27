@@ -1,0 +1,3 @@
+The basis of the current ongoing Canadian Civil War between pressure equalization and ventilated and drained claddings (open-joint cladding systems). Old school engineers like me were taught by Old Masters like Handegord who pointed out that drainage was the key to life in general and pressure equalization—if it applied at all—was for joints and not for entire wall assemblies. Claddings were to be drained. Ventilated if you must, but first and foremost they had to be drained.
+Video Category
+Cup of Joe’s

@@ -1,0 +1,116 @@
+Effective Date
+April 27, 2009
+Text
+This two-story slab-on-grade enclosure is designed for Maitland, FL (Hot-Humid Climate). It features an unvented roof with cavity insulation in rafter cavities, and clay tiles. The 2x6 advanced wood frame walls on the second floor are insulated with cavity insulation and feature a stucco finish. The masonry walls on the first floor are insulated on the interior with permeable or semi-permeable rigid insulation. The rim joist is insulated with cavity insulation on the interior and the slab is left uninsulated.
+## Enclosure Design
+[![](/sites/default/files/resize/migrate/jpg/maitland_profile-499x734.jpg)](/sites/default/files/migrate/jpg/maitland_profile.jpg)
+## Building Science Details
+  * **Foundation:** Stem wall & slab
+  * **Above Grade Wall****(1st floor)****:** Masonry;******(2nd floor)****:** Wood frame
+  * **Cladding:** Stucco
+  * **Attic:** Conditioned
+  * **Roof** : Tile
+
+
+## Building Science Details
+  * **Air sealing details at transitions** \- Air sealing can be particularly difficult, but no less important, at assembly transitions such as top-of-wall/roof assembly junctions, band joists, and between attached garages and living spaces. These three are discussed below because they have proven to be a consistent challenge for builders.
+
+
+[![](/sites/default/files/migrate/jpg/maitland01.jpg)](/sites/default/files/migrate/jpg/maitland01.jpg)
+**Figure 7**
+  * **Top-of-wall/roof assembly junction** – The continuity of an exterior air barrier can be maintained at this junction if the air barrier material (foam insulation or stucco cladding, for example) is used continuously for the wall, soffit, and fascia. The continuity of an interior air barrier can be maintained through a combination of cut foam blocks and sealant/caulk, or spray foam. Note that neither cellulose nor fiberglass (batt or blown) can be used for the air barrier.
+  * **Band joists** – Continuity of an exterior air barrier can be maintained at the band joist with sealed or taped housewrap or rigid foam insulation. Continuity of an interior air barrier can be maintained through a combination of cut foam blocks and sealant/caulk, or spray foam. Note that neither cellulose nor fiberglass (batt or blown) can be used for the air barrier. The air barrier detail on second-story band joists is important because it is inaccessible (covered by structural/finish floor and ceiling finish) after construction. The air barrier/thermal envelope detail is important on ground floor band joists because of the thermal bridge that can occur at the top of crawlspace foundation walls (as the result of the air barrier and thermal envelope moving from the outside to the inside of the building enclosure and termite inspection zones located at the top of crawlspace foundation walls). Note that while fiberglass batts fulfill the requirement for protection from ignition in the open band joists, fiberglass batt material by itself cannot maintain the air barrier.
+  * **Attached garages** – the building enclosure surfaces shared between conditioned space and an unconditioned garage must have a continuous air barrier. See *Figure 7* for details in terms of using sealants and rigid insulation to create a continuous air barrier between the attached garage and living space. Refer to [Information Sheets](etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/doctypes/information-sheets) for details.
+
+
+  * **Drying mechanisms –** In any climate, vapor control is based on the relationships among the following: the permeability of wall components, the type of cladding (reservoir or non-reservoir), the presence/lack/nature of an air space, and the magnitude/duration of the vapor drive (based on the relationship between the exterior and interior moisture content and temperature differences). The type of sheathing and housewrap used in any wall assembly must be based on an understanding of these inter-relationships. See “[Insulations, Sheathings, and Vapor Diffusion Retarders](etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/reports/rr-0412-insulations-sheathings-and-vapor-retarders)” for more information.  
+  
+In both the first and second story wall assemblies, drying can occur to the exterior and the interior as long as permeable latex paints are used. The use of semi-permeable rigid insulation on the interior of the first story masonry wall assembly allows drying to the interior at a controlled rate. Either expanded polystyrene (EPS) or extruded polystyrene (XPS) can be used in this location. We recommend that less than one inch of XPS be used. A thicker layer retards inward drying due to its lower vapor permeability.
+  * **Drainage "step" in slab perimeter -** The block "seat" is readily accomplished by securing dimensional lumber of the desired size to the inside top edge of the concrete form.
+  * **Drainage plane, air barrier, and vapor control –** The drainage plane on the first story exterior wall is the face of the stucco. The drainage plane on the second story exterior wall is the StuccoWrap®. Flashing details at penetrations on each story must reflect this difference.  
+  
+The building paper behind the weep screed flashing at the transition from first to second story is an important “back-up” protection against liquid water penetration into the wall assembly. The first floor air barrier is the concrete block (with continuity at the top of the wall provided by the cap block). On the second floor, the air barrier is both the exterior stucco rendering and the interior gypsum board installed using the [Airtight Drywall Approach](etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/information-sheets/air-barriers-airtight-drywall-approach/view). Control of moisture drive from the outside in is accomplished by the relative impermeability of the OSB on the second story. On the first story, the storage capacity and insensitivity of the concrete block mitigates the impact of moisture penetration in the wall assembly, and the entire assembly permits drying in both directions.
+  * **Window flashing –** Window flashing details are wall assembly or cladding specific. See *Figures 8a-c* and refer to the *[Water Management Guide](http://www.buildingsciencepress.com/Water-Management-Guide-P9.aspx)*.
+
+
+![](/sites/default/files/resize/migrate/jpg/maitland02-220x215.jpg)
+**Figure 8a: Exterior door pan flashing "seat**
+![](/sites/default/files/resize/migrate/jpg/maitland03-220x241.jpg)
+**Figure 8b: Window sill drainage detail**
+![](/sites/default/files/migrate/jpg/maitland04.jpg)
+**Figure 8c: Window sill drainage section**
+  * **Advanced framing** – An important element of high performance wood-frame construction is an advanced framing package. For more detailed information see [Advanced Framing Techniques](etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/information-sheets/information-sheet-common-advanced-framing-details/view).
+  * **Framing on slabs -** Installing a capillary break between the sill plate and a concrete slab on all walls—exterior, interior, partition—is good practice. A closed cell foam sill sealer or gasket works well. Alternatively, a strip of sheet polyethylene can be used. This isolates the framing from any source of moisture that may be either in or on the concrete slab (and using sill sealer on all walls maintains wall height exactly the same).
+  * **Soil gas ventilation** – The sub-slab to roof vent system handles conditions that are difficult if not impossible to assess prior to completion of the structure— confined concentrations of air-borne radon, soil treatments (termiticides, pesticides) methane, etc. The cost of this "ounce" of prevention is well balanced against the cost of the "pound" of cure. Note that this system is a passive system that can easily be converted to an active ventilation system by installing an in-line fan into the stack in the attic.
+  * **Thermal barrier** – In this climate, moisture control does not require specific levels of insulation. Inside/outside temperature differences do not require cavity-warming exterior rigid insulation to control wintertime condensing surface temperatures. Having said this, insulating sheathing in general is a good idea. We recommend full cavity fill in the walls, but the 2X6 framing is more about advanced framing than the depth of cavity insulation that can be achieved. The R-22 cellulose or R-30 batts in the conditioned attic have proven to be adequate to provide interior conditions for enhanced HVAC equipment durability and duct performance when they are located in the attic. Note that the cellulose netting or fiberglass batt supports create the insulation “belly” and accommodate cavity fill depth that exceeds the depth of the truss top chord.
+  * **Sub-slab stone bed** \- The four-inch deep 3/4" stone bed functions as a granular capillary break, a drainage pad, and a sub-slab air pressure field extender for the soil gas ventilation system. The sub-slab stone bed is a practical method for venting soil gas should be necessary.
+
+
+## Climate Specific Details
+  * **Termite management** \- In hot-humid climates, termites are best managed with a three-pronged approach that deals with the three things termites need - cover from sunlight, moisture, and food (wood or paper):
+
+
+>   * **Reduced cover -** Keep plantings 3 feet away from the building perimeter, thin the ground cover (wood mulch or pea stone) to no more than two inches depth for the first 18 inches around the building, and maintain the termite inspection zone on the exterior of the foundation above grade.
+>   * **Control moisture -** Maintain slope away from building as shown, carry roof load of water at least three feet away from building, and make sure that irrigation is directed away from the building.
+>   * **Chemical treatment -** Use an environmentally-appropriate soil treatment (such as Termidor®) and a building materials treatment (such as Bora-Care®) for termite-prone near-grade wood materials.
+>   * **Inter-relationship of first three points –** Since a builder and a homeowner’s ability to employ or stick to each of the three strategies above will vary, make sure that an inability to fully employ one strategy is compensated for by complete rigor by the others. For example, if for some reason, chemical treatment of soil or building materials is not an option, then complete rigor in controlling moisture and ground cover must be maintained.
+> 
+
+  * **Conditioned attics** – This [assembly](etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/digests/bsd-102-understanding-attic-ventilation) may require discussion with local building code official.
+  * **Mechanical systems** \- The key elements of a system for this climate are:
+![](/sites/default/files/resize/migrate/jpg/maitland06-450x137.jpg)  
+**Figure 10a-c**  
+---  
+    * **Sealed combustion gas furnace** \- for energy efficiency and health/safety with the unit inside conditioned space.
+    * **Minimum 12 SEER AC unit** \- for energy efficient management of sensible load.
+    * **Central-fan-integrated supply ventilation** \- this system is simple, effective, and economical. It provides fresh, filtered, outside air in a controlled amount using the existing HVAC delivery system for even distribution and mixing. Set-up intermittent central-fan-integrated supply, designed to ASHRAE 62.2P rate, with fan cycling control set to operate the central air handler as much as 33% of the time, but not less than 25% of the time, occurring within at least every three hours to provide ventilation air distribution and whole-house averaging of air quality and comfort conditions ($125 to $150). Include a normally closed motorized damper in the outside air duct with the AirCycler™ FRV control (+$50 to $60). See “[Air Distribution Fan And Outside Air Damper Recycling Control](etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/reports/rr-9901-air-distribution-fan-and-outside-air-damper-recycling-control)" for more detailed information. 
+    * **Supplemental dehumidification** \- all homes in this climate call for supplemental dehumidification; the reduced sensible load of high performance homes reduces the dehumidification the AC unit provides, extends shoulder seasons, and raises the impact of occupant-generated moisture.   
+  
+There are a number of different ways to accomplish supplemental dehumidification with varying costs and performance advantages (for a detailed discussion of supplemental dehumidification, see [Air Conditioning](resolveuid/a1edd9667ecadcf0ee7c4f29477ccdb5).). Described below is one low-cost yet effective approach and one more costly but higher performance/systems-engineered approach:  
+  
+**1\. Ducted stand-alone dehumidifier:** This system is a "site-constructed" and consists of an off-the-shelf standard dehumidifier ducted in the attic and controlled by a dehumidistat located in the living space. This arrangement of individual components has proven to be an effective and economical system for the production home building setting. The installed cost ranges from approximately $350 to $550. The system is comprised of any Energy Star dehumidifier that uses a blower wheel instead of a paddle fan to move air past the coil (dehumidifier located in attic in an insulated enclosure and ducted to living space), Honeywell dehumidistat model H8808C located in living space and Honeywell switching relay (with transformer) model RA89A 1074. See Figure 9.  
+  
+**Note:** The following manufacturers make Energy Star-qualified blower wheel stand-alone dehumidifiers:
+**2\. Aprilaire 1700:** This is a truly engineered, coherently manufactured, supplemental dehumidification system with built-in air filtration, ducted design, and a controls package that integrates central blower cycling for distribution, dehumidification and intermittent introduction of outside air ventilation. The system is also designed for flexibility-it can be connected to the conditioned space directly or to the central air distribution system in a number of configurations. It's also compact and lightweight enough to be set on or hung from most framing. The product cost for this system is currently about $1,100. For more information, see: [ http://.aprilaire.com](http://www.aprilaire.com/index.php).  
+  
+For more information on other high performance supplemental dehumidification systems, see: [ http://www.thermastor.com](http://www.thermastor.com/DesktopDefault.aspx).
+      * LG Electronics (all models):
+      * Haier America (all models):
+      * [Heat Controller](http://www.heatcontroller.com/) (all BHD models use a turbo-impeller with turned blades):
+      * Or you can check the [ EPA Energy Star website](http://www.energystar.gov/index.cfm?c=dehumid.pr_dehumidifiers) for dehumidifiers from these manufacturers
+
+
+![](/sites/default/files/migrate/jpg/maitland05.jpg)
+**Figure 9**
+  * **Ducts in conditioned space** \- The preferred method for keeping HVAC ducts and mechanical equipment inside conditioned space is moving them down from the attic. Moving the conditioned boundary up (to the underside of the roof sheathing) so that the attic is conditioned also works as shown below. In this building profile, a conditioned attic can be used for HVAC ducts and equipment. In no case should HVAC ducts be placed within exterior wall assemblies-this is not part of what is meant by ducts in conditioned space. A vented attic assembly may be used in this climate as long as the ceiling plane is air tight and no ductwork or air handling equipment is located in the attic. See *Figures 10a-c*.  
+
+
+>   * **Transfer grilles** – Single air returns require transfer grilles to provide return pathways that prevent pressurization of bedrooms. Appropriate sizing for ducts, including these pressure relief methods, can be found in the [Cooling System Sizing](http://www.buildingscienceconsulting.com/presentations/documents/PR-0109_Startup_Cooling_Systems.pdf) Pro. See *Figures 11a-d*.
+> 
+
+>> ![](/sites/default/files/resize/migrate/jpg/maitland07-450x372.jpg)
+>> **Figure 11a-d**
+>   * **Water heater** \- any type of gas water heater (in terms of venting) works if the water heater is located in the garage. If the water heater is located inside conditioned space, then it must be a gas power vented or power-direct vented unit, or an electric water heater.
+> 
+
+## Field Experience Notes
+  * **Air sealing** – Unvented assemblies—walls or roofs—are robust when the air sealing is robust. The hardest spots are not the "fields" but the "margins" of assemblies. Spray foam may seem like an expensive element of the assembly, but the labor savings and air sealing quality in comparison to the alternatives are clear.
+  * **Roofing** \- Roofing tiles in general, and light-colored ones in particular, have proven a wise choice to reduce cooling loads in this climate. For more information, see [ Performance of Unvented Attics](etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/reports/rr-9802-performance-of-building-america-initiative-houses-with-unvented-attics-and-tile-roofs-constructed-by-pulte-homes-las-vegas-division) or see the [ Energy Star Reflective Roof Product List](http://www.energystar.gov/ia/products/prod_lists/roof_prods_prod_list.xls).
+  * **Elastomeric paints and stucco** \- We have found that acrylic latex paints generally outperform elastomeric paints on stucco. While elastomeric paints have excellent crack-spanning capability, they can be much less vapor permeable than acrylic latex paints. Elastomeric paints have been known to blister when moisture gets into the assembly. In hot-humid climates, the higher vapor permeability of latex paints is overall more important than the higher crack-spanning capability of elastomeric paints unless a high permeability (greater than 20 perms) elastomeric paint coating is used.
+
+
+![](/sites/default/files/migrate/jpg/maitland08.jpg)
+**Figure 12**
+  * **Advanced framing –** For a technical resource that may help with resistance to advanced framing methods from local code officials, see the *Building Safety Journal* article written by Nathan Yost of BSC.
+  * **Energy trusses –** There are a number of different truss configurations that yield greater depth at the heel, but they vary quite a bit in cost. The truss shown in *Figure 12* (sometimes called a “slider” truss) has proven to be among the most cost-competitive. And of course, the pitch of the roof affects just how much insulation you can get at this location, regardless of the type of truss.
+  * **HVAC commissioning –** The most efficient equipment means little if the system is not set up and started up properly. Follow [high performance start-up procedures](etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/guides-and-manuals/gm-system-sizing-pro/view).
+
+
+## Material compatibility and substitutions
+  * **Exterior sheathing/building "paper"** \- We do not recommend any substitutions behind stucco and a wood-framed wall. The paper-backed lath is an excellent bond break for the stucco and the unique corrugated profile of the StuccoWrap® is an excellent drainage plane material. In addition, structural sheathing is required for its resistance to wind loads in this hurricane prone region. Note that a cladding/sheathing combination capable of passing the hurricane impact test is a critical component of any wall assembly within many areas of this climate zone.
+  * **Cavity insulation** \- Any type of cavity insulation would be acceptable in this application—spray foam (open cell and closed cell), cellulose, fiberglass, (as long as air sealing is accomplished by a separate component or system when cellulose or fiberglass is used). The only exception is with high permeability sheathings (such as fiberboard and gypsum), where a vapor permeable cavity insulation should be used. Since this wall assembly is designed to dry exclusively to the interior, do not use any layers at the interior surface that have a low vapor permeability (polyethylene or vinyl wall covering). Note that when foam insulation is left exposed in an assembly, a "thermal barrier" or "protection against ignition" may be required. Code implementation/interpretation have proven to be particularly troublesome for "gray" areas, such as spaces that are conditioned but not occupied (conditioned attics and crawlspaces).
+  * **Eave blocking and spray foam** – Since stucco is used as the exterior cladding, it can be used continuously on the soffit and fascia (replacing the spray foam and blocking) to move the air barrier from the top of the wall to the roof overhang (see Hot-Dry/Mixed-Dry Climate building profiles).
+  * **Flooring** \- Many finished flooring materials — either because of their impermeability (sheet vinyl, for example) or sensitivity to moisture (wood strip flooring, for example) — should only be installed over a slab with a low w/c ratio (≈0.45 or less) or a slab allowed to dry (0.3 grams/24hrs/ft2) prior to installation of flooring. In general, sheet vinyl flooring should be avoided.
+  * **Sub-slab sand layers** \- A [sand layer under the slab](etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/etw-maitland-profile/insights/bsi-003-concrete-floor-problems/?topic=/doctypes/building-science-insights) (to prevent differential drying and cracking) should never be placed between a vapor barrier and a concrete slab. Cast the concrete directly on top of the vapor barrier. This problem is better handled with a low w/c ratio (≈0.45 or less) and wetted burlap covering during initial curing.
+  * **Latex paint** \- The substitution of low permeability finishes (vinyl wall paper, oil-based paints) for latex paint is strongly discouraged because of reduced drying potential. (Note that there are latex paints with very low vapor permeabilities, but they are generally clearly labeled as such.)
+  * **Gypsum wallboard -** Areas of potentially high moisture, such as bathrooms, laundry rooms, and kitchens are excellent candidates for non-paper faced wallboard systems (e.g. James Hardie’s Hardibacker®, GP’s DensArmor®, USG’s Fiberock®). In addition, paper-faced gypsum board should never be used as interior sheathing or backer for tub or shower surrounds where ceramic tile or marble (any material with joints or grout lines) is used as the finish.

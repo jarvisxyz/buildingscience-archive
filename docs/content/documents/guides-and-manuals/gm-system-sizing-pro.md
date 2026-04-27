@@ -1,0 +1,64 @@
+[Armin Rudd](/users/arudd)
+Effective Date
+December 19, 2006
+Text
+A design process is described for sizing cooling and heating system capacity, for specifying the airflow and duct sizes to each conditioned space, and for specifying the free area needed to transfer air supplied to closed rooms back to the central return. This design process involves using a computerized version of the industry standard ACCA Manual J calculation procedure, with specific parameters specified to properly handle infiltration, ventilation, glazing, and airflow velocities for ducts.
+### **1.0 Introduction**
+A design process is described for sizing cooling and heating system capacity, for specifying the airflow and duct sizes to each conditioned space, and for specifying the free area needed to transfer air supplied to closed rooms back to the central return. This design process involves using a computerized version of the industry standard ACCA Manual J calculation procedure, with specific parameters specified to properly handle infiltration, ventilation, glazing, and airflow velocities for ducts. This process is particularly suited for Building America houses (also Environments for Living™ and Engineered for Life™ Platinum level).
+The program RHVAC, version 8, from EliteSoft was used for this example (check the internet for the latest updates). An Excel worksheet was developed to collate the information from RHVAC and perform additional calculations to come up with final project specifications.
+When setting up the building model, some specific parameters need to be input properly for evaluation of the Building America (BA) houses.
+### **2.0 Infiltration**
+All of the BA houses are constructed to have a low building envelope air leakage rate and a controlled mechanical ventilation system. The ventilation system slightly pressurizes the house when the air handler unit blower is operating. During that time, a small amount of conditioned air leaves the building through unintentional leakage pathways to outside, restricting air exchange to exfiltration not infiltration. While the air handler unit blower is not operating, some air infiltration will naturally occur. Based on tracer gas measurements in many of the homes constructed to the Building America standard, the infiltration rate should be input as 0.1 air changes per hour for winter and summer.
+### **3.0 Ventilation**
+The design ventilation rate is input according to Equation (1). For three bedroom houses, using a 33% fan duty cycle, the intermittent outside air flow usually falls in a range of 60 to 85 cfm. We often specify 80 cfm for the design outside airflow. For large houses with high ceilings and relatively few bedrooms, the result of Equation (1) can be small or even less than zero; however, the minimum design ventilation rate should be 40 cfm for a three bedroom house. For houses with two systems, all 80 cfm can be put on one system, or it can be split up between systems.
+The ventilation airflow rate is calculated according to the following equation, but limited to a minimum equal to continuous outside air flow rate required (ft3):
+![](https://www.buildingscience.com/sites/default/files/gm-0605_equation_01.jpg?itok=kykdk_vx) (1)
+where:
+![](https://www.buildingscience.com/sites/default/files/gm-0605_equation_01_text.jpg?itok=g3Ujx5Ry)
+### **4.0 Glazing**
+Use the National Fenestration Research Council (NFRC) rated and labeled U-value and Solar Heat Gain Coefficient (SHGC). The spectrally selective glazing used in BA homes often has a Uvalue of 0.35 and a SHGC of 0.35. Use Eq. 2 to convert from the older Shading Coefficient (SC) to SHGC if necessary.
+![](https://www.buildingscience.com/sites/default/files/gm-0605_equation_02.jpg?itok=4cawiLk-) (2)
+For cooling load calculations, interior shading should be selected as Drapes-Medium 100% closed. While this may not always be the case in actuality, we have found that system sizing will be too inflated if at least this interior shading is not selected, and this matches well with the new IECC Chapter 4 Reference Design internal shade specification of 0.7 for summer. Use no insect or external shade screens, and use ground reflectance equal to 0.20 except ground reflectance equal to 0.32 for glass adjacent to concrete areas such as a patio.
+***Exception:** *French doors and entry door side glass shall have None as internal and external shade. Bathroom windows shall have obscured or block glass.
+### **5.0 Duct gain/loss**
+Because ducts are ducts are always located inside conditioned space for BA houses, duct gain and loss factors should be set to zero.
+### **6.0 Appliance heat gain**
+One appliance will be equal to 600 Btu/h. Put one appliance in the laundry, and two appliances (1200 Btu/h) in the kitchen. If a Children’s/Recreation Retreat, Theatre Room or other equivalent space exists, then put one appliance there.
+### **7.0 People heat gain**
+Gain from people will be set at 230 Btu/h sensible and 200 Btu/h latent, per person. People will be placed around the house as follows:
+\- 2 people in the master bedroom and one person in each secondary bedroom;  
+\- 2 people in the family room or in the living room if there is no family room;  
+\- for houses with auxiliary recreation room, add one person there.
+### **8.0 Indoor and Outdoor Design Temperatures**
+For the outdoor design temperature, use the 0.4% cooling drybulb temperature listed in the ASHRAE 2001 Handbook of Fundamentals. Indoor conditions will be set at 75 F drybulb and 63 F wetbulb (50% RH).
+### **9.0 Cooling and Heating System Sizing**
+The building design load shall be calculated for the worst case elevation at the solar orientation that produces the highest heat gain.
+For equipment selection, indoor and outdoor coils should be matched. The equipment will be selected to meet the design sensible load at the actual outdoor and indoor design conditions (not ARI standard conditions of 95 outdoor and 80/67 indoor). Count at least one-half of the unused latent capacity as additional sensible capacity according to ACCA Manual S .
+HVAC designers and contractors often oversize cooling equipment to try to compensate for high occupancy, large thermostat setbacks, unusual loads, poor initial design, or inadequate distribution. Our experience has shown that typical air conditioner sizing generally results in cooling system over-sizing by about 40% to 50%. The following factors weigh against oversizing:
+  * Humidity control is reduced
+  * The system short-cycles, which reduces efficiency and allows more air stagnation and stratification
+  * First cost is increased
+
+
+In humid climates, a correctly sized system does a better job of humidity control than an oversized system. This is because the system runs longer and the evaporator coil remains colder. An oversized unit will short-cycle, sending a quick burst of cold air that will satisfy the thermostat before much moisture has been removed. Air conditioners are least efficient during the first few minutes after they start; short cycling increases the amount of time the system is operating at this lower efficiency. In addition, less air handler operation increases air stratification and stagnation. Although a fan cycling control will reduce air stagnation and stratification, we do not intend fan cycling to excuse poor design or poor workmanship. We intend to size the cooling system to appropriately to meet the design load, calculated according to ACCA Manual J, and to provide good air distribution for improved indoor air quality and thermal comfort.
+Between building air tightening, getting ducts inside conditioned space, and using high performance windows, the system size can be reduced and pay for those upgrades. In no case, for the Building America program, should the cooling system total capacity be sized higher than 110% of the ACCA Manual J total load.
+The size, or capacity, of cooling and heating systems should be specified based on the house orientation that creates the highest total load. This usually depends on the location of glazing. At minimum, the four N, E, S, W orientations should be considered. It may be advisable to also consider the four off-angle orientations of NE, SE, SW, NW as well, especially if there is a lot of off-angle, unshaded glass.
+For non-heat pump systems, specifying the heating system capacity is straightforward; the output capacity of the heating appliance must match the calculated heat loss. Usually, the first available size in furnaces or boilers is well beyond the required heating capacity for energy-efficient homes. To get longer heating cycles, multiple stage heating equipment can be used. Heat pump sizing is more involved and is not covered here. Usually, the heat pump capacity is set by the more dominant cooling system size requirement.
+For cooling systems, size the equipment based on 100% of the total cooling load (not the sensible cooling load) at the actual outdoor design condition (not the ARI rated condition) and for the realistically expected evaporator air flow (if you don’t know then assume 125 Pascal [0.5” wc] external static pressure). The combination of indoor coil and outdoor units should be ARI rated.
+Total external static pressure is defined as the pressure differential between the return side and the supply side of the air handler cabinet, and should not exceed the manufacturers specification, usually 125 Pa (0.5” water column).
+System air flow should be between 400 and 425 cfm per ton of cooling for dry climates, and between 350 to 400 cfm per ton for humid climates. Dry climates are defined as those with 20 inches or less of annual rainfall, and where the evaporator coil rarely removes much moisture from the air. These are also referred to as dry-coil climates. Humid climates, or wet-coil climates, have more than 20 inches of annual rainfall.
+If the total cooling load is more than 15% of the way toward the next larger cooling system size, then specify the larger size. Major manufacturers produce cooling systems in the following tonnage increments: 1.5, 2, 2.5, 3, 3.5, 4, and 5. One ton of cooling is equal to 12,000 Btu/h which is the heat rate required to melt one ton (2,000 lb) of 32 F ice in 24 hours.
+Especially for dry climates, most excess latent capacity converts to sensible capacity, so sizing by total load helps avoid a common mistake of over-sizing. In dry climates, system efficiency can be improved by increasing the size of the indoor unit (blower and evaporator coil) relative to the outdoor unit (compressor and condenser) by one-half ton. Upsizing the indoor unit increases the air flow per ton of cooling and raises the evaporator coil temperature, usually increasing the rated efficiency. For systems with a fixed metering device (non-thermal expansion valve system), this one-half ton mismatch usually requires a change in the orifice size according to the manufacturers specification. More than a one-half ton mismatch is not recommended even for dry climates, and for humid climates, do not upsize the indoor coil relative to the outdoor unit.
+For humid climates, sizing by total cooling load will tend to cause the system to have longer runtimes, which is good for humidity control. However, using this sizing methodology, at design conditions and steady-state operation, we don’t expect the system to operate more than 80% of any given hour. Of course for this to be true, the system must be installed and maintained properly, meaning proper refrigerant charge and proper air flow (see our other guideline, “[Refrigeration System Installation and Startup Procedures](/files/sizing-and-startup-procedures-cooling-systems)”).
+### **10.0 Air Flow Velocity and Duct Size**
+When setting up criteria for the mechanical system, some velocity constraints and duct size constraints should be set to obtain appropriate duct sizing from the program, as follows:
+  1. Set the supply trunk minimum velocity to 500 ft/min and the maximum to 750 ft/min.
+  2. Set the supply runout minimum velocity to 400 ft/min and the maximum velocity to 500 ft/min.
+  3. Set the runout duct type to round flex and the minimum runout duct diameter to 4”.
+  4. Set the maximum runout flow to 120 cfm (see below for splitting up flow for closed rooms).
+  5. Set the return air trunk minimum velocity to 250 ft/min and the maximum velocity to 550 ft/min.
+  6. Set the duct size schedule for supply runouts to 4” through 8” ducts in one inch increments.
+
+
+For community scale homebuilding, it is not practical to specify the cooling and heating system size and duct layout based on actual orientations for each house, although that would be ideal. . . 
+Download complete document [here](/file/3725).

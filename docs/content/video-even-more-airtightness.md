@@ -1,0 +1,3 @@
+So where are we after a half century? We went from the interior to the exterior with air barriers. And we went from combining the vapor barrier with the air barrier on the inside to combining the water control layer with the air barrier on the outside. We went from films on the inside to sheet goods on the inside. Then we went from films on the outside to sheet goods on the outside. We went from caulking and the black death on the inside to tapes and fluid applied joint systems on the outside. We are not done of course. But we are well on the way. It is only a matter of time that production builders move the airtightness bar from 3 ach@50 Pa to 1 ach@50 Pa.
+Video Category
+Cup of Joe’s

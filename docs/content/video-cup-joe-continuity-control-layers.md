@@ -1,0 +1,3 @@
+Pretty easy…just connect the water control layer of the roof, wall and foundation to each other…the air control layer of the roof, wall and foundation to each other…vapor control layer of the roof, wall and foundations to each other…and the thermal control layer of the roof, wall and foundations to each other. Then it gets complicated…punched openings like windows and doors… It gets worse…decks...
+Video Category
+Cup of Joe’s

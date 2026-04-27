@@ -1,0 +1,3 @@
+It is all about the connections…industry trends….we have seen them before…manufactured housing was supposed to win the game….the problem is having to move the box from the factory to the site…not cheap…not easy… The boxes coming together is not easy….not efficient because you double up the surfaces… How about panels? We love panels…you don’t ship air. How about robotics? You really think we can replace judgement and experience with a robot?
+Video Category
+Cup of Joe’s

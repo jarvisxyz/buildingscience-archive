@@ -1,0 +1,76 @@
+BSC Role
+[Building Enclosure and Energy Performance Consultant](/taxonomy/term/79)
+Services Provided
+[Building Performance and Enclosure Consulting](/services/building-performance-and-commissioning)
+Location
+Dallas, TX
+It shouldn’t be a surprise that energy would be a hit in Texas—but 8,000 people on the fi rst weekend to tour a home that uses less than half that of a standard new home, and makes the rest itself? There is no magic in the technology and engineering, but clearly builder Jim Sargent and his systems thinking team have created something special at the Building America Zero Energy Home of Lone Star Ranch in Frisco, Texas.  
+
+**Project Team:** Anderson Sargent Builders, Barley Pfieffer Architects, Building Science Corporation, EEBA, US DOE Building America Program
+**Address:** Dallas, Texas
+At the first-of-its-kind Zero Energy Home in North Texas, energy-efficient technology and science are not thrown into and onto the home, but are integrated into every aspect of the home’s design, walls, and equipment. Early in the design process, Sargent decided to make it a Building America project, and became a Building Science Consortium partner. A full-day design charrette in Westford, Massachusetts, became the first step in ensuring that this Zero Energy Home would be a systems-engineered expression of age-old and cuttingedge architecture and building science.  
+
+The Building America/Building Science Consortium approach to Zero Energy Homes is based on this premise: A home that consumes no more energy than its renewable energy systems can produce must excel in all aspects of home performance. The complete high-performance home must address:
+• Energy efficiency  
+• Indoor environmental quality  
+• Durability  
+• Water efficiency  
+• Occupant comfort  
+
+Let's take a look at how the Building America Zero Energy Home of North Texas stacks up on complete home performance.  
+
+**Energy Efficiency** — The key to any zero energy home is reducing the overall load as much as possible, keeping the renewable energy systems within the home's ability to support both their cost and their typical rooftop location. This means that all major systems in the house—the building enclosure, the mechanical systems (space heating/cooling/ventilation), domestic hot water, appliances, and lighting—must work together. As you look at the impressive list of energy features in this home (see [Anderson Sargent Building America Zero Energy House Case Study](/files/anderson-sargent-building-america-zero-energy-house-case-studypdf) side bars, keep these points in mind:
+• The architectural design and details (sized overhangs and window shading, window locations and dimensions, and layout for temporal and space "zoning") are accomplished with precision and beauty—the definition of high performance includes occupant convenience and comfort.
+• The design and performance of each system are synergetic with each of the others—no system competes to reduce overall energy load. A truly elegant example of this is the integration of the rooftop solar water system, the tankless water heater, and the modified heat pump. The key? A heat sink—the large, highly insulated hot water storage tank with two high-surface area heat exchangers. The lower heat exchanger is connected to the rooftop solar system, the upper to the tankless water heater. Since the closed-loop solar water system can “communicate” with the space heating system through the tankless water heater coil, the hot water storage tank takes on or gives up heat as solar supply and domestic water/space heating needs demand. The water heater is a backup supply for space and domestic water heating. This system depends on a series of controls for efficient operation, but is much less complex than many systems with the same level of integration.
+• The combined impact of all the features is a 45% reduction in overall annual energy consumption—181 MBtu for this home compared to 329 MBtu for a conventional home of the same basic dimensions and characteristics. With modest energy savvy, the homeowner’s remaining energy needs can be met by the renewable energy produced by the photovoltaic and solar hot water systems.1  
+
+**Indoor environmental quality** — As the home becomes a more and more efficient environmental separator (keeping the outdoors out, and the indoors in), maintaining indoor environmental quality becomes a greater challenge. This Building America Zero Energy Home has a mechanical ventilation system integrated into the central heating, ventilation, and air-conditioning (HVAC) system, and no-combustion or sealed-combustion mechanical systems. The builder and architect selected materials for their low emissions and designed assemblies for their ability to manage moisture and mold.
+**Durability** — A high-performance home is a lasting home, and maintains its performance over time. There is no simpler nor more effective way to reduce the environmental footprint of a building than by making it last longer. Durability is a three-legged stool that requires due diligence in design, specification, and workmanship. The architect, the builder, and the trades must achieve durability in concert. The Building America Zero Energy Home of North Texas will long stand as a testament to durability, with its ventilated claddings, engineered wall assemblies, and painstaking attention to moisture  
+control details.  
+
+**Water Efficiency** — Fresh water is as critical as energy in nearly every region of the country, even in Frisco, Texas, which receives nearly 40 inches of rain a year. This home has a comprehensive water conservation package:  
+• Delta® low-flow faucets and showerheads use 35% less water than conventional fixtures.  
+• The Metlund® Hot Water D’Mand system recirculates cooled water in the hot water pipes back to the water heater.  
+• Toto® toilets require a single flush of 1.6 gallons or less.  
+• The Whirlpool® clothes washer uses up to 42% less energy and up to 59% less water than standard-efficiency clothes washers.  
+• The Whirlpool® dishwasher uses at least 25% less energy and 44% less water than conventional dishwashers.  
+• The ETWater Systems irrigation controller reduces outdoor water use by up to 50%, yet maintains the health and vigor of turf and plants.  
+
+**Occupant Comfort** — A home that supplies its own energy needsover the course of a year would mean little if the occupants are dissatisfied or uncomfortable. As an Environments For Living® Platinum home, its thermal comfort is guaranteed throughout the entire space. And the meaning of thermal comfort is extended to cover hot water, as the structured plumbing/on-demand recirculation system provides hot water at every point of use “instantaneously” (and wastes no more than a cup of water in the process).  
+
+**A Systems Approach to Building the Team?** — The story of how the Building America North Texas Zero Energy Home team was built is too good not to tell.  
+• Custom builder Jim Sargent builds energy-efficient homes in North Texas for 30 years. He encourages his homeowners to keep track of their utility bills and let him know the results.  
+• Local Saturday radio home-show2 host Chris Miles, a veteran home builder and remodeler, scoffs at a caller who said the June electric bill for his 2100-ft2 home (built by Sargent) was just $60.  
+• Sargent is invited to Miles’ radio show and converts Miles into a systems-thinking building buddy.  
+• Sargent completes high-performance home building training (much of it sponsored by the U.S. Department of Energy’s [DOE] Building America Program) and becomes the Energy and Environmental Building Association’s (EEBA) first Master Builder.  
+• Sargent and Miles “go for zero” after seeing a Zero Energy Home presentation by Lew Pratsch of DOE’s Building America Program at an EEBA conference.  
+• Jim Sargent sees architect Peter Pfeiffer’s homes (known for their elegant blend of technology and timeless architecture); Sargent and Pfeiffer agree that Pfeiffer must join the team.  
+• Sargent joins the Building Science Consortium and makes his Zero Energy Home a Building America project.  
+• Chris Miles and Jim Sargent build the North Texas Zero Energy Home, from start to finish, in a little more than three months.  
+
+**The Final Analysis**
+But what does a “one-off,” nearly $1 million Zero Energy Parade Home really mean, in the grand scheme of things? Project manager Chris Miles sees it this way:
+“This home can help people make the right choices. They learn the cost and value of granite countertops and high-efficiency appliances, the living room size bath with Jacuzzi, and the solar water integrated heating. These are good things.”
+For builder Jim Sargent, the proof is in the voting—his Building America North Texas Zero Energy Home was voted “Best House Overall” by the thousands of parade attendees. “There are seven very beautiful homes here at the Parade, but the most popular one, the one everyone is asking so many detailed questions about, is this home. Performance pays,” says Sargent with a winning smile.
+See the [North Texas Zero Energy Home analysis](/documents/case-studies/cs-anderson-sargent-dallas-show-house/view) for more detailed information and discussion on the energy performance of this home.
+#### Footnotes:
+  1. The performance of this home was modeled using EnergyGauge USA compared to the DOE Building America Benchmark. Keep these considerations in mind with ALL Zero Energy homes: 1. Its building enclosure and mechanical systems are cutting edge, rely on sophisticated interplay between active and passive strategies, and are difficult to model. 2. When the performance of the building enclosure and mechanical systems (things under the builder’s and architect’s control) is optimized, the home’s performance becomes largely dependent on hot water, appliance, and lighting use (things under the occupant’s control). For discussion and details, see the [Energy Analysis](http://www.buildingamerica.gov) in the Webbased version of this case study.
+  2. House Talk, AM660, KSKY.
+
+
+Project Files
+[tx_dallas_andersonsargent_ba_zeh.pdf](/sites/default/files/project/tx_dallas_andersonsargent_ba_zeh.pdf)
+[CS-BA21_AndersonSargent.pdf](/sites/default/files/project/CS-BA21_AndersonSargent.pdf)
+Percent Energy Use Reduction
+56
+[![](/sites/default/files/styles/square/public/project/tx_dallas_andersonsargent_exterior_1024x400.jpg?itok=PUs4nvf4) ](https://buildingscience.com/sites/default/files/project/tx_dallas_andersonsargent_exterior_1024x400.jpg "Dallas, TX - The Anderson/Sargent Dallas Show House - Case Study")
+[![](/sites/default/files/styles/square/public/project/tx_dallas_andersonsargent_south_675x400.jpg?itok=tnERhGqF) ](https://buildingscience.com/sites/default/files/project/tx_dallas_andersonsargent_south_675x400.jpg "Dallas, TX - The Anderson/Sargent Dallas Show House - Case Study")
+[![](/sites/default/files/styles/square/public/project/tx_dallas_andersonsargent_kitchen_458x400.jpg?itok=E2uJNQqa) ](https://buildingscience.com/sites/default/files/project/tx_dallas_andersonsargent_kitchen_458x400.jpg "Dallas, TX - The Anderson/Sargent Dallas Show House - Case Study")
+[![](/sites/default/files/styles/square/public/project/tx_dallas_andersonsargent_lr_457x400.jpg?itok=gDgWnhuH) ](https://buildingscience.com/sites/default/files/project/tx_dallas_andersonsargent_lr_457x400.jpg "Dallas, TX - The Anderson/Sargent Dallas Show House - Case Study")
+[![](/sites/default/files/styles/square/public/project/tx_dallas_andersonsargent_solar_522x400.jpg?itok=uFZK1FL8) ](https://buildingscience.com/sites/default/files/project/tx_dallas_andersonsargent_solar_522x400.jpg "Dallas, TX - The Anderson/Sargent Dallas Show House - Case Study")
+[![](/sites/default/files/styles/square/public/project/tx_dallas_andersonsargent_foundation_279x400.jpg?itok=BX3f0cLr) ](https://buildingscience.com/sites/default/files/project/tx_dallas_andersonsargent_foundation_279x400.jpg "Dallas, TX - The Anderson/Sargent Dallas Show House - Case Study")
+[![](/sites/default/files/styles/square/public/project/tx_dallas_andersonsargent_overhang_403x400.jpg?itok=5e6b--Ps) ](https://buildingscience.com/sites/default/files/project/tx_dallas_andersonsargent_overhang_403x400.jpg "Dallas, TX - The Anderson/Sargent Dallas Show House - Case Study")
+[![](/sites/default/files/styles/square/public/project/tx_dallas_andersonsargent_ducts_539x400.jpg?itok=G5_yCID_) ](https://buildingscience.com/sites/default/files/project/tx_dallas_andersonsargent_ducts_539x400.jpg "Dallas, TX - The Anderson/Sargent Dallas Show House - Case Study")
+[![](/sites/default/files/styles/square/public/project/tx_dallas_andersonsargent_radiant_458x400.jpg?itok=nUwh1Dt7) ](https://buildingscience.com/sites/default/files/project/tx_dallas_andersonsargent_radiant_458x400.jpg "Dallas, TX - The Anderson/Sargent Dallas Show House - Case Study")
+[![](/sites/default/files/styles/square/public/project/tx_dallas_andersonsargent_profile_notxt_264x400.jpg?itok=IHMmUCIL) ](https://buildingscience.com/sites/default/files/project/tx_dallas_andersonsargent_profile_notxt_264x400.jpg "Dallas, TX - The Anderson/Sargent Dallas Show House - Case Study")
+[![](/sites/default/files/styles/square/public/project/tx_dallas_andersonsargent_mechanicals_479x400.jpg?itok=4zls3XgS) ](https://buildingscience.com/sites/default/files/project/tx_dallas_andersonsargent_mechanicals_479x400.jpg "Dallas, TX - The Anderson/Sargent Dallas Show House - Case Study")

@@ -1,0 +1,4 @@
+Can it be so easy that all we have to do to make the perfect wall more perfect is leave out the vapor control layer and allow the all to dry in both directions? Ah man, why do you ask these types of questions? Go irritate someone else. The answer is yes. Sorta. Kinda. But not always.
+When you have non-extreme environmental loads and continuous insulation on the outside. The answer is yes. What is a non-extreme environmental load? This means an enclosure enclosing an office or house or apartment rather than a natatorium, museum, hospital or art gallery5. So for natatoriums, museums, hospitals or art galleries stick with the perfect wall with a vapor control layer.
+Video Category
+Cup of Joe’s

@@ -1,0 +1,18 @@
+BSC Role
+[Building Enclosure and Energy Performance Consultant](/taxonomy/term/79)
+Services Provided
+[Building Performance and Enclosure Consulting](/services/building-performance-and-commissioning)
+Location
+Tucson, AZ
+In 1986, Pulte Homes in Tucson was plagued by customer complaints and even law suits for construction and material defects in their homes. Today, customer satisfaction is above 90% and the Pulte division is the 2001 Energy Value in Housing Award (EVHA) Builder of the Year. What happened?
+"We finally got the message from our buyers—value is as important as cost," says Vice President of Construction for Pulte Tucson, Alan Kennedy. Home buyer surveys revealed that energy efficiency, ease of maintenance, and builder reputation were topping the list of what home buyers wanted. Kennedy adds, "A large part of achieving these qualities has been our work with Building Science Corporation through the Building America program."
+Pulte Tucson has changed an awful lot about the way they build—new design, new systems, new materials —all according to Building America performance criteria. Note how closely the key features listed at the right coincide with the Best Practices for the Hot/Dry Houses that Work. And the operative word here is performance: Pulte Tucson builds all of their homes to the BA performance standards, backs all of their homes with an Environments for Living™ energy guarantee, and has a fulltime employee dedicated to performance testing and construction inspections.
+Pulte Tucson has changed very little from their first Building America prototype home in 1996. They have switched from plywood to Thermoply (lighter, cheaper, easier) to define the attic conditioned space (backer for cellulose insulation installation), and have fine-tuned their mechanical ventilation system (see discussion of moisture problems for technical [discussion of ventilation systems](/files/discussionofventilationsystemsforpulte-tucsonhomespdf) for Pulte Tucson).
+Kennedy continues: “This took a lot of work—we had to educate and train our staff, realtors, and even our building inspection department on some of the innovative systems. But if you take the same total systems approach with the industry as you take with your homes, it pays off.” It certainly seems to—Pulte Tucson has 9 communities under full development, two-thirds of their customers are recommending Pulte three times or more, and call-backs and customer complaints are a fraction of their peak ten years ago.
+![](https://www.buildingscience.com/sites/default/files/styles/panopoly_image_original/public/copper_moon_graph.gif?itok=MU7Mjj8C)
+The next step for Pulte Tucson is the [Ultra-Efficient Home](/files/coppermoonultra-efficienthomepdf) — total energy consumption, including appliances and plug loads, 50% more energy efficient than even their Building America homes. Better stay tuned to Pulte Tucson—blink and you will be left straining to see their back door!
+See the [Copper Moon Energy Analysis](/files/coppermoonenergyanalysispdf) for more information about energy savings.
+Project Files
+[131223_Copper_Moon_Case_Study.pdf](/sites/default/files/project/131223_Copper_Moon_Case_Study.pdf)
+[![](/sites/default/files/styles/square/public/project/copper_moon_626x400.jpg?itok=YYMThI7Z) ](https://buildingscience.com/sites/default/files/project/copper_moon_626x400.jpg "Tucson, AZ - Copper Moon - Case Study")
+[![](/sites/default/files/styles/square/public/project/copper_moon_unvented_attic.jpg?itok=yfRoqJjr) ](https://buildingscience.com/sites/default/files/project/copper_moon_unvented_attic.jpg "Tucson, AZ - Copper Moon - Case Study")

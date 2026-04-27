@@ -1,0 +1,3 @@
+Things have evolved considerably since the Eisenhower and Diefenbaker years. Hutcheon taught us about air flow that decade but it took more than a half century to get it right. We needed air control. We needed an air control layer – an air barrier. We started off with locating it on the inside, moved it to the middle, and finally ended up with it on the outside3. We started by combining it with a vapor barrier on the inside then we finished by combining it with a weather resistive barrier (WRB) and continuous insulation on the outside.
+Video Category
+Cup of Joe’s

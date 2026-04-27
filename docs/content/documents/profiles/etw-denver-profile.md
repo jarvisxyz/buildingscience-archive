@@ -1,0 +1,130 @@
+Effective Date
+April 27, 2009
+Text
+This two-story enclosure with a basement is designed for Denver, CO (Cold Climate). It features a vented attic with a raised heel truss and cavity insulation at the attic floor, and asphalt shingles. The 2x6 advanced wood frame walls on the second floor are insulated with cavity insulation and features wood siding. The wood frame walls on the first floor are insulated with cavity insulation and rigid insulation on the exterior, and feature brick veneer cladding. The rim joist is insulated with cavity insulation on the interior. 1” XPS rigid insulation is installed on the interior of the basement wall. The basement slab and the floor of the crawlspace are left uninsulated.
+## Enclosure Design
+## ![](/sites/default/files/resize/migrate/jpg/denver_profile-500x686.jpg)
+## Construction Recommendations
+  * **Foundation:** Basement w/sub-crawl
+  * **Above Grade Walls:** Wood frame
+  * **Cladding (1st floor):** Brick veneer; **(2nd floor):** Wood siding
+  * **Attic** : Unconditioned
+  * **Roof:** Asphalt shingles
+
+
+## Building Science Notes
+  * **Ducts in conditioned space** \- This building profile is designed to accommodate HVAC equipment and ducts in the basement and living space, not in the unconditioned attic. HVAC ducts should not be run in exterior walls.
+  * **Air sealing details at transitions** – Air sealing can be particularly difficult, but no less important, at assembly transitions such as band joists, and between attached garages and living spaces. These are discussed below because they have proven to be a consistent challenge for builders.
+
+
+![](/sites/default/files/migrate/jpg/denver01.jpg)
+**Figure 9**
+  * **Band joists** – Continuity of an exterior air barrier can be maintained at the band joist with sealed or taped housewrap or rigid foam insulation. Continuity of an interior air barrier can be maintained through a combination of cut foam blocks and sealant/caulk, rigid draftstopping material (wood blocking) and sealant/caulk, or spray foam. Note that neither cellulose nor fiberglass (batt or blown) can be used for the air barrier. The air barrier detail on second-story band joists is important because it is inaccessible (covered by structural/finish floor and ceiling finish) after construction. Note that while fiberglass batts fulfill the requirement for protection from ignition in the open band joists, fiberglass batt material by itself cannot maintain the air barrier.
+    * **Attached garages** – the building enclosure surfaces shared between conditioned space and an unconditioned garage must have a continuous air barrier. See *Figure 9* for details in terms of using sealants and rigid insulation to create a continuous air barrier between the attached garage and living space. See [Air Sealing ](/node/1376)/ [Air Drywall Approach](/node/1390) Details.
+  * **Drying mechanisms** – In any climate, vapor control is based on the relationships among the following: the permeability of wall components, the type of cladding (reservoir or non-reservoir), the presence/lack/nature of an air space, and the magnitude/duration of the vapor drive (based on the relationship between the exterior and interior moisture content and temperature differences). The type of sheathing and housewrap used in any wall assembly must be based on an understanding of these inter-relationships. See “[Insulations, Sheathings, and Vapor Diffusion Retarders](etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/reports/rr-0412-insulations-sheathings-and-vapor-retarders/?topic=/doctypes/researchreport)” for more information).  
+  
+In cold climates, the moisture load in the winter months is primarily from the interior, so roof and wall assemblies are generally designed to dry primarily to the exterior. Wintertime condensation control can be facilitated by elevating the temperature of the first condensing surface (the back side of the exterior sheathing) via the use of insulating sheathing. When XPS (with relatively low permeability) is used, then only slow drying is available to the exterior. Accordingly, the majority of drying occurs to the interior during the summer months. Therefore, interior vapor barriers should not be installed. Note that there is a difference between an interior vapor barrier and an interior vapor retarder (see “[Insulations, Sheathings, and Vapor Diffusion Retarders](etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/reports/rr-0412-insulations-sheathings-and-vapor-retarders/?topic=/doctypes/researchreport)”). Particular care must be taken to prevent the entry of bulk water (i.e., leaks) and control interior relative humidity in the coldest month. See Material Compatibility and Substitutions.
+  * **Drainage plane, air barrier, vapor control** – On the second story, the drainage plane is the housewrap—it must be weatherlapped at any horizontal joints. On the first story, the rigid insulation becomes the drainage plane—all vertical joints must be shiplapped, flashed, or sealed; all horizontal joints must be sealed or taped. Note how flashing maintains the continuity of the drainage plane at transitions.   
+  
+This building profile has a continuous air barrier on the interior (see [Airtight Drywall Approach](/node/1390) on ceiling and walls and on the exterior walls (the housewrap on the second story and sealed rigid insulation on the first story).  
+  
+In cold climates, walls are generally designed to dry to the exterior, with the vapor permeability of the exterior of the wall being 5 times more permeable than the interior; or, they are designed with insulating sheathing in order to control the temperature of the condensing surfaces. The thickness of the insulating sheathing is determined by calculation based on the severity of the climate (see “[Insulations, Sheathings, and Vapor Diffusion Retarders](etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/reports/rr-0412-insulations-sheathings-and-vapor-retarders/?topic=/doctypes/researchreport)”). Walls constructed with XPS insulating sheathing are designed to dry to the interior during the summer months. Latex paint or some other vapor retarder (i.e. the kraft facing on fiberglass batts or CertainTeed’s MemBrain™ Smart Vapor Retarder) acts to slow moisture entry in to the framed assembly from the interior. Ideally, the more vapor permeable EPS rigid insulation works well as the thickness of insulation goes beyond 1 inch, but see Field Experience Notes for more discussion.
+  * **Rough opening flashing** – See the *Figure 10* for the brick veneer flashing (for drainage plane continuity). For more details see the *[Water Management Guide](http://www.buildingsciencepress.com/Water-Management-Guide-P9.aspx)*.
+
+
+![](/sites/default/files/migrate/jpg/denver02.jpg)
+**Figure 10**
+  * **Advanced framing** – On the first story, the wall assembly replaces structural sheathing with cross bracing or some alternative for shear resistance; thermal performance and reduced drywall cracking are additional benefits of a comprehensive approach. See [Advanced Framing Details](http://www.buildingscience.com/documents/information-sheets/information-sheet-common-advanced-framing-details/view) for details.
+  * **Framing on slabs** – Installing a capillary break between the sill plate and a concrete slab on all walls—exterior, interior, partition—is good practice. A closed cell foam sill sealer or gasket works well. Alternatively, a strip of sheet polyethylene can be used. This isolates the framing from any source of moisture that may be either in or on the concrete slab (and using sill sealer on all walls maintains wall height exactly the same). In this profile, only garage walls would be affected.
+  * **Soil gas ventilation** – Soil gas ventilation is accomplished by the continuous exhaust ventilation system in the structural sub-crawlspace. Radon, soil moisture, and any volatilized organic substances that may be in the soil from previous land use (agriculture) are all handled with this exhaust system. The continuous polyethylene sheeting should still be installed on the floor of the sub-crawl to reduce the soil gas load that the continuous exhaust ventilation system handles. Alternatively, a passive system exiting through the roof can be used.
+  * **Thermal barrier** – Cavity-warming exterior rigid insulation is important in this climate where the average monthly temperature for the coldest month of the year goes below 45°F (see [Unvented Roofs](etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/digests/bsd-149-unvented-roof-assemblies-for-all-climates?full_view=1) for more information). The heat loss through the basement walls is significant enough to warrant 1-1/2 to 2 inches of rigid insulation; note that the insulation must either comply with local codes for protection against ignition or be covered with material such as gypsum wallboard.
+  * **Vented attic** – Soffit and ridge vents provide more effective attic ventilation than gable-end vents. Gable exhaust fans do not provide effective attic ventilation. They are generally temperature-controlled, when relative humidity is often the condition that requires higher ventilation rates. They can also depressurize the house causing loss of conditioned air. Generally, the area of the gable and soffit vents combined with the leakage of the attic ceiling is such that the fan pulls air not just from the exterior vent, but from the conditioned space below.
+
+
+## Climate Specific Details
+  * **Below-grade insulation** – Ground temperatures make wall and slab insulation an important part of the thermal barrier.
+  * **Above-grade insulation** – Homes in this climate benefit from exterior insulation that warms whatever structural material is to its interior, protecting it from the moisture degradation that can occur as the result of condensation.
+  * **Ice dam protection** – The combination of sufficient roof pitch, adequate insulation just above the exterior wall, and air sealing at the wall-roof assemblies transition are all essential to prevent ice dams. But ice dams can occur even in properly detailed roof assemblies from differential solar snow melt. A water protection membrane at the eave is recommended on all roof assemblies in this climate.
+  * **Mechanical ventilation** –![](/sites/default/files/resize/migrate/jpg/denver03-490x405.jpg)  
+**Figures 11a-d**  
+---  
+    * **Heating and Cooling** – Sealed combustion hot air furnace; SEER 12 air conditioning unit. A single return requires transfer grilles to provide return path and avoid pressurizing bedrooms. See *Figures 11a-d*.  
+
+      * **Ventilation** \-   
+*For homes**with** central forced air distribution system:  
+*Intermittent central-fan-integrated supply, designed to ASHRAE 62.2P rate, with fan cycling control set to operate the central air handler as much as 33% of the time, but not less than 25% of the time, occurring within at least every three hours to provide ventilation air distribution and whole-house averaging of air quality and comfort conditions ($125 to $150). Outside air fraction is designed to keep mixed air temperature at furnace heat exchanger above 50°F, usually not more than a 10% outside air fraction. Optionally include a normally closed motorized damper in the outside air duct (+$50 to $60). See Figures 12, 13 and 14.  
+  
+In very cold climates ventilation can also be accomplished using a continuous single-point exhaust system, designed to ASHRAE 62.2P rate, pulling from the principal living area ($150).  
+
+![](/sites/default/files/resize/migrate/jpg/denver04-175x276.jpg)  
+**Figure 12**| ![](/sites/default/files/resize/migrate/jpg/denver05-260x272.jpg)  
+**Figure 13**  
+---|---  
+![](/sites/default/files/migrate/jpg/denver06.jpg)  
+**Figure 14 - Basement Configuration**  
+![](/sites/default/files/resize/migrate/jpg/denver07-490x406.jpg)  
+**Figure 14a - Supplemental Dehumidification**  
+>  *For homes**without** central forced air distribution system:  
+> *Continuous multi-point exhaust, designed to ASHRAE 62.2P rate, pulling from each bedroom, unless the bedroom has a bathroom. Then it will pull from the bathroom and from at least one location in the principal living area. Any combustion appliances must be direct-vented sealed combustion.
+    * **Supplemental dehumidification** \- Although high performance homes in this climate rarely require supplemental dehumidification, it is:  
+… one of three strategies appropriate for conditioned crawlspaces (see Building Science Notes),  
+… may be desired in homes with full basement foundations, and,  
+… is strongly recommended when occupants require humidity control (and high-efficiency air filtration) for asthma trigger control.  
+  
+There are a number of different ways to accomplish supplemental dehumidification with varying costs and performance advantages (for a detailed discussion of supplemental dehumidification see [ Conditioning Air](etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/reports/rr-0505-residential-dehumidification-systems-research-for-hot-humid-climates)). Described below is one low-cost yet effective approach and one more costly but higher performance/systems-engineered approach:  
+  
+**1\. Ducted stand-alone dehumidifier:** This system is a "site-constructed" one consisting of an off-the-shelf standard dehumidifier ducted in the attic and controlled by a dehumidistat located in the living space. This arrangement of individual components has proven to be an effective and economical system for the production home building setting. The installed cost ranges from approximately $350 to $550. The system is comprised of a GE dehumidifier model AHG40FCG1 (dehumidifier located in attic in an insulated enclosure and ducted to living space), Honeywell dehumidistat model H8808C located in living space, and Honeywell switching relay (with transformer) model RA89A 1074. See Figure 14a. The selection of the dehumidifier is based largely on the fact that it has a blower wheel rather than paddle fan that moves air more efficiently in its ducted box configuration.  
+  
+**Note:** The following manufacturers make Energy Star-qualified blower wheel stand-alone dehumidifiers:
+      * LG Electronics (all models)
+      * Haier America (all models)
+      * [Heat Controller](http://www.heatcontroller.com/) (all BHD models use a turbo-impeller with turned blades)
+      * Or you can check the [ EPA Energy Star website](http://www.energystar.gov/index.cfm?c=dehumid.pr_dehumidifiers) for dehumidifiers from these manufacturers.
+
+
+> > **2\. Aprilaire 1700:** This is a truly engineered, coherently manufactured, supplemental dehumidification system with built-in air filtration, ducted design, and a controls package that integrates central blower cycling for distribution, dehumidification and intermittent introduction of outside air ventilation. The system is also designed for flexibility-it can be connected to the conditioned space directly or to the central air distribution system in a number of configurations. It's also compact and lightweight enough to be set on or hung from most framing. The product cost for this system is currently about $1,100. For more information, see: [ http://www.aprilaire.com](http://www.aprilaire.com/index.php?znfAction=ProductDetails&category=17&item=1700).   
+>   
+>  For more information on other high performance supplemental dehumidification systems, see: [ http://www.thermastor.com](http://www.thermastor.com/DesktopDefault.aspx).
+  * **Structural sub-crawlspace** – This detail is actually soil- rather than climate-specific. For areas with expansive soils, the simplest solution is to build post-tensioned slab-on-grade foundations that “float” over and in expansive soils. If homes must have basements, the structural sub-crawlspace resists the lateral forces of expanding soils, while deep piles carry the house structural load to bear on deep stable material. This sub-structural crawlspace must have a continuous vapor barrier ground cover and must be vented to prevent moisture problems. A continuous 50 to 100 cfm exhaust fan accomplishes this ventilation without any significant or real effect on the pressure balance within the basement, the rest of the home, or with any combustion sources that may be in the home (50 cfm for homes 2,000 sq. ft. and less and 100 cfm for homes over 2,000 sq. ft.). 
+  * **Insect management** – In cold climates, insect pressure (termites and carpenter ants) is less pronounced than in warmer climates, but important nonetheless. A three-pronged approach deals with the three things insects need—cover, moisture, and food (wood or paper).
+    * **Reduced cover** – Keep plantings 3 feet away from the building perimeter, thin the ground cover (wood mulch or pea stone) to no more than two inches depth for the first 18 inches around the building, and maintain any termite inspection zone on the foundation.
+    * **Control moisture** – Maintain slope away from building as shown, carry roof load of water at least three feet away from building, and make sure that irrigation is directed away from the building.
+    * **Chemical treatment** – Use an environmentally-appropriate building materials treatment (such as Bora-Care®) for insect-prone, near-grade wood materials.
+    * **Inter-relationship of first three points** – Since a builder and a homeowner’s ability to employ or stick to each of the three strategies above will vary, make sure that an inability to fully employ one strategy is compensated for by complete rigor with others. For example, if for some reason, chemical treatment of soil or building materials is not an option, then complete rigor in moisture control and ground cover is required.
+
+
+## Field Experience Notes
+  * **Selection of rigid insulation** – Most builders select rigid insulation based on costs and handling properties. Although the vapor permeability of both EPS and rigid fiberglass insulation can make them particularly well suited to cold climate envelope assemblies, their availability or their user-friendliness (or both) generally make XPS insulation the builder choice. For these reasons, we recommend 1-inch or thicker XPS in most wall assemblies. But remember, the type of sheathing to use is always a question that should be asked in the context of:
+    * the given cladding; and
+    * the level of control that can be expected over interior relative humidity via mechanical ventilation. See “[Insulations, Sheathings, and Vapor Diffusion Retarders](etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/reports/rr-0412-insulations-sheathings-and-vapor-retarders)” for more information.
+  * **Joint treatment in rigid insulation** – Shiplapped rigid foam insulation has proven to be available in only very limited areas. Mastic works as a water sealant but its long term performance is not known but appears promising. The flexible flashing with polyethylene film is straightforward and creates a natural weatherlap and therefore is the preferred approach.
+  * **Reservoir claddings** – Solar-driven moisture can be a significant problem with cladding such as wood clapboards and brick if wind, rain, and sun work together to saturate the siding and then drive this moisture into the wall assembly. The primary defense against this is the continuous back-venting of the air space interior to the cladding. The low permeability of the material just to the interior of the air space is a secondary defense. A 3/8-inch space works well for the wood clapboard (large enough for free flow of water and air and not large enough to create reveal problems at windows, doors, cornerboards). For more information on this topic, see [Solar Driven Moisture in Brick Veneer](etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/etw-denver-profile/reports/rr-0104-solar-driven-moisture-in-brick-veneer/). A 1-inch air space and open head joints (top and bottom of wall) are required for the brick veneer. Harking back to "old-timer" practices—place a thin sand layer at the bottom of the 1-inch air space (to act as a bond break for mortar droppings) and leave bricks out intermittently in the first course. After the veneer is completed, the sand and mortar droppings can be easily removed and the missing bottom course brick mortared in.
+  * **Brick ties** – The two-piece adjustable ties are strongly recommended, given the 1-inch air space and foam insulation. See the [Masonry Institute Technical Notes](http://www.brickinfo.org/pdfs/44b.pdf).
+  * **Brick shelf in foundation wall** \- The brick veneer "seat" is readily accomplished by securing dimensional lumber of the desired size to the inside top edge of the concrete form.
+  * **Perimeter drainage in expansive soils** – The plastic trough in which the perforated drain pipe is placed in this assembly prevents water collected in the pipe from passing into the soil around the foundation pilings. This is an important foundation detail in expansive soils.
+  * **Advanced framing** – For a technical resource that may help with resistance to advanced framing methods from local code officials, see the *Building Safety Journal* article written by Peter Yost of BSC.
+  * **Stepped foundation insulation detail** – Maintaining thermal barrier continuity in stepped foundations has proven difficult, or easy, to neglect. Figure 15 shows how the rigid foam needs to be cut and placed.
+
+
+![](/sites/default/files/migrate/jpg/denver08.jpg)
+**Figure 15**
+  * **Energy trusses** –There are a number of different truss configurations that yield greater depth at the heel, but they vary quite a bit in cost. The truss shown Figure 16 (sometimes called a “slider” truss) has proven to be among the most cost-competitive. And of course, the pitch of the roof affects just how much insulation you can get at this location, regardless of the type of truss.
+
+
+![](/sites/default/files/migrate/jpg/denver09.jpg)
+**Figure 16**
+## Material Compatibility and Substitutions
+  * **Exterior sheathing** – On the second story of this building, cavity-warming rigid insulation (usually strongly recommended for cold climates) is lacking. It is therefore doubly important that the exterior elements of this wall be vapor permeable or vapor semi-permeable. A material such as fiberglass-faced gypsum board (DensGlass Gold®, for example) is more permeable than plywood, which is more permeable than OSB, although all are acceptable. A material such as a faced high-density paperboard (Energy Brace® or Thermo-ply®, for example) is vapor impermeable and is not recommended in this climate. See the [Building Materials Property Table](/node/1397) for more information.
+  * **Rim joist insulation** \- Fiberglass cavity insulation at the rim joist is only acceptable if the exterior sheathing is cavity-warming rigid foam insulation that extends down over the entire rim joist. If non-insulating exterior sheathing is used at the rim joist then one of the following insulation details must be used at the rim joist (see Figure 16a) to manage condensation potential:
+  * Spray foam insulation in the rim joist cavity
+    * Fully air-sealed rigid insulation
+    * Inset rim joist with rigid insulation between the exterior sheathing and the rim joist
+
+
+![](/sites/default/files/migrate/jpg/denver_rim_joist_blocking.jpg)
+**Figure 16a - Rim Joist Blocking**
+  * **Drainage plane on rigid insulation** – An alternative to flashing, shiplapping, or sealing the XPS insulation for continuity of the drainage plane is to apply a housewrap to the outside of the insulation. The housewrap then becomes the continuous drainage plane. It is also possible to install the housewrap under the XPS insulation (this is a more common commercial wall system approach).
+  * **Interior latex paint -** The substitution of low permeability interior finishes (vinyl wall paper, oil-based paints) for latex paint should be considered in the context of severely limiting or eliminating any drying potential that the wall assembly has to the interior. These interior treatments are not recommended.
+  * **Cavity insulation materials** – Acceptable cavity insulation includes any that have a relatively high vapor permeability—cellulose, fiberglass, foam (as long as air sealing is accomplished by a separate component or system when cellulose or fiberglass is used). User discretion can be based on properties other than building science.
+  * **Floor system between basement and sub-crawl** – We selected the cast concrete system as the most robust and moisture resistant of the options—wood, steel, and concrete.
+  * **Gypsum wallboard** –Areas of potentially high moisture, such as bathrooms, basements, kitchens, are excellent candidates for non-paper faced wallboard systems (e.g. James Hardie’s Hardibacker®, GP’s DensArmor®, USG’s Fiberock®). In addition, paper-faced gypsum board should never be used as interior sheathing or backer for tub or shower surrounds where ceramic tile or marble (any material with joints or grout lines) is used as the finish.

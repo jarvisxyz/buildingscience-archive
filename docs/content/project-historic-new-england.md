@@ -1,0 +1,22 @@
+BSC Role
+[Building Enclosure and Energy Performance Consultant](/taxonomy/term/79)
+Services Provided
+[Building Performance and Enclosure Consulting](/services/building-performance-and-commissioning)
+Location
+Various Locations, MA
+Team
+[Kohta Ueno](/users/kueno)
+Historic New England owns and/or manages historic properties scattered throughout five states, with the goals of preserving and presenting New England heritage, and educating the public. They have consulted Building Science Corporation on multiple projects, typically looking at the goal of reducing energy consumption while without the use of irreversible methods on the historic fabric of the building, as well as not compromising durability. All of these projects involved a field evaluation of the building, followed by analysis and recommendations.
+The Pierce House was built circa 1683 and is located in Dorchester, MA. Historic New England intended this house to be a study house, demonstrating the energy efficiency retrofits that could be implemented on this and other similar properties. BSC was able to achieve significant energy savings by improving basement crawl space conditions as well as air sealing the attic. To meet the non-irreversible strategies approach requested by Historic New England, BSC provided guidance on the installation of non-adhering, non-permanent air sealing materials.
+The Lyman Estate, located in Waltham, MA was originally built in 1793, with additional renovations and wings added in 1882 and 1917. Historic New England currently uses the mansion as an office, and the estate is also used as rental space to host private parties and events. BSC’s guidance included recommendations on better defining the boundaries between conditioned and unconditioned space, as well as for air sealing, duct sealing, and attic insulation.
+Lang Building was constructed circa 1909 and is an eight-story, site-cast reinforced concrete frame and slab structure. Historic New England has used the Lang Building as its collections and conservation facility since 1989. The goals of this project were to improve control of temperature and relative humidity conditions, to address water leakage issues that threaten the collection, to control the occurrence of mold growth on cold interior surfaces due to humidification, and to reduce energy consumption.
+[![](/sites/default/files/styles/square/public/project/pierce_house_1.jpg?itok=hE8g6_KE) ](https://buildingscience.com/sites/default/files/project/pierce_house_1.jpg "Historic New England")
+[![](/sites/default/files/styles/square/public/project/pierce_house_2.jpg?itok=j8j-sxSz) ](https://buildingscience.com/sites/default/files/project/pierce_house_2.jpg "Historic New England")
+[![](/sites/default/files/styles/square/public/project/pierce_house_3.jpg?itok=SGsMq3ba) ](https://buildingscience.com/sites/default/files/project/pierce_house_3.jpg "Historic New England")
+[![](/sites/default/files/styles/square/public/project/pierce_house_4.jpg?itok=KvIaIKfi) ](https://buildingscience.com/sites/default/files/project/pierce_house_4.jpg "Historic New England")
+[![](/sites/default/files/styles/square/public/project/lyman_estate_1.jpg?itok=CtWp8aQO) ](https://buildingscience.com/sites/default/files/project/lyman_estate_1.jpg "Historic New England")
+[![](/sites/default/files/styles/square/public/project/lyman_estate_2.jpg?itok=iJLkPVPJ) ](https://buildingscience.com/sites/default/files/project/lyman_estate_2.jpg "Historic New England")
+[![](/sites/default/files/styles/square/public/project/lyman_estate_3.jpg?itok=nLHWWGtK) ](https://buildingscience.com/sites/default/files/project/lyman_estate_3.jpg "Historic New England")
+[![](/sites/default/files/styles/square/public/project/lyman_estate_4.jpg?itok=Uu1aOOFs) ](https://buildingscience.com/sites/default/files/project/lyman_estate_4.jpg "Historic New England")
+[![](/sites/default/files/styles/square/public/project/lang_building_1.jpg?itok=Ny8XllRs) ](https://buildingscience.com/sites/default/files/project/lang_building_1.jpg "Historic New England")
+[![](/sites/default/files/styles/square/public/project/lang_building_2.jpg?itok=0o6aQQxT) ](https://buildingscience.com/sites/default/files/project/lang_building_2.jpg "Historic New England")

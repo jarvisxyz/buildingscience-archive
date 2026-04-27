@@ -1,0 +1,27 @@
+[Armin Rudd](/users/arudd)
+Effective Date
+May 10, 2010
+Text
+The performance of the cooling system will be evaluated and assured through a series of measurements including: air flow, pressures, temperatures, humidity levels, and power draw. To get off to the best start possible, the following procedures (or equivalent) should be followed for line set installation and system startup:
+  1. The refrigerant grade copper line set should not be left open to the atmosphere to collect contaminants. It should be capped off and filled with dry nitrogen.
+  2. Make sure a filter/dryer is installed in the liquid line (either factory or field installed). Use bi-directional units for heat pumps.
+  3. Using a silver/phosphorus/copper alloy with between 5% and 15% silver, braze refrigerant line set to the indoor and outdoor units with nitrogen flowing through the lines to eliminate carbon deposit buildup on the inside of the joints which could contaminate the refrigerant and restrict the metering device. (To do this, remove the Schrader valve cores and connect nitrogen bottle to one valve and set pressure regulator to about 2 psi. A small amount of nitrogen will flow out the other Schrader valve.)
+  4. After brazing the line set to the indoor and outdoor units, visually inspect the quality of the joints (a mirror helps), then reinstall the Schrader valve cores and pressurize the line set and evaporator coil with between 125 to 150 psi of dry nitrogen. Check for leaks.
+  5. Connect the manifold pressure gauges, micron gauge, and vacuum pump. Release the nitrogen charge and begin evacuation. For faster evacuation, leave the gas ballast valve open on the 2-stage pump until you reach 1000 microns, then close it.
+  6. Evacuate the refrigerant lines and evaporator coil to 300 microns or lower (a micron gauge and 2-stage vacuum pump are required). This should take about 15 minutes for a system that is not contaminated. Valve off and turn off the vacuum pump and wait for at least 10 minutes to make sure the micron gauge reading does not go back up above 700 microns. If it does, re-start the vacuum pump and evacuate for another 15 minutes. Repeat that process until it is successful, assuring that there are no leaks and all moisture and non-condensable particles are removed.
+  7. With the system evacuated, if the actual line set length is greater than the default length that the manufacturer pre-charged the condenser for, add refrigerant by weight to account for the actual line set length. The manufacturer will specify the weight of refrigerant per foot of line set for different tube diameters, and the manufacturers specification should be used for a mismatched evaporator coil size. The condenser unit comes pre-charged for a given line set length (usually between 15 ft and 25 ft). It is easiest to measure and document the line set length at rough-in. One way this can be done is by measuring the waste length from a standard size coil. Refrigerant charge must be adjusted by weight using a digital refrigerant scale with resolution to at least one-half ounce.
+  8. Release the refrigerant charge from the condenser unit into the line set and evaporator coil.
+  9. If the refrigerant line set length is less than the default length that the manufacturer pre-charged the condenser for, then subtract refrigerant by weight to account for the actual line set length according to the manufacturers specification. Refrigerant charge must be adjusted by weight using a digital refrigerant scale with resolution to at least one-half ounce.
+  10. Check the return air filter(s). If it is new, continue to step 11, if it is dirty (> 25 Pa pressure drop), replace it with a new filter. If a new filter is not available, remove the dirty filter for the purpose of checking system operation.
+  11. Start the system and run for at least 15 minutes. If indoor and outdoor environmental conditions are favorable, check for proper superheat for capillary tube and accurator systems, and check for proper sub-cooling for TXV (thermal expansion valve) systems. Adjust refrigerant charge as necessary.
+  12. Check for proper temperature drop across the evaporator coil. Check static pressures in the supply and return plenums. Correct for any airflow problems as necessary.
+
+
+According to the best engineering data available, the performance loss using a thermal expansion valve (TXV) metering device is about 5% if the refrigerant charge is off by plus or minus 20%. The performance loss using a fixed metering device (capillary tube, piston or accurator) is about 15% to 20% if the refrigerant charge is off by plus or minus 20%. Therefore, TXV systems are best, however, by following the installation procedure listed above, the refrigerant charge should be within about 5% every time, limiting the performance loss to about 5%.
+* * *
+### Additional resources:
+  * “Just the facts,” Thermal Engineering Company, Toledo, OH
+  * “Fundamentals of dehydrating a refrigerant system,” Robinair Manufacturing Corp., Montpelier, OH
+  * “Influence of the expansion device on air-conditioner system performance characteristics under a range of charging conditions,” Farzad and O’Neal, ASHRAE Transactions 1993, V. 99, Pt. 1.
+  * “Soldering and brazing copper tube,” Copper Development Association Inc.
+  * “Split system space cooling refrigerant charge and air flow measurement,” California Energy Commission, Contractor’s Report, #P 400-01-014, <http://www.energy.ca.gov/reports>.

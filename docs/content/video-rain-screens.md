@@ -1,0 +1,3 @@
+We have learned to add holes and drainage in tall buildings in order for them to work. The lesson learned in tall buildings is that we can’t keep the rain out so we drain it out after it has entered. We can reduce the amount that enters but we can never completely keep it all out. Drainage and holes are key. These are regularly installed in tall buildings but not in short buildings. Until we add holes and drainage to small buildings they will continue to leak. This is so counter-intuitive that it borders on magic. If you drained the water penetrating the cladding you would control the hydrostatic pressure and small holes would not matter. With good drainage pretty much everything works. We call this the rain screen.
+Video Category
+Cup of Joe’s

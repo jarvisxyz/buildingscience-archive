@@ -1,0 +1,4 @@
+One moisture transport mechanism that is often overlooked in building construction is capillarity or capillary suction. Capillary suction acts primarily to move moisture into porous materials. For example, a paper towel, with one end in contact with liquid water, draws water into itself against the force of gravity as a result of capillary suction. 
+Capillarity is a function of - among other things - pore size and available moisture. If pore size in a material is large, such as clear gravel and coarse sand, then capillarity will not exist. If pore size in a material is small, such as in concrete, silty clay, and paper, then capillarity is possible.
+Video Category
+Cup of Joe’s

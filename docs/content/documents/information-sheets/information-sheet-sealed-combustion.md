@@ -1,0 +1,10 @@
+Effective Date
+May 19, 2009
+Text
+These systems are completely decoupled from the interior environment through the use of dedicated outdoor air intake and exhaust ducts connected directly to the unit. This change completely disconnects the combustion process from the interior environment, and eliminates concerns of backdrafting of the unit. In addition, it allows the elimination of the usual make-up air ducts. These make-up air ducts (required for naturally aspirated units) are a source of uncontrolled air leakage through the building enclosure, and therefore increase energy use. Finally, the sealed combustion appliances tend to be more efficient than the naturally aspirated units.
+Spillage or backdrafting of combustion appliances is unacceptable. Only sealed combustion, direct vented, power vented or induced draft combustion appliances should be installed inside conditioned spaces for space conditioning or for domestic hot water. Traditional gas water heaters with draft hoods are prone to spillage and backdrafting. They should be avoided. Gas ovens, gas stoves or gas cooktops should only be installed with an exhaust range hood directly vented to the exterior. Wood-burning fireplaces or gasburning fireplaces should be supplied with glass doors and exterior combustion air ducted to the firebox. Wood stoves should have a direct ducted supply of combustion air. Unvented (ventless) gas fireplaces or gas space heaters should never be installed. Sealed combustion direct vent gas fireplaces are an acceptable alternative. Portable kerosene heaters should never be used indoors.
+* * *
+### Sealed Combustion Detail
+[![](/sites/default/files/migrate/jpg/BSCInfo_601_Figure_01.jpg)](/sites/default/files/migrate/jpg/BSCInfo_601_Figure_01.jpg)
+  * Water heater combustion air supplied directly to water heater from exterior via duct; products of combustion exhausted directly to exterior also via duct
+  * Furnace flue gases exhausted to the exterior using a fan; combustion air supplied directly to furnace from exterior via duct

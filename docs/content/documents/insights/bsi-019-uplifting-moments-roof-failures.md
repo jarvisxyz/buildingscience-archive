@@ -1,0 +1,59 @@
+[Joseph Lstiburek](/users/jlstiburek)
+Effective Date
+April 02, 2009
+Text
+Now I am a simple kind of guy. I just bet that a roof with a couple of hundred bullet holes probably leaked I wonder what all those holes did to the roof at the Superdome? Just asking.
+I remind everyone that the roof of the Superdome experienced one of the more spectacular failures in enclosure history. It unzipped during Katrina like a cheap prom dress on a Saturday night in less than catastrophic wind conditions (**Photograph 1**). Let’s toy with this memorable failure a little—just hypothetically of course because there is litigation.1
+![Photo_01](/sites/default/files/resize/migrate/jpg/BSI19_Photo_01-375x221.jpg)**  
+Photograph 1:** **Should Have Never Happened** —The Superdome roof membrane is missing after Hurricane Katrina. 
+It is quite something when a roof blows off. To have one blow off during a national disaster with the world watching puts it into a class by itself. But the roof blow off of the Superdome is not an isolated incident. We seem to be experiencing more uplift problems with roofs lately and it begs the question why?
+We seem to have forgotten how to build roofs. Back in the day compact roofs required multiple layers—and one of the most important was the air barrier (**Figure 1**). Air barriers were originally an artifact of cold climate construction and often misnamed as vapor barriers. In Canada, where there are only two seasons, this winter and last winter, architects and engineers learned about the importance of air barriers in controlling roof assembly moisture induced deterioration from interior sources. However, early on, one of the most important lessons of utilizing air barriers, was the huge improvement in uplift performance. The air barrier helped to transfer the wind load to the structural deck. And this proved to be important in all climates besides those dominated by hockey players.
+![Figure_01](/sites/default/files/resize/migrate/jpg/BSI19_Figure_01-449x182.jpg)**Figure 1: Multiple Layer Compact Roof**
+  * Mechanically attached sheathing supports fully adhered air barrier.
+  * Fully adhered insulation boards—best performance when split into two layers with joints staggered to further limit three dimensional air flow paths.
+  * Fully adhered coverboard protects insulation and facilitates lateral migration of water vapor and other off-gassing products to control blisters.
+  * Fully adhered membrane.
+  * (It is becoming increasingly common to mechanically attach the insulation layers and membrane while also omitting the coverboard—an unfortunate development. Some insurance policies require mechanically attached layers because they don’t trust the workmanship necessary for fully adhesion of layers—old timers roll their eyes at this and the crotchety ones do both—they fully adhere the layers to get the performance and add the mechanical attachment to shut the insurance folks up.)  
+
+
+When mechanically attached membranes became common—a bad idea in my humble opinion – the lack of an air barrier lead to fluttering of membranes (**Figure 2**) and some interesting failures (**Photograph 2**) and some interesting solutions (**Photograph 3**).
+![Figure_02](/sites/default/files/resize/migrate/jpg/BSI19_Figure_02-452x147.jpg)**  
+Figure 2: Fluttering Membrane** —Mechanically attached membrane flutters due to air leakage from interior when air barrier is omitted.
+![Photo_02](/sites/default/files/resize/migrate/jpg/BSI19_Photo_02-375x274.jpg)**  
+Photograph 2: Fluttering Membrane** —No air barrier at deck leads to an idea for a Disney World ride…
+![Photo_03](/sites/default/files/resize/migrate/jpg/BSI19_Photo_03-375x247.jpg)**  
+Photograph 3: Fluttering Membrane Fix** —“I’ll fix that darn moving membrane, Bubba get me some pavers and blocks…”
+Fluttering, besides stressing the membrane, leads to the pumping transfer of airborne moisture from the interior into the roof assembly. This has typically been a cold climate phenomenon but the problems are migrating south as membranes become white rather than black. Dark membranes get very hot—duh—and the heat drives the moisture back down into the building. In the south mechanically attached dark membranes roofs typically dodged the moisture bullet because the moisture that was pumped up was driven back down by the huge temperature gradient. No harm, no foul. But that all began to change with energy conservation and light colored membranes. Many roofs no longer get hot enough to drive flutter driven moisture back down into the building. Failures that were limited to cold climates now happen in Georgia.
+Air barriers make fluttering go away and make the world safe for mechanically attached light colored membranes. The fluttering is controlled since any attempt by the membrane to lift off the insulation layer is resisted by suction—air from the interior is not able to enter the roof assembly due to the presence of the air barrier. The lack of an air barrier and a leaky deck will allow replacement air to enter the roof assembly from the interior and the suction resistance is lost.
+Uplift resistance is increased with the presence of an air barrier by the transfer of a significant amount of the load from the membrane to the air barrier and deck. A little algebra illustrates the principle. The total wind pressure is taken by all of the roof elements acting together. The total wind pressure resisted by the roof assembly is equal to the sum of the individual pressures taken by each element. In general, the tighter the element, the greater the pressure taken by the element. A simple series pressure relationship is a pretty reasonable approximation of what actually occurs.
+P(t) = P(m) + P(i) + P(d)  
+  
+Where P(t) = total wind pressure  
+P(m) = membrane pressure  
+P (i) = insulation pressure   
+P(d) = deck pressure
+Here is a trick question_what is the tightest element of a roof? That would be the element without any holes. That would be the membrane since it can’t have holes because if it does it leaks. Duh. If I have a tight membrane, rigid insulation installed in boards/sheets with gaps over a fluted steel deck with seams and holes the majority of the wind load is taken by the membrane. That was the case in the Superdome roof (**Figure 3**). We know that how? Well, the membrane is gone and the insulation was left behind—double duh (**Photograph 4**).
+![Figure_03](/sites/default/files/resize/migrate/jpg/BSI19_Figure_03-450x116.jpg)**  
+Figure 3: Failed Superdome Roof Section** —Mechanically attached rigid insulation boards on fluted metal deck with fully adhered membrane. Note the absence of an air barrier. Membrane takes full wind load.
+![Photo_04](/sites/default/files/resize/migrate/jpg/BSI19_Photo_04-375x243.jpg)**  
+Photograph 4: Superdome Roof Damage** —Missing membrane and exposed rigid sheet insulation - note the mechanical connectors. The membrane was adhered to the top of the sheet insulation boards and to the mechanical connectors. Also note the metal deck and the flutes that allowed lateral airflow and lateral water migration.
+With an air barrier a significant portion of the wind pressure is transferred to the air barrier and its attachment to the deck. The tighter the air barrier, the greater the load transfer. The greater the load transfer to the air barrier, the less stress on the membrane. **Figure 1** rocks, **Figure 3** sucks–literally–wind suction.
+The Superdome roof did not have an air barrier—at least not the replacement roof installed in 2002—the one that failed during Katrina. It was reported that the smoke dampers at the top of the roof were sucked off during Katrina and that allowed the wind to enter exacerbating building pressurization and stressing the roof assembly. The membrane took the majority of the load, unzipped and traveled to a neighboring parish.
+Could it be that the lack of an air barrier caused the Superdome roof to fail in wind conditions that were pretty minor as far as hurricanes go? Just asking. Hypothetically, of course. And how was the Superdome replacement roof that was installed in 2002 allowed to be constructed without an air barrier—when the original roof that was installed in the 1980’s had one? Where were the adults?
+Back to the bullet holes—it will come as a surprise to folks that domed stadium roofs all over have problems with folks with guns. Folks like to shoot at them regardless of state and team affiliation. So what specifically about the bullet holes at the Superdome? Well, the steel decking was so corroded it had to be replaced after the Katrina blow-off. The steel decking was fine in 2002 during the re-roof. It wasn’t fine in 2004. The water had to come from somewhere. Could it be that hundreds of bullet holes could be a factor? Just asking. Hypothetically, of course.
+The good news is that the post Katrina repair is both bulletproof2 and has an air barrier. The new roof is similar to the original roof. It is spray polyurethane insulation system applied directly to the roof deck (**Figure 4** and **Photograph 5**). A spray applied fully adhered membrane is installed over the top of the insulation (**Photograph 6**). The spray polyurethane insulation also acts as the air barrier.
+![Figure_04](/sites/default/files/resize/migrate/jpg/BSI19_Figure_04-450x108.jpg)**  
+Figure 4: New Superdome Roof Section** —Fully adhered spray-applied membrane over fully adhered spray polyurethane foam insulation layer and integral air barrier.
+![Photo_05](/sites/default/files/resize/migrate/jpg/BSI19_Photo_05-376x240.jpg)**  
+Photograph 5: Spray Foam Application** —New, fully adhered roof insulation and integral air barrier.
+![Photo_06](/sites/default/files/resize/migrate/jpg/BSI19_Photo_06-375x242.jpg)**  
+Photograph 6: Better than Before** —Welcome back Saints…
+So how are bullets handled in the new roof? The bullet goes right through the roof system providing a “straight-through-the-assembly” water path. The spray foam does not allow the lateral migration of water that occurred in the 2002 roof (**Figure 5**). OK, so the roof isn’t really bullet proof, but bullets don’t cause anything besides a minor annoyance. The bullet holes are easy to fix—the hole and the leak are coincident – and corrosion is limited and controlled.
+![Figure_05](/sites/default/files/resize/migrate/jpg/BSI19_Figure_05-300x383.jpg)**  
+Figure 5: Bulletproof** —Bullet holes in upper roof section allow for lateral migration of rainwater due to the gaps in the roof system layers and the channels provided by the fluted steel deck. In the lower roof section bullet holes result in a “straight-through-the assembly” flow path for water thereby limiting damage to the hole only.
+Would there have been any difference in the Superdome roof blow off if there were no bullet holes and no corrosion of the underlying deck? Probably not. The only thing that might have changed on the repair side would have been the deck replacement. But the argument has been made that the deck needed upgrading regardless to handle even greater wind loads.3
+So can we learn any lessons from all of this? Lots of roofs today are being constructed without air barriers and lots of roofs have been constructed without air barriers. I predict many uplifting moments in our future unless air barriers become common to say nothing of the problems of fluttering membranes and light colored roofs.
+* * *
+### Footnotes:
+  1. I would have given anything to have been a fly on the wall when the engineer or architect of record was told that not only did the post Katrina Superdome replacement roof need to resist uplift but that it also had to deal with bullets. I do not know whom the engineers or architects were on the repair and replacement project but I salute them. They succeeded on both fronts. Well done—very well done indeed.
+  2. Ah, speculation. Love it. No peer review, it’s allowed, this is a column…

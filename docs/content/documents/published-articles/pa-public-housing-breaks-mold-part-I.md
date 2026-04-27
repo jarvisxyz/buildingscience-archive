@@ -1,0 +1,28 @@
+[Betsy Pettit](/users/bpettit), [John Snell](/users/jsnell)
+Effective Date
+September 01, 2001
+Abstract
+Multifamily public and low-income housing have particular problems when it comes to moisture and air pollutants. In this first of a two-part series, we look at one particular type of multifamily construction: midrise housing. Originally published in Home Energy September/October 2001, pages 24-28. For more information about mold in homes, see Popular Topics/Homeowner Resources[.](http://buildingscience.com/document-search?term=&field_doc_topic_tid=59)
+Text
+Sick buildings are a growing concern in all sectors of the building industry. As homes become tighter and more energy efficient, other performance factors, particularly moisture and ventilation problems, often become apparent. Each day, building scientists and public health researchers learn more about the link between poor home performance and poor occupant health. These health problems cannot be taken lightly; for example, Cleveland's public housing stock is the epicenter of recent mold-related deaths among children.
+In our work in the fields of energy efficiency and forensic architecture, we have investigated building problems in more than 200 subsidized housing developments. Based on our experiences with this housing stock, we fiind that moisture problems are the major cause of suspected health-related building problems in subsidized housing, and that adding controlled mechanical ventilation is one of the easiest and least expensive means of reducing or resolving many of these problems.
+In many of the home we've seen, specifically midrise and Veterans Era (post-World War II) housing, high surface humidity due to a lack of ventilation coupled with thermal bridgining is a large factor in mold growth. Other factors include high occupancy rates per ft2, and occupant behavior. We conclude that proper mitigation in these buildings can improve home comfort and safety, and can improve the health effects of the occupants.
+However, in some cases—such as where thermal bridging is a problem—the mitigation efforts can be extensive, since adding ventilation alone is typically not sufficient. Finally, we feel that it is essential that building mitigation work and energy efficiency improvements be done properly, so as not to exacerbate existing moisture problems.
+#### The Medical Impact Impact of Moisture
+Medical costs to treat housing-related health problems are extraordinary: $500-$800 per emergency room visit, and $1,000-$2,000 per overnight stay; and an average asthma-induced hospital stay lasts for three and a half days. In Boston, aggressive health center-based medical interventions have reduced the number of emergency room visits from chronic health problems such as ashtma. Outpatient service costs, however, have increased sixfold.
+Another concern is the long-term effect on children of the medication used to treat ashtma and related bronchial inflammation.
+Healthcare providers need to understand potential housing interventions that can reduce their patients' exposure to potential environmental health hazards. In addition, they need appropriate mechanisms to "prescribe" housing interventions. Rhode Islands' Lead Paint Center initiative provides an interesting model for future Medicaid-reimbursed housing interventions. Under this program Rhode Island Medicaid pays the cost to replace apartment windows for patients with clinically diagnosed high lead levels. Chronic moisture and health problems are closely associated with poor housing conditions in subsidized housing; occupants of such housing could benefit from a similar type reimbursement program.
+#### Standards Must Be Set
+Our findings from the examples we present in the following pages are consistent with subsidized housing conditiones we have inspected throughout the United States. Based on our experience, we propose that the major health-related buidling problems in subsidized housing can be traced back to water damage and poor environmental control. In order to ensure that publicly funded housing provides healthy environments for its occupants, minimum performance standards must be set.
+Standards must be set and tested for compliance in the following categories:
+  * rainwater and groundwater control;
+  * thermal bridge control;
+  * foundation wall, crawl space, and slab insulation;
+  * window thermal resistance;
+  * forced water and steam distribution systems; and
+  * fresh air supply and distribution.
+
+
+These performance standards must be measurable and achievable within the trade base. Long-term solutions will require a collaborative response from housing, public health and urban planning institutions and agencies, beginning with systematic surveys of existing conditions.
+We support tax or other incentives for developers, housing managers, and energy service companies to build healthier housing and upgrade existing housing to higher standards, such as DOE's Building America or the American Lung Association's Health House building programs. In order to develop appropriate long-term solutions to housing-related chronic health problems, legislators and government agencies need to fund targeted, integrated health and housing research and technology transfer initiatives that will help shape appropriate legislative responses to these problems. . .
+Download complete document [here](/sites/default/files/migrate/pdf/PA_Public_Housing_Breaks_the_Mold_Part_I.pdf).

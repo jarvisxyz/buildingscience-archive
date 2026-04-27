@@ -1,0 +1,22 @@
+Services Provided
+[Forensic Investigations](/services/forensic-investigations)
+Location
+Southeast
+Team
+[Kohta Ueno](/users/kueno)
+BSC was asked to investigate an 8-year old assisted care facility in a mixed-humid climate, which was experiencing interior humidity control problems, including interior dampness, mold growth on furniture and walls, and musty odors. BSC’s field work included examination of the building enclosure (shell) and measurements and analysis of the installed mechanical systems.
+Measurements of the central HVAC systems demonstrated that several units were exhibiting poor dehumidification (small temperature drop and small dewpoint change). Continuous fan operation also reduced dehumidification capacity of these units: this strategy re-evaporates condensed moisture from the cooling coils. These systems also brought in excess amounts of exterior air from outside air ducts, via motorized dampers run using ineffective control strategies. In contrast, portions of the building with fewer problems used ERV (energy recovery ventilators) for outside air ventilation. Further calculations indicated that the cooling systems were oversized (exacerbating humidity problems) and had excess outdoor air ventilation rates.
+Several residential rooms were conditioned by PTAC (packaged terminal air conditioner) units. These units were also oversized (by a factor of 4 or 5), set on continuous fan operation, and had an excessively high ventilation rate (125%-170% of required). All of these exacerbate humidity problems in a mixed-humid climate.
+Potential enclosure issues included a lack of brick cavity ventilation (possibly resulting in inward vapor moisture drives) and air leakage from the attic via unsealed wall top plates (as demonstrated by infrared thermography).
+A dedicated outdoor air system (DOAS) was installed 5 years earlier but had failed to solve the issues. BSC confirmed that the DOAS system positively pressurizes the building. However, if it is supplying unconditioned outside air (due to controls failures), it provides no RH control benefit compared to depressurization air leakage. Even when it operates correctly, providing pre-cooled air, it only treats the air that is being supplied for ventilation.
+BSC’s recommendations included reduction of ventilation rates as possible, retro-commissioning of HVAC systems (correcting refrigerant charge problems), eliminating continuous fan operation, and installation of ducted dehumidifiers connected to the HVAC system.
+Project Files
+[Humidity_Control_Investigation.pdf](/sites/default/files/project/humidity_control_investigation.pdf)
+[![](/sites/default/files/styles/square/public/project/01_img_0937_mold_0.jpg?itok=tVf3YwOh) ](https://buildingscience.com/sites/default/files/project/01_img_0937_mold_0.jpg "Humidity Control Investigation")
+[![](/sites/default/files/styles/square/public/project/02_hvac_measurements.jpg?itok=R93y9ygQ) ](https://buildingscience.com/sites/default/files/project/02_hvac_measurements.jpg "Humidity Control Investigation")
+[![](/sites/default/files/styles/square/public/project/03_temperature_rh_graph.png?itok=NNctc0Rb) ](https://buildingscience.com/sites/default/files/project/03_temperature_rh_graph.png "Humidity Control Investigation")
+[![](/sites/default/files/styles/square/public/project/04_hvac_system.png?itok=Y6CodskB) ](https://buildingscience.com/sites/default/files/project/04_hvac_system.png "Humidity Control Investigation")
+[![](/sites/default/files/styles/square/public/project/05_hvac_zones-alf.png?itok=SrGYaONl) ](https://buildingscience.com/sites/default/files/project/05_hvac_zones-alf.png "Humidity Control Investigation")
+[![](/sites/default/files/styles/square/public/project/06_ptac_measurements.jpg?itok=PRNJWcVr) ](https://buildingscience.com/sites/default/files/project/06_ptac_measurements.jpg "Humidity Control Investigation")
+[![](/sites/default/files/styles/square/public/project/07_img_4020.jpg?itok=wTtad38A) ](https://buildingscience.com/sites/default/files/project/07_img_4020.jpg "Humidity Control Investigation")
+[![](/sites/default/files/styles/square/public/project/08_img_4019.jpg?itok=lHC7hnJT) ](https://buildingscience.com/sites/default/files/project/08_img_4019.jpg "Humidity Control Investigation")

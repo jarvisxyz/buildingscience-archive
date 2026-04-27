@@ -1,0 +1,69 @@
+[Joseph Lstiburek](/users/jlstiburek)
+Effective Date
+December 15, 2022
+Text
+HVAC systems and windows have almost as interesting a relationship as the “Odd Couple” - Oscar and Felix - did in the 70’s1. However, unlike Oscar and Felix’s relationship, the relationship between HVAC systems and windows has changed dramatically over time. How they now live together is interesting and changing.
+Way back in the day we had “lousy” windows. They were thermal nightmares. Insanely uncomfortable in the winter and ugly uncomfortable in the summer. You couldn’t be near them when it was cold or when it was hot and sunny. Thank god for HVAC systems. Good HVAC systems saved “lousy” windows. We had to blow warm air against them in winter to raise the mean radiant temperature and blow cold air against them in the summer to lower the mean radiant temperature. Laying out ductwork was a big deal.
+In cold climates warm air would be blown up against the cold glass from floor registers located under the windows. The “blown” air would rise to the ceiling and the assumption was that the air would flow across the ceiling, be cooled, fall downwards and be picked up at the bottom of interior walls by a return register (Figure 1).
+![](/sites/default/files/bsc-138_figure_1.png?itok=y3MsIeTB)
+**Figure 1: Cold Climates** \- Warm air would be blown up against the cold glass from floor registers located under windows. The “blown” air would rise to the ceiling and flow across the ceiling, be cooled, fall downwards and be picked up at the bottom of interior walls by a return register.
+In hot climates cold air would be blown down against the warm glass from ceiling registers located above the windows. The “blown” air would fall to the floor level and the assumption was that the air would flow across the floor, be heated, rise upwards and be picked up at the top of interior walls by a return register (Figure 2).
+![](/sites/default/files/bsc-138_figure_2.png?itok=q_PHVqGJ)
+**Figure 2: Hot Climates** \- Cold air would be blown down against the warm glass from ceiling registers located above windows. The “blown” air would fall to the floor level and air would flow across the floor, be heated, rise upwards and be picked up at the top of interior walls by a return register.
+As buildings became better insulated it turned out that the air at ceilings would no longer be cooled in cold climates and fall to floor. The simple fix to this issue was to locate returns at the top of interior walls (Figure 3).
+![](/sites/default/files/bsc-138_figure_3.png?itok=ICVoQuit)
+**Figure 3: High Returns** \- As buildings became better insulated air at ceilings would no longer be cooled in cold climates and fall to floor thereby requiring high returns. 
+As window thermal performance improved we learned to “throw” the air across the room from registers located high on interior walls (Photograph 1). The air would “flow” across the ceiling, get to a window, be cooled, fall to the floor, flow across the floor and be picked up by a return register located at the bottom of the wall on interior walls (Figure 4).
+![](/sites/default/files/bsc-138_photograph_1.png?itok=4bQ9hKva)
+**Photograph 1: High Supply Registers** \- As window thermal performance improved we learned to “throw” the air across the room from registers located high on interior walls.
+![](/sites/default/files/bsc-138_figure_4.png?itok=2k__9gqe)
+**Figure 4: “Throwing the Air”** – With good windows air could “flow” across the ceiling, get to a window, be cooled, fall to the floor, flow across the floor and be picked up by a return register located at the bottom of the wall on interior walls.
+Better windows also meant smaller ducts. Ducts could easily fit in interior walls (Photograph 2). Not done yet. It got even better with better windows. The return at the bottom of the wall in Figure 4 could be moved to the top of the wall. (Figure 5). What was nice about Figure 5 is that furniture did not interfere with air flow. Let me repeat, furniture did not interfere with air flow. Yeah! Can’t tell you how much interior designers interfered with ductwork layout.
+![](/sites/default/files/bsc-138_photograph_2.png?itok=XKuSqhLC)
+**Photograph 2: Small Ducts** \- Better windows also meant smaller ducts. Ducts could easily fit in interior walls.
+![](/sites/default/files/bsc-138_figure_5.png?itok=M1S-_nzp)
+**Figure 5: More Good Windows** \- The return at the bottom of the wall in Figure 4 could be moved to the top of the wall. Furniture no longer interfered with air flow. 
+The supply duct and the return duct could be located up high on the same wall a couple of feet apart (Photograph 3). Short circuiting of flows did not occur because the supply air was “thrown” with a high positive pressure whereas the return had a small negative pressure. With well insulated walls and ceilings and real good windows, Figure 5 worked in all climates.
+![](/sites/default/files/bsc-138_photograph_3.png?itok=TQEdc-FA)
+**Photograph 3: No Short Circuiting** \- The supply duct and the return duct could be located up high on the same wall a couple of feet apart.
+While all of this was going on we started to really look at return systems. Did we in fact need them in each room? We discovered “transfer grilles” (Figure 6 and Photograph 4) and “sound attenuated” transom vents that were baffled (Photograph 5) that allowed the hallway and stairwell to act as the return system with a single return hard ducted to the air handler. What? Folks freaked out. A single return…and on the main floor of a two story house…no way that will ever work. But it did2.
+![](/sites/default/files/bsc-138_figure_6.png?itok=EqfyN-H8)
+**Figure 6: Transfer Grilles** – This approach allowed the hallway and stairwell to act as the return system.
+![](/sites/default/files/bsc-138_photograph_4.png?itok=VcCi_owc)
+**Photograph 4: Transfer Grilles** \- Grille high on one side, low on the opposite side to control light and noise transfer.
+![](/sites/default/files/bsc-138_photograph_5.png?itok=W5IispOi)
+**Photograph 5: Transom Vents** \- “Sound attenuated” by being internally baffled.
+All kinds of options. Figure 7, Photograph 6 and Photograph 7 show a basement air handler with a single return at the main floor level. Note that the supply system is fully “hard” ducted. The single return had an “offset” to handle blower noise. Folks in cold climates loved it.
+![](/sites/default/files/bsc-138_figure_7.png?itok=3FVHZt4R)
+**Figure 7: Single Ducted Return** \- Basement air handler with a single return at the main floor level coupled with transfer grilles.
+![](/sites/default/files/bsc-138_photograph_6.png?itok=AuzlzZMB)
+**Photograph 6: Basement Air Handler** \- Single hard ducted return.
+![](/sites/default/files/bsc-138_photograph_7.png?itok=nvqcMmCm)
+**Photograph 7: Single Return** \- The single return at the main floor level has an “offset” to handle blower noise.
+In hot climates with slab houses we first started with returns in the upper hallways, not in individual bedrooms (Figure 8). In crawlspace houses, particularly in hot-humid and mixed-humid climates, we began to see conditioned crawlspaces (Figure 9). The approaches soon morphed into a single return at the air handler as in cold climates. Folks in hot climates loved it.
+![](https://lh3.googleusercontent.com/1Yl4X0xz8EIbwhnt0726Pk0bWNlzJ2MwxNC_ZHmBC69bWKpZ8AsoPmRjIdFP8XdRg-xF6piBC_0cNzXaTJMwF8fjzzJ4Mwlu0V1V2kTXdAS3KMGgBXBzh9Qn8tJGYJ7mugJ3clX5I1v0y96PIHYLXQgccuEQZ9zqtcNN3cNAlL6ca_eq344w0iA0Jg)
+**Figure 8: Slab Houses** \- In hot climates with slab houses we first started with returns in the upper hallways, not in individual bedrooms. The approaches soon morphed into a single return at the air handler as in cold climates.
+![](https://lh5.googleusercontent.com/991us-WUdJ0yUIp4ub-epZtjex-byT2SqL2EImH1zs-QsCJVIE-L-LN6THdLb7lMhKF4pCcnDRr7htba5i2yjMtdEM2bxPcyB0JP6xdy8vN--9sf0lNP62kxukctm9L66ouVRBbHN3g2F3PJaV0XTt_XIusgSs8ibaFECa5BBvstmqzByNCkV3igqw)
+**Figure 9: Crawlspace Houses** – In hot climates, specifically, hot-humid climates and mixed-humid climates, we began to see conditioned crawlspaces. Again, the approaches soon morphed into a single return at the air handler as in cold climates
+We weren’t done yet. In cold and hot climates we soon coupled the “throwing the air across the room” from interior located high wall registers with single returns (Figure 10 and Figure 11). Ductwork could be located in a hallway/corridor dropped ceiling (Photograph 8 and Photograph 9). The supply and returns could be in the same dropped ceiling. The returns were “passive” – transfer grilles into the dropped ceiling and a large ceiling register in the corridor dropped ceiling connecting the dropped ceiling to the corridor. The supplies were “active” hard ducted. The supply grilles and return grilles shared the same wall (Photograph 10).
+![](https://lh4.googleusercontent.com/tijz0r9HHMzzn3LoVE5prxfeix8gtTiM5fuPtnjQsbR9qNj7u-XmE5USVd5eV1H57KfNl4NP3mrYmi1TMq68JGjrH0ZCEmdEVVB64deJnoXC0RtWjiFYfdHCr7EyV6y11zJMlLmLUa-6WO3Xjl9f7tmFRCcCxiZh4ZyoS7pCUjEN7UJdHBNnIj7CFQ)
+**Figure 10: Dropped Ceilings** – Supply and returns could be located in a hallway/corridor dropped ceiling.
+![](https://lh6.googleusercontent.com/FHc70QT7M7TibL0VchTFK3tmTOK3_RlBXQXZGkz0zOqQge0phaAvGEuNY2WodY2Ci6xJjk8pgocXk--yODkEI2jdKHHBuYywE9SIvP7Guq_yylwTU24jGz1JQWfyaAAs9K9DE7sAoK_v8eCm48-ggWheOPcHukmKpY1sesh2aOyEZU1xbIa94AO7-w)
+> **Figure 11: Scissor Truss Dropped Ceilings** – If you want a taller hallway, you can frame your roof with a scissor truss, keeping the air handler and ductwork in that hallway ceiling.
+![](/sites/default/files/bsc-138_photograph_8.png?itok=LkR0TXzJ)
+**Photograph 8: Dropped Ceiling** – Ductwork located in a hallway/corridor dropped ceiling. The supply and returns are in the same dropped ceiling. 
+![](/sites/default/files/bsc-138_photograph_9.png?itok=nPob139y)
+****Photograph 9:******More Dropped Ceiling** \- The returns are “passive” – transfer grilles into the dropped ceiling and a large ceiling register in the corridor dropped ceiling connecting the dropped ceiling to the corridor. The supplies are “active” hard ducted. 
+![](/sites/default/files/bsc-138_photograph_10.png?itok=yoW5-OGJ)
+******Photograph 10:********Still More Dropped Ceiling** \- The supply grilles and return grilles share the same wall.
+Still not done. With “fabulous” windows we can get rid of the supply return ducts all together (Photograph 11). Having said that, we will still need some means of distributing ventilation air. Fully ducted HRV’s and ERV’s are more than up to the task.
+![](https://lh3.googleusercontent.com/h02cYMatWEKTV-nadkVVZjBOLX0IIkyqzyMG_uNljpUeT2pjQs-iOGu_oEsijgqVRDAtubLTlMts9TAmC5L2cObYiGBgWwLtm2wyWHQDDN7hSrpx7xHqpPc_oqbP34pKHqdcpEpOMyEoY_lbr8STZ7Wk_HWgLkjRL8eB4L4haovZS2kdOHoglObWPg)
+**Photograph 11: Fabulous Windows** \- With “fabulous” windows we can get rid of the supply return ducts all together. Having said that, we will still need some means of distributing ventilation air. Fully ducted HRV’s and ERV’s are more than up to the task.
+There has to be some issue with all of this. Yup. Lousy windows saved old buildings with lousy walls. They acted as “dehumidifiers” and prevented high levels of interior moisture (Photograph 12). Lousy windows were the “first condensing surface” in a building in a cold climate. When we got better windows we moved the condensing surface to the interior surface of the exterior sheathing. And better windows allowed higher levels of interior moisture. The higher levels of interior moisture messed up our walls. We had to get better walls. Better windows made us get better walls.
+![](https://lh4.googleusercontent.com/OOk_tP0h7Uh9NkuJEfau52obwFWX4FuaHnWiI2OOlMOdABTPL-K4H12wMiyTtA2LzlHd-D1FJ5UnO9ANognjhFFRCkYLrkdynQvIQ5QnAyyHlX-HrHAhMtXBsdaYXkuheyRGQwEakQHGY02pvFfUXL-031FG-f0wapwVeGWim7_H0cPfgnFm6v87-Q)
+**Photograph 12: Lousy Windows** \- “Dehumidifiers” that prevented high levels of interior moisture.
+Having pointed that out we are beginning to get even better windows. Fabulous windows actually. This will allow even higher levels of interior relative humidity in cold climates. It will allow Covid levels of interior relative humidity. Yes. We were here before, not that long ago ([BSI-133: Covert Covid Thoughts, July 2022](/documents/building-science-insights/bsi-133-covert-covid-thoughts%E2%80%A6)). Guess what, that means we are going to have to get fabulous walls. Fabulous windows are making us get fabulous walls. Odd, indeed.
+**Footnotes:**
+1 The Odd Couple was a movie starring Jack Lemmon and Walter Matthau that turned into a TV series with Tony Randall and Jack Klugman. The premise was about two separated men who have to live together whose “ideas of housekeeping and lifestyles” were “as different as night and day”.
+2 I had a lot of fun in Minneapolis in the late 90’s with the code folks. They said they were never going to allow the approach. No way. I said how about letting me build a couple of houses with both approaches in each house. Run them one week one way and one week the other way through the winter and summer. At the end of the year you tell me which way you will allow and I will convert the houses to that way. It helped that I had a big time builder who had my back…Bill Pulte I miss you big time. The houses had real families in them…”friends of Bill..” They were instrumented “up the wazzou***”..thank you DOE and the Building America Program. At the end of the year even the code folks were impressed…and we changed Minneapolis….and then most of the rest of the country.
+***”Wazzou” is a metric term…it is two “Ying-yangs”.

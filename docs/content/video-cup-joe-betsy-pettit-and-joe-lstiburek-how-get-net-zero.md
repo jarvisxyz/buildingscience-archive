@@ -1,0 +1,3 @@
+To get to zero energy conservation takes us most of the way…and the last bit is the renewables piece. We get 70 percent of the way to “net zero” with conservation…. Guess what…we changed the building code to get us there. Huh? Yup, if you build new homes to comply with the 2021 International Energy Conservation Code (IECC) you “officially '' comply with the Department of Energy “Zero Energy Ready Home Program (ZERH)”. Okay, there are few other typical “government” things (see <https://www.energy.gov/eere/buildings/zero-energy-ready-home-program>) but I never thought we would get as far as we did. Nice job United States of America
+Video Category
+Cup of Joe’s

@@ -1,0 +1,29 @@
+[Armin Rudd](/users/arudd), [Kohta Ueno](/users/kueno), [Joseph Lstiburek](/users/jlstiburek)
+Effective Date
+June 05, 1999
+Abstract
+Unvented-cathedralized attics are known to be advantageous in hot-humid and hot-dry climates, whereby, exterior moisture would be excluded for hot-humid climates, and attic mounted air distribution systems would be inside conditioned space for both climates. Current work focuses on the performance and durability of unvented-cathedralized attics in hot-humid climates with both tile and asphalt shingle roofing. The advantages for the hot-humid climate are expected to be even greater than for the hot-dry climate.
+Text
+### **Where We've Been**
+A residential attic model, contained in the finite element computer program FSEC 3.0, was empirically aligned with measured attic data from three roof research facilities in Florida and Illinois. This model was then used to simulate hourly space conditioning energy use, and roof and attic temperatures, for peak cooling days and annual weather, for Orlando, Florida and Las Vegas, Nevada. Results given in Tables 1 and 2 showed that, when compared to typically vented attics with the air distribution ducts present, unvented-cathedralized attics (i.e. unvented attic with the air barrier and insulation at the sloped roof plane) can be constructed without an associated energy penalty in hot climates (Rudd, Lstiburek 1998). If typical duct leakage is factored in, the energy savings due to unvented-cathedralized attics can be quite large.
+**Table 1:** Summary of annual simulation results for Las Vegas, Nevada
+![](https://www.buildingscience.com/sites/default/files/rr-0994_table_01.jpg?itok=MPI-z7FH)
+1 Consumption based on 10 SEER cooling and electric heat
+2 Cost based on 10 SEER cooling at $.07/kW-h and gas heat (combo water heating system 60% efficiency) at $.02/kW-h
+All homes in cooling climates, including those with unvented-cathedralized attics, benefit from tile roofing or a bright white roofing color.
+#### Test Houses At Angel Park Subdivision, Las Vegas, Nevada
+Following the favorable indications from simulation results, code variance was obtained and two test houses were constructed in Angel Park with unvented-cathedralized attics. These houses were tested and monitored to evaluate their cooling energy performance compared to a conventional vented attic house.
+#### Short-term monitoring.
+Results from short-term testing in the late summer of 1996 showed that the unvented attic houses had cooling energy use savings over the conventional 1:150 vented attic house (Rudd, Lstiburek and Moyer 1997). This was mostly due to the unvented-cathedralized attic which brought the air distribution ducts inside the air and thermal boundary of the building.
+Tile top temperatures were hardly effected by the unvented attic. The 3°F maximum tile top temperature difference agreed well with the simulated prediction. The maximum measured plywood roof sheathing temperature increase of 17°F for the unvented attics was less than the temperature variation expected by changing from tile to asphalt shingles of any available color. During the test period, the maximum measured roof sheathing temperature of 126°F for the unvented attics was well within an acceptable temperature performance range of wood-based roof sheathing ( 180°F). Subsequent long-term monitoring through mid-summer (described below) found the maximum roof sheathing temperature for both attics to be higher.
+**Table 2:** Summary of annual simulation results for Orlando, Florida
+![](https://www.buildingscience.com/sites/default/files/rr-0994_table_02.jpg?itok=ccWwQy9y)
+1 Consumption based on 10 SEER cooling and electric heat
+2 Cost based on 10 SEER cooling at $.08/kW-h and gas heat (combo water heating system 60% efficiency) at $.02/kW-h
+![](https://www.buildingscience.com/sites/default/files/rr-0994_figure_01.jpg?itok=OJCfd7mn)
+**Figure 1:** Regression of cooling energy consumption verus inside to outside temperature difference for the vented attic (LV22) and unvented attic houses
+Long-term monitoring. One of the two unvented attic houses (Angel Park Lot 24) and the conventional vented attic house (Angel Park Lot 22) were monitored between July 1997 and March 1998. Both houses had medium colored tile roofs. Analysis of the cooling season data showed an average of 5% savings for the unvented attic house. This is illustrated in Figure 1. Relatively low duct leakage in the vented attic house contributed to the somewhat lower-than-expected savings. Figure 2 shows the average temperatures for each hour of the month of August 1997. Notably, there was a difference of about 35°F in the temperature of the spaces where the air distribution system was located. Maximum roof sheathing temperature reached 154°F for the unvented-cathedralized attic and 133°F for the vented attic.
+![](https://www.buildingscience.com/sites/default/files/rr-0994_figure_02.jpg?itok=vqWIS--l)
+**Figure 2:** Average hourly temperatures for the month of August; shows the large difference in temperature where the air distribution systems are located
+Analysis of the heating season data showed heating energy consumption savings of over 50% for the unvented attic house. This information is shown in Table 3 and Figure 3. In addition to the benefits of the unvented-cathedralized attic, part of these savings were also due to the higher performing low-e windows. The exact effect of the windows is unknown since the use of window coverings varied with the occupants. We have found that most window coverings in the Las Vegas climate are kept closed during summer, somewhat limiting the benefit of high performance windows, but use varies in winter. Although we know that getting the duct system inside conditioned space, and not venting solar gain. . .
+Download complete report [here](/files/rr-0994unventedatticsfuturepdf).

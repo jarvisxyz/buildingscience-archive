@@ -244,54 +244,60 @@ def html_to_markdown(html, base_url):
 
 
 def download_assets(html, base_url, asset_dir):
-    """Download all images and assets from the page."""
+    """Download images and assets from the page."""
+    # Skip asset download entirely if --skip-assets flag
+    if "--skip-assets" in sys.argv:
+        return []
+    
     soup = BeautifulSoup(html, "lxml")
     downloaded = []
     
-    # Find all image sources
-    img_tags = soup.find_all("img")
+    # Find all image sources (limit to first 10 per page to avoid excessive downloads)
+    img_tags = soup.find_all("img")[:10]
     for img in img_tags:
         src = img.get("src") or img.get("data-src") or img.get("data-lazy-src")
         if not src:
             continue
         
-        # Skip data URIs
+        # Skip data URIs and external domains
         if src.startswith("data:"):
             continue
         
         full_url = urljoin(base_url, src)
         
-        # Only download from buildingscience.com for local archive
-        if "buildingscience.com" in full_url or full_url.startswith("//buildingscience.com") or full_url.startswith("/"):
-            try:
-                rate_limit()
-                resp = requests.get(full_url, headers=HEADERS, timeout=15, verify=True)
-                if resp.status_code == 200:
-                    # Determine file extension
-                    parsed = urlparse(full_url)
-                    path = parsed.path
-                    ext = os.path.splitext(path)[1] or ".jpg"
-                    
-                    # Sanitize filename
-                    fname = sanitize_filename(os.path.basename(path))
-                    ext = re.sub(r"[^a-z0-9]", "", ext.lower())
-                    if not ext or ext == ".":
-                        ext = ".jpg"
-                    if ext:
-                        fname = os.path.splitext(fname)[0][:50] + ext
-                    
-                    # Hash to avoid collisions
-                    hash_suffix = hashlib.md5(full_url.encode()).hexdigest()[:8]
-                    fname = f"{os.path.splitext(fname)[0]}_{hash_suffix}{ext}" if fname else f"asset_{hash_suffix}{ext}"
-                    
-                    fpath = asset_dir / fname
-                    fpath.write_bytes(resp.content)
-                    downloaded.append({
-                        "original_url": full_url,
-                        "local_path": str(fpath.relative_to(asset_dir.parent)),
-                    })
-            except Exception as e:
-                pass  # Silently skip failed asset downloads
+        # Only download from buildingscience.com
+        if "buildingscience.com" not in full_url and not full_url.startswith("/"):
+            continue
+        
+        try:
+            # Brief pause between asset downloads (less aggressive than page rate limit)
+            time.sleep(0.2)
+            
+            resp = requests.get(full_url, headers=HEADERS, timeout=10, verify=True)
+            if resp.status_code == 200:
+                parsed = urlparse(full_url)
+                path = parsed.path
+                ext = os.path.splitext(path)[1] or ".jpg"
+                
+                fname = sanitize_filename(os.path.basename(path))
+                ext = re.sub(r"[^a-z0-9]", "", ext.lower())
+                if not ext:
+                    ext = "jpg"
+                fname = os.path.splitext(fname)[0][:50] + "." + ext
+                
+                # Hash to avoid collisions
+                hash_suffix = hashlib.md5(full_url.encode()).hexdigest()[:8]
+                fname = os.path.splitext(fname)[0] + "_" + hash_suffix + "." + ext
+                
+                asset_dir.mkdir(parents=True, exist_ok=True)
+                fpath = asset_dir / fname
+                fpath.write_bytes(resp.content)
+                downloaded.append({
+                    "original_url": full_url,
+                    "local_path": str(fpath.relative_to(asset_dir.parent)),
+                })
+        except Exception:
+            pass  # Silently skip failed asset downloads
     
     return downloaded
 
@@ -737,7 +743,13 @@ def main():
     # Step 3: Generate index
     print("\nGenerating index.json...")
     index = build_index(metadata_list)
-    META_FILE.write_text(json.dumps(index, indent=2, ensure_ascii=False), encoding="utf-8")
+    # Write with surrogate handling — some scraped content may contain
+    # invalid UTF-16 surrogate pairs from badly-encoded source HTML
+    json_str = json.dumps(index, indent=2, ensure_ascii=False)
+    # Strip any surrogate characters that would break UTF-8 encoding
+    json_bytes = json_str.encode("utf-8", errors="surrogatepass")
+    json_clean = json_bytes.decode("utf-8", errors="replace")
+    META_FILE.write_text(json_clean, encoding="utf-8")
     print(f"  Written {META_FILE} ({len(metadata_list)} entries)")
     
     # Summary stats

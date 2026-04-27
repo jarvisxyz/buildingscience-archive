@@ -1,0 +1,14 @@
+[Armin Rudd](/users/arudd)
+Effective Date
+December 12, 1999
+Abstract
+An hourly simulation study using DOE2.1E was conducted to determine the annual difference in energy consumption between various ventilation options in different climates.
+Text
+An hourly simulation study using DOE2.1E was conducted to determine the annual difference in energy consumption between various ventilation options in different climates. Energy consumption and runtime was evaluated for the ventilation fan, and heating and cooling equipment. For the New Jersey climate, an average of the results for Chicago and Charlotte may be used. The simulated houses were insulated according to the ASHRAE Standard 90.2, and the heating and cooling systems were sized according to the ACCA Manual J procedure.
+The focus here is a comparison between 1) a multi-port exhaust or supply system, continuously delivering 40 ft3/min of ventilation air; and 2) a central-fan-integrated supply system, intermittently supplying 60 ft3/min of ventilation air (33% duty cycle maintained with a fan recycling control). The central-fanintegrated system was simulated with ducts inside conditioned space (Table 1), and outside conditioned space (Table 2). In all cases, fan power was calculated as 0.35 W/cfm and 400 cfm per ton of cooling. The central system air handlers were 1000 cfm and 800 cfm for ducts in unconditioned and conditioned space, respectively. For multi-port supply systems, the outside air should be tempered with at least two parts inside air, which would increase ventilation fan energy consumption from what is shown here.
+In summary, the central-fan-integrated system cost $24/yr more to operate with ducts in conditioned space and $65/yr more with ducts in unconditioned space. The difference in first-cost was estimated at $500 more for the multi-port exhaust or supply system due to installing a separate duct system. Thus, the multi-port exhaust or supply system has a simple payback between 8 and 21 years compared to the central-fan-integrated system. An added benefit of the central-fan-integrated system is periodic wholehouse mixing, which takes place due to the fan recycling control, and serves to smooth temperature, humidity, and air quality conditions throughout the house providing improved comfort.
+**Table 1** Summary of DOE2.1E annual simulation data for ventilation systems with ducts in conditioned space for the central-fan-integrated system
+![](https://www.buildingscience.com/sites/default/files/rr-9912_table_01.jpg?itok=BUVe8nZR)
+**Table 2** Summary of DOE2.1E annual simulation data for ventilation systems with ducts in conditioned space for the central-fan-integrated system
+![](https://www.buildingscience.com/sites/default/files/rr-9912_table_02.jpg?itok=tS4wgNvp)
+Download complete report [here](/files/rr-0912-discussion-ventilation-system-energy-performance-and-costpdf).
