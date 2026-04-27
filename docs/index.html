@@ -698,7 +698,7 @@ function exportIndex() {
 }
 
 // Load index.json
-fetch('index.json')
+fetch('index.json?v=' + Date.now())
     .then(function(r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
         return r.json();
