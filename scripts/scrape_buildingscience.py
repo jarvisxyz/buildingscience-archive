@@ -177,36 +177,53 @@ def html_to_markdown(html, base_url):
     """Convert HTML body to clean Markdown."""
     soup = BeautifulSoup(html, "lxml")
     
-    # Remove scripts, styles, nav, header, footer, sidebar, forms
-    for tag in soup.find_all(["script", "style", "nav", "header", "footer", 
-                               "aside", "form", "noscript"]):
-        tag.decompose()
-    
-    # Remove elements with certain classes
-    for cls in ["navigation", "sidebar", "footer", "header", "nav", "search",
-                 "newsletter", "modal", "popup", "banner", "cookie", "ads",
-                 "ad-banner", "skip-to-content"]:
-        for elem in soup.find_all(class_=re.compile(cls, re.I)):
-            elem.decompose()
-    
-    # Extract metadata from structured data
+    # Extract tags BEFORE any decomposition
     tags = []
     for tag in soup.find_all("meta", attrs={"name": "keywords"}):
         if tag.get("content"):
             tags = [t.strip() for t in tag["content"].split(",")]
     
-    # Also try article tags
-    article = soup.find("article") or soup.find("main") or soup.find("div", class_="content")
-    if article:
-        body_html = str(article)
-    else:
-        body_html = str(soup.body) if soup.body else str(soup)
+    # First, find the main content area
+    content = None
+    for selector in [
+        soup.find("div", class_=re.compile(r"main-content|page-content|node-content", re.I)),
+        soup.find("article"),
+        soup.find("main"),
+        soup.find("div", class_=re.compile(r"content", re.I)),
+        soup.find("div", role="main"),
+    ]:
+        if selector and len(selector.get_text(strip=True)) > 100:
+            content = selector
+            break
+    
+    if not content:
+        content = soup.body or soup
+    
+    # Now clean the content area only — remove noise from within it
+    for tag in content.find_all(["script", "style", "nav", "aside", "form", "noscript"]):
+        tag.decompose()
+    
+    # Remove specific noise classes (more targeted — avoid removing main content)
+    for cls in ["navigation", "sidebar", "newsletter", "modal", "popup", 
+                 "banner", "cookie", "ads", "ad-banner", "skip-to-content",
+                 "menu", "breadcrumb", "pager", "pagination", "comment",
+                 "social", "share", "related", "footer-links"]:
+        for elem in content.find_all(class_=re.compile(r"\b" + cls + r"\b", re.I)):
+            elem.decompose()
+    
+    # Also remove Drupal-specific noise regions
+    for cls in ["layout-sidebar", "region-sidebar", "block-system", 
+                 "block-search", "block-menu", "field-name-field-tags"]:
+        for elem in content.find_all(class_=re.compile(cls, re.I)):
+            elem.decompose()
+    
+    body_html = str(content)
     
     # Convert to markdown
     h = HTML2Text()
     h.body_width = 0  # No line wrapping
     h.ignore_links = False
-    h.ignore_images = True  # We handle images separately
+    h.ignore_images = False  # Include image references
     h.wrap_links = False
     h.wrap_tables = False
     h.mark_code = False
@@ -354,24 +371,27 @@ def scrape_document(url, category="documents"):
 
     # Skip if already scraped (resume support)
     if (html_path / "full.html").exists() and (html_path / "content.md").exists():
-        # Reload metadata from existing files
-        existing_html = (html_path / "full.html").read_text(encoding="utf-8")
-        title, meta_desc, canonical, keywords = extract_meta_descriptions(existing_html)
-        date = extract_date(existing_html)
-        md = (html_path / "content.md").read_text(encoding="utf-8")
-        asset_count = len(list((html_path / "assets").iterdir())) if (html_path / "assets").exists() else 0
-        print(f"    (cached)")
-        return {
-            "url": url,
-            "title": title or "Unknown",
-            "description": meta_desc or "",
-            "date": date or "",
-            "tags": keywords[:20],
-            "category": category,
-            "local_path": str(html_path.relative_to(ARCHIVE_DIR)),
-            "assets": asset_count,
-            "word_count": len(md.split()) if md else 0,
-        }
+        # Verify content.md is non-empty (re-scrape if extraction failed)
+        existing_md = (html_path / "content.md").read_text(encoding="utf-8").strip()
+        if existing_md:
+            # Reload metadata from existing files
+            existing_html = (html_path / "full.html").read_text(encoding="utf-8")
+            title, meta_desc, canonical, keywords = extract_meta_descriptions(existing_html)
+            date = extract_date(existing_html)
+            asset_count = len(list((html_path / "assets").iterdir())) if (html_path / "assets").exists() else 0
+            print(f"    (cached)")
+            return {
+                "url": url,
+                "title": title or "Unknown",
+                "description": meta_desc or "",
+                "date": date or "",
+                "tags": keywords[:20],
+                "category": category,
+                "local_path": str(html_path.relative_to(ARCHIVE_DIR)),
+                "assets": asset_count,
+                "word_count": len(existing_md.split()),
+            }
+        # else: content.md is empty, fall through to re-scrape
 
     html = fetch(url)
     if not html:
