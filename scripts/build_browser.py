@@ -1,0 +1,760 @@
+#!/usr/bin/env python3
+"""
+build_browser.py — Generates a standalone single-page searchable archive browser.
+
+Output: scripts/index.html (reads scripts/index.json client-side)
+Features: Fuse.js search, category grouping, tag filters, dark/light toggle,
+          responsive sidebar, sort by date/title, clean minimal aesthetic.
+"""
+
+import json
+import os
+import sys
+from pathlib import Path
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+OUTPUT_HTML = SCRIPT_DIR / "index.html"
+DEFAULT_INDEX_JSON = "index.json"
+
+# ── Placeholder data (used when index.json is absent) ──────────────────────
+
+PLACEHOLDER_DATA = {
+    "categories": [
+        {"id": "documents", "label": "Documents", "icon": "📄"},
+        {"id": "contributors", "label": "Contributors", "icon": "👤"},
+        {"id": "events", "label": "Events", "icon": "📅"},
+        {"id": "guides", "label": "Guides", "icon": "📖"},
+        {"id": "research", "label": "Research", "icon": "🔬"},
+    ],
+    "tags": [
+        "HVAC", "insulation", "moisture", "ventilation", "envelope",
+        "energy-code", "residential", "commercial", "retrofit", "monitoring",
+    ],
+    "items": [
+        {
+            "id": "doc-001",
+            "title": "Building Enclosure Design Guide",
+            "category": "documents",
+            "tags": ["envelope", "moisture"],
+            "date": "2025-11-15",
+            "content": "Comprehensive guide to building enclosure design principles including air barriers, vapor retarders, and thermal control layers.",
+        },
+        {
+            "id": "doc-002",
+            "title": "Residential HVAC Sizing Manual",
+            "category": "documents",
+            "tags": ["HVAC", "residential"],
+            "date": "2025-09-20",
+            "content": "Manual J and S procedures for residential heating and cooling load calculations.",
+        },
+        {
+            "id": "contrib-001",
+            "title": "Dr. Sarah Chen — Building Science Corp",
+            "category": "contributors",
+            "tags": ["envelope", "research"],
+            "date": "2025-08-01",
+            "content": "Principal researcher specializing in hygrothermal analysis and wall assembly durability.",
+        },
+        {
+            "id": "evt-001",
+            "title": "Passive House Conference 2025",
+            "category": "events",
+            "tags": ["energy-code", "envelope"],
+            "date": "2025-06-10",
+            "content": "Annual conference on passive house design, certification, and high-performance building standards.",
+        },
+        {
+            "id": "guide-001",
+            "title": "Deep Energy Retrofit Playbook",
+            "category": "guides",
+            "tags": ["retrofit", "insulation", "ventilation"],
+            "date": "2025-04-22",
+            "content": "Step-by-step playbook for planning and executing deep energy retrofits on existing residential buildings.",
+        },
+        {
+            "id": "res-001",
+            "title": "Moisture Monitoring in Wall Assemblies",
+            "category": "research",
+            "tags": ["moisture", "monitoring", "envelope"],
+            "date": "2025-03-05",
+            "content": "Long-term field study of moisture transport in wood-frame wall assemblies across climate zones 4-6.",
+        },
+        {
+            "id": "doc-003",
+            "title": "Commercial Ventilation Requirements — ASHRAE 62.1 Summary",
+            "category": "documents",
+            "tags": ["ventilation", "commercial", "energy-code"],
+            "date": "2025-01-18",
+            "content": "Simplified summary of ASHRAE Standard 62.1 ventilation rate procedure for commercial buildings.",
+        },
+        {
+            "id": "contrib-002",
+            "title": "Mark Rivera — Phius Alliance",
+            "category": "contributors",
+            "tags": ["envelope", "energy-code"],
+            "date": "2024-12-01",
+            "content": "Certified passive house consultant and trainer focused on multifamily and commercial passive building.",
+        },
+        {
+            "id": "evt-002",
+            "title": "Building Science Symposium 2025",
+            "category": "events",
+            "tags": ["research", "monitoring"],
+            "date": "2025-07-14",
+            "content": "Two-day symposium featuring peer-reviewed presentations on building science research and practice.",
+        },
+        {
+            "id": "res-002",
+            "title": "Attic Insulation Retrofit Performance Study",
+            "category": "research",
+            "tags": ["insulation", "retrofit", "residential"],
+            "date": "2024-10-30",
+            "content": "Comparative study of spray foam vs. blown-in fiberglass in attic retrofits across 40 homes in climate zone 5.",
+        },
+    ],
+}
+
+
+def generate_html(index_json_path: str = DEFAULT_INDEX_JSON) -> str:
+    """Return the complete index.html as a string."""
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building Science Archive</title>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<style>
+/* ── Reset & Variables ──────────────────────────────────────── */
+*, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
+
+:root {{
+  --bg:        #0e1117;
+  --bg-card:   #161b22;
+  --bg-sidebar:#0d1117;
+  --border:    #21262d;
+  --text:      #c9d1d9;
+  --text-dim:  #8b949e;
+  --accent:    #58a6ff;
+  --accent-dim:#1f6feb22;
+  --tag-bg:    #1f6feb33;
+  --tag-text:  #58a6ff;
+  --hover:     #1c2129;
+  --shadow:    0 1px 3px rgba(0,0,0,.4);
+  --radius:    6px;
+  --sidebar-w: 260px;
+  --transition: .2s ease;
+}}
+
+[data-theme="light"] {{
+  --bg:        #ffffff;
+  --bg-card:   #f6f8fa;
+  --bg-sidebar:#f0f2f5;
+  --border:    #d0d7de;
+  --text:      #1f2328;
+  --text-dim:  #656d76;
+  --accent:    #0969da;
+  --accent-dim:#0969da11;
+  --tag-bg:    #0969da18;
+  --tag-text:  #0969da;
+  --hover:     #eef1f5;
+  --shadow:    0 1px 3px rgba(0,0,0,.08);
+}}
+
+html {{ font-size: 15px; }}
+body {{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  display: flex;
+  min-height: 100vh;
+  transition: background var(--transition), color var(--transition);
+}}
+
+/* ── Sidebar ────────────────────────────────────────────────── */
+.sidebar {{
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  transition: transform var(--transition), background var(--transition);
+  z-index: 100;
+}}
+
+.sidebar-header {{
+  padding: 20px 16px 12px;
+  border-bottom: 1px solid var(--border);
+}}
+
+.sidebar-header h1 {{
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  color: var(--text);
+}}
+
+.sidebar-header p {{
+  font-size: .75rem;
+  color: var(--text-dim);
+  margin-top: 2px;
+}}
+
+/* ── Search ─────────────────────────────────────────────────── */
+.search-wrap {{
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}}
+
+.search-wrap input {{
+  width: 100%;
+  padding: 8px 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: .85rem;
+  outline: none;
+  transition: border var(--transition);
+}}
+
+.search-wrap input:focus {{
+  border-color: var(--accent);
+}}
+
+/* ── Categories ─────────────────────────────────────────────── */
+.sidebar-section {{
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}}
+
+.sidebar-section h3 {{
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}}
+
+.cat-list {{ list-style: none; }}
+
+.cat-list li {{
+  padding: 5px 8px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: .85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  transition: background var(--transition);
+}}
+
+.cat-list li:hover {{ background: var(--hover); }}
+.cat-list li.active {{ background: var(--accent-dim); color: var(--accent); font-weight: 500; }}
+
+.cat-list .count {{
+  margin-left: auto;
+  font-size: .7rem;
+  color: var(--text-dim);
+  background: var(--bg);
+  padding: 1px 6px;
+  border-radius: 10px;
+}}
+
+/* ── Tags ───────────────────────────────────────────────────── */
+.tag-cloud {{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}}
+
+.tag-pill {{
+  padding: 3px 9px;
+  font-size: .72rem;
+  border-radius: 12px;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+  user-select: none;
+}}
+
+.tag-pill:hover {{ transform: scale(1.05); }}
+.tag-pill.active {{ background: var(--accent); color: #fff; }}
+
+/* ── Theme Toggle ───────────────────────────────────────────── */
+.sidebar-footer {{
+  margin-top: auto;
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}}
+
+.theme-btn {{
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 12px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: .8rem;
+  transition: background var(--transition);
+}}
+
+.theme-btn:hover {{ background: var(--hover); }}
+
+/* ── Mobile menu button ─────────────────────────────────────── */
+.menu-btn {{
+  display: none;
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 200;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 1.1rem;
+  align-items: center;
+  justify-content: center;
+}}
+
+.overlay {{
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  z-index: 90;
+}}
+
+/* ── Main Content ───────────────────────────────────────────── */
+.main {{
+  flex: 1;
+  padding: 24px 32px;
+  overflow-y: auto;
+  height: 100vh;
+}}
+
+.toolbar {{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}}
+
+.toolbar .result-count {{
+  font-size: .85rem;
+  color: var(--text-dim);
+}}
+
+.sort-select {{
+  margin-left: auto;
+  padding: 5px 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: .8rem;
+  cursor: pointer;
+  outline: none;
+}}
+
+.sort-select:focus {{ border-color: var(--accent); }}
+
+/* ── Cards ──────────────────────────────────────────────────── */
+.cards {{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}}
+
+.card {{
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}}
+
+.card:hover {{ border-color: var(--accent); box-shadow: var(--shadow); }}
+
+.card-top {{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}}
+
+.card-cat {{
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--text-dim);
+  background: var(--accent-dim);
+  padding: 2px 8px;
+  border-radius: 10px;
+}}
+
+.card-date {{
+  font-size: .7rem;
+  color: var(--text-dim);
+  margin-left: auto;
+}}
+
+.card-title {{
+  font-size: .95rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text);
+}}
+
+.card-content {{
+  font-size: .8rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}}
+
+.card-tags {{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: auto;
+}}
+
+.card-tags .tag-pill {{
+  font-size: .65rem;
+  cursor: default;
+}}
+
+.empty-state {{
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-dim);
+}}
+
+.empty-state .icon {{ font-size: 2.5rem; margin-bottom: 12px; }}
+.empty-state p {{ font-size: .9rem; }}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 768px) {{
+  .sidebar {{
+    position: fixed;
+    left: 0; top: 0;
+    transform: translateX(-100%);
+  }}
+  .sidebar.open {{ transform: translateX(0); }}
+  .overlay.open {{ display: block; }}
+  .menu-btn {{ display: flex; }}
+  .main {{ padding: 52px 16px 24px; }}
+  .cards {{ grid-template-columns: 1fr; }}
+}}
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar {{ width: 6px; }}
+::-webkit-scrollbar-track {{ background: transparent; }}
+::-webkit-scrollbar-thumb {{ background: var(--border); border-radius: 3px; }}
+::-webkit-scrollbar-thumb:hover {{ background: var(--text-dim); }}
+</style>
+</head>
+<body>
+
+<!-- Mobile hamburger -->
+<button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
+<div class="overlay" id="overlay"></div>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h1>🏗️ Building Science Archive</h1>
+    <p>Searchable document browser</p>
+  </div>
+
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="Search titles & content…" autocomplete="off">
+  </div>
+
+  <div class="sidebar-section">
+    <h3>Categories</h3>
+    <ul class="cat-list" id="catList"></ul>
+  </div>
+
+  <div class="sidebar-section">
+    <h3>Tags</h3>
+    <div class="tag-cloud" id="tagCloud"></div>
+  </div>
+
+  <div class="sidebar-footer">
+    <span style="font-size:.75rem;color:var(--text-dim)">Theme</span>
+    <button class="theme-btn" id="themeBtn">☀️ Light</button>
+  </div>
+</aside>
+
+<!-- Main -->
+<main class="main" id="mainContent">
+  <div class="toolbar">
+    <span class="result-count" id="resultCount">Loading…</span>
+    <select class="sort-select" id="sortSelect">
+      <option value="date-desc">Newest first</option>
+      <option value="date-asc">Oldest first</option>
+      <option value="title-asc">Title A–Z</option>
+      <option value="title-desc">Title Z–A</option>
+    </select>
+  </div>
+  <div class="cards" id="cardsContainer"></div>
+</main>
+
+<script>
+// ── State ──────────────────────────────────────────────────────
+let DATA = null;
+let fuse = null;
+let activeCategory = null;   // null = "All"
+let activeTags = new Set();
+let searchQuery = "";
+let sortBy = "date-desc";
+
+// ── Theme ──────────────────────────────────────────────────────
+function initTheme() {{
+  const saved = localStorage.getItem("bs-archive-theme");
+  if (saved) document.documentElement.setAttribute("data-theme", saved);
+  updateThemeBtn();
+}}
+
+function toggleTheme() {{
+  const current = document.documentElement.getAttribute("data-theme");
+  const next = current === "light" ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", next);
+  localStorage.setItem("bs-archive-theme", next);
+  updateThemeBtn();
+}}
+
+function updateThemeBtn() {{
+  const isLight = document.documentElement.getAttribute("data-theme") === "light";
+  document.getElementById("themeBtn").textContent = isLight ? "🌙 Dark" : "☀️ Light";
+}}
+
+// ── Mobile sidebar ─────────────────────────────────────────────
+function toggleSidebar() {{
+  document.getElementById("sidebar").classList.toggle("open");
+  document.getElementById("overlay").classList.toggle("open");
+}}
+
+// ── Data loading ───────────────────────────────────────────────
+async function loadData() {{
+  try {{
+    const resp = await fetch("{index_json_path}");
+    if (!resp.ok) throw new Error(resp.statusText);
+    DATA = await resp.json();
+  }} catch (e) {{
+    console.warn("Could not load index.json, using placeholder data", e);
+    DATA = PLACEHOLDER_DATA;
+  }}
+
+  // Build Fuse index
+  fuse = new Fuse(DATA.items, {{
+    keys: [
+      {{ name: "title", weight: 2 }},
+      {{ name: "content", weight: 1 }},
+    ],
+    threshold: 0.35,
+    ignoreLocation: true,
+    includeScore: true,
+  }});
+
+  renderSidebar();
+  renderCards();
+}}
+
+// ── Sidebar rendering ──────────────────────────────────────────
+function renderSidebar() {{
+  // Categories
+  const catList = document.getElementById("catList");
+  const counts = {{}};
+  DATA.items.forEach(it => {{ counts[it.category] = (counts[it.category] || 0) + 1; }});
+
+  let catHTML = `<li class="active" data-cat="">All <span class="count">${{DATA.items.length}}</span></li>`;
+  DATA.categories.forEach(c => {{
+    catHTML += `<li data-cat="${{c.id}}">${{c.icon}} ${{c.label}} <span class="count">${{counts[c.id] || 0}}</span></li>`;
+  }});
+  catList.innerHTML = catHTML;
+
+  catList.querySelectorAll("li").forEach(li => {{
+    li.addEventListener("click", () => {{
+      activeCategory = li.dataset.cat || null;
+      catList.querySelectorAll("li").forEach(l => l.classList.remove("active"));
+      li.classList.add("active");
+      renderCards();
+      // Close sidebar on mobile
+      if (window.innerWidth <= 768) toggleSidebar();
+    }});
+  }});
+
+  // Tags
+  const tagCloud = document.getElementById("tagCloud");
+  tagCloud.innerHTML = DATA.tags.map(t =>
+    `<span class="tag-pill" data-tag="${{t}}">${{t}}</span>`
+  ).join("");
+
+  tagCloud.querySelectorAll(".tag-pill").forEach(pill => {{
+    pill.addEventListener("click", () => {{
+      const tag = pill.dataset.tag;
+      if (activeTags.has(tag)) {{
+        activeTags.delete(tag);
+        pill.classList.remove("active");
+      }} else {{
+        activeTags.add(tag);
+        pill.classList.add("active");
+      }}
+      renderCards();
+    }});
+  }});
+}}
+
+// ── Card rendering ─────────────────────────────────────────────
+function getFilteredItems() {{
+  let items;
+
+  // Search
+  if (searchQuery.trim()) {{
+    items = fuse.search(searchQuery).map(r => r.item);
+  }} else {{
+    items = [...DATA.items];
+  }}
+
+  // Category
+  if (activeCategory) {{
+    items = items.filter(it => it.category === activeCategory);
+  }}
+
+  // Tags (AND logic — item must have ALL selected tags)
+  if (activeTags.size > 0) {{
+    items = items.filter(it => {{
+      const itemTags = new Set(it.tags || []);
+      for (const t of activeTags) {{
+        if (!itemTags.has(t)) return false;
+      }}
+      return true;
+    }});
+  }}
+
+  // Sort
+  items.sort((a, b) => {{
+    switch (sortBy) {{
+      case "date-desc": return (b.date || "").localeCompare(a.date || "");
+      case "date-asc":  return (a.date || "").localeCompare(b.date || "");
+      case "title-asc": return (a.title || "").localeCompare(b.title || "");
+      case "title-desc": return (b.title || "").localeCompare(a.title || "");
+      default: return 0;
+    }}
+  }});
+
+  return items;
+}}
+
+function catLabel(catId) {{
+  const cat = DATA.categories.find(c => c.id === catId);
+  return cat ? `${{cat.icon}} ${{cat.label}}` : catId;
+}}
+
+function renderCards() {{
+  const items = getFilteredItems();
+  const container = document.getElementById("cardsContainer");
+  const countEl = document.getElementById("resultCount");
+
+  countEl.textContent = `${{items.length}} result${{items.length === 1 ? "" : "s"}}`;
+
+  if (items.length === 0) {{
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="icon">🔍</div>
+        <p>No documents match your filters.</p>
+      </div>`;
+    return;
+  }}
+
+  container.innerHTML = items.map(it => `
+    <div class="card">
+      <div class="card-top">
+        <span class="card-cat">${{catLabel(it.category)}}</span>
+        <span class="card-date">${{it.date || "—"}}</span>
+      </div>
+      <div class="card-title">${{escHtml(it.title)}}</div>
+      <div class="card-content">${{escHtml(it.content)}}</div>
+      <div class="card-tags">
+        ${{(it.tags || []).map(t => `<span class="tag-pill">${{t}}</span>`).join("")}}
+      </div>
+    </div>
+  `).join("");
+}}
+
+function escHtml(s) {{
+  const d = document.createElement("div");
+  d.textContent = s;
+  return d.innerHTML;
+}}
+
+// ── Event listeners ────────────────────────────────────────────
+document.getElementById("searchInput").addEventListener("input", e => {{
+  searchQuery = e.target.value;
+  renderCards();
+}});
+
+document.getElementById("sortSelect").addEventListener("change", e => {{
+  sortBy = e.target.value;
+  renderCards();
+}});
+
+document.getElementById("themeBtn").addEventListener("click", toggleTheme);
+document.getElementById("menuBtn").addEventListener("click", toggleSidebar);
+document.getElementById("overlay").addEventListener("click", toggleSidebar);
+
+// ── Placeholder data (fallback) ────────────────────────────────
+const PLACEHOLDER_DATA = {json.dumps(PLACEHOLDER_DATA)};
+
+// ── Boot ───────────────────────────────────────────────────────
+initTheme();
+loadData();
+</script>
+</body>
+</html>"""
+
+
+def main():
+    # Optionally write a placeholder index.json if it doesn't exist
+    index_json_path = SCRIPT_DIR / DEFAULT_INDEX_JSON
+    if not index_json_path.exists():
+        print(f"Writing placeholder {DEFAULT_INDEX_JSON} …")
+        index_json_path.write_text(json.dumps(PLACEHOLDER_DATA, indent=2), encoding="utf-8")
+
+    # Generate the HTML
+    html = generate_html()
+    OUTPUT_HTML.write_text(html, encoding="utf-8")
+    print(f"✅ Generated {OUTPUT_HTML}  ({len(html):,} bytes)")
+
+    # Quick sanity check
+    assert "<!DOCTYPE html>" in html
+    assert "fuse.min.js" in html
+    assert "PLACEHOLDER_DATA" in html
+    print("✅ Sanity checks passed")
+
+
+if __name__ == "__main__":
+    main()

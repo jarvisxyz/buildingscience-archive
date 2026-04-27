@@ -1,0 +1,23 @@
+# ── Archive: large crawled HTML & assets ──────────────────────
+archive/
+*.html.bak
+
+# ── Python ────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ── OS / editor junk ─────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# ── Misc ──────────────────────────────────────────────────────
+*.log
+.env

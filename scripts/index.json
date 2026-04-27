@@ -1,0 +1,157 @@
+{
+  "categories": [
+    {
+      "id": "documents",
+      "label": "Documents",
+      "icon": "\ud83d\udcc4"
+    },
+    {
+      "id": "contributors",
+      "label": "Contributors",
+      "icon": "\ud83d\udc64"
+    },
+    {
+      "id": "events",
+      "label": "Events",
+      "icon": "\ud83d\udcc5"
+    },
+    {
+      "id": "guides",
+      "label": "Guides",
+      "icon": "\ud83d\udcd6"
+    },
+    {
+      "id": "research",
+      "label": "Research",
+      "icon": "\ud83d\udd2c"
+    }
+  ],
+  "tags": [
+    "HVAC",
+    "insulation",
+    "moisture",
+    "ventilation",
+    "envelope",
+    "energy-code",
+    "residential",
+    "commercial",
+    "retrofit",
+    "monitoring"
+  ],
+  "items": [
+    {
+      "id": "doc-001",
+      "title": "Building Enclosure Design Guide",
+      "category": "documents",
+      "tags": [
+        "envelope",
+        "moisture"
+      ],
+      "date": "2025-11-15",
+      "content": "Comprehensive guide to building enclosure design principles including air barriers, vapor retarders, and thermal control layers."
+    },
+    {
+      "id": "doc-002",
+      "title": "Residential HVAC Sizing Manual",
+      "category": "documents",
+      "tags": [
+        "HVAC",
+        "residential"
+      ],
+      "date": "2025-09-20",
+      "content": "Manual J and S procedures for residential heating and cooling load calculations."
+    },
+    {
+      "id": "contrib-001",
+      "title": "Dr. Sarah Chen \u2014 Building Science Corp",
+      "category": "contributors",
+      "tags": [
+        "envelope",
+        "research"
+      ],
+      "date": "2025-08-01",
+      "content": "Principal researcher specializing in hygrothermal analysis and wall assembly durability."
+    },
+    {
+      "id": "evt-001",
+      "title": "Passive House Conference 2025",
+      "category": "events",
+      "tags": [
+        "energy-code",
+        "envelope"
+      ],
+      "date": "2025-06-10",
+      "content": "Annual conference on passive house design, certification, and high-performance building standards."
+    },
+    {
+      "id": "guide-001",
+      "title": "Deep Energy Retrofit Playbook",
+      "category": "guides",
+      "tags": [
+        "retrofit",
+        "insulation",
+        "ventilation"
+      ],
+      "date": "2025-04-22",
+      "content": "Step-by-step playbook for planning and executing deep energy retrofits on existing residential buildings."
+    },
+    {
+      "id": "res-001",
+      "title": "Moisture Monitoring in Wall Assemblies",
+      "category": "research",
+      "tags": [
+        "moisture",
+        "monitoring",
+        "envelope"
+      ],
+      "date": "2025-03-05",
+      "content": "Long-term field study of moisture transport in wood-frame wall assemblies across climate zones 4-6."
+    },
+    {
+      "id": "doc-003",
+      "title": "Commercial Ventilation Requirements \u2014 ASHRAE 62.1 Summary",
+      "category": "documents",
+      "tags": [
+        "ventilation",
+        "commercial",
+        "energy-code"
+      ],
+      "date": "2025-01-18",
+      "content": "Simplified summary of ASHRAE Standard 62.1 ventilation rate procedure for commercial buildings."
+    },
+    {
+      "id": "contrib-002",
+      "title": "Mark Rivera \u2014 Phius Alliance",
+      "category": "contributors",
+      "tags": [
+        "envelope",
+        "energy-code"
+      ],
+      "date": "2024-12-01",
+      "content": "Certified passive house consultant and trainer focused on multifamily and commercial passive building."
+    },
+    {
+      "id": "evt-002",
+      "title": "Building Science Symposium 2025",
+      "category": "events",
+      "tags": [
+        "research",
+        "monitoring"
+      ],
+      "date": "2025-07-14",
+      "content": "Two-day symposium featuring peer-reviewed presentations on building science research and practice."
+    },
+    {
+      "id": "res-002",
+      "title": "Attic Insulation Retrofit Performance Study",
+      "category": "research",
+      "tags": [
+        "insulation",
+        "retrofit",
+        "residential"
+      ],
+      "date": "2024-10-30",
+      "content": "Comparative study of spray foam vs. blown-in fiberglass in attic retrofits across 40 homes in climate zone 5."
+    }
+  ]
+}
