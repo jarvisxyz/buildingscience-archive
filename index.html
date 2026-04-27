@@ -605,43 +605,25 @@ function openViewer(doc) {
     if (doc.url) metaHtml += '<span><a href="' + escapeHtml(doc.url) + '" target="_blank" rel="noopener">Source &nearr;</a></span>';
     meta.innerHTML = metaHtml;
 
-    // Show loading
-    body.innerHTML = '<div class="viewer-loading"><div class="spinner"></div><p>Loading content...</p></div>';
-
     // Activate panel
     overlay.classList.add('active');
     panel.classList.add('active');
     panel.scrollTop = 0;
 
-    // Fetch markdown
-    var mdPath = doc.local_path;
-    if (!mdPath) {
+    // Render content — inline from index.json
+    var md = doc.content || '';
+    if (md) {
+        if (typeof marked !== 'undefined' && marked.parse) {
+            body.innerHTML = '<div class="md-content">' + marked.parse(md) + '</div>';
+        } else {
+            body.innerHTML = '<div class="md-content"><pre style="white-space:pre-wrap;">' + escapeHtml(md) + '</pre></div>';
+        }
+    } else {
         body.innerHTML = '<div class="viewer-error"><h3>Content not available</h3>' +
-            '<p>No local path for this document.</p>' +
+            '<p>This document has no extracted content.</p>' +
             (doc.url ? '<p><a href="' + escapeHtml(doc.url) + '" target="_blank" rel="noopener">View on buildingscience.com &nearr;</a></p>' : '') +
             '</div>';
-        return;
     }
-
-    fetch(mdPath)
-        .then(function(r) {
-            if (!r.ok) throw new Error('HTTP ' + r.status);
-            return r.text();
-        })
-        .then(function(md) {
-            if (typeof marked !== 'undefined' && marked.parse) {
-                body.innerHTML = '<div class="md-content">' + marked.parse(md) + '</div>';
-            } else {
-                // Fallback: render as preformatted
-                body.innerHTML = '<div class="md-content"><pre style="white-space:pre-wrap;">' + escapeHtml(md) + '</pre></div>';
-            }
-        })
-        .catch(function(err) {
-            body.innerHTML = '<div class="viewer-error"><h3>Could not load content</h3>' +
-                '<p>' + escapeHtml(err.message) + '</p>' +
-                (doc.url ? '<p><a href="' + escapeHtml(doc.url) + '" target="_blank" rel="noopener">View on buildingscience.com &nearr;</a></p>' : '') +
-                '</div>';
-        });
 }
 
 function closeViewer() {
