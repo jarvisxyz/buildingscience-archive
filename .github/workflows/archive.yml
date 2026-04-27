@@ -22,11 +22,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install --quiet -r requirements.txt 2>/dev/null || true
-          pip install --quiet requests beautifulsoup4 lxml
+          pip install --quiet requests beautifulsoup4 lxml bleach html2text tqdm Pillow
 
       - name: Run scraper
-        run: python scripts/scrape_buildingscience.py
+        run: python scripts/scrape_buildingscience.py --yes
 
       - name: Rebuild browser index
         run: python scripts/build_browser.py

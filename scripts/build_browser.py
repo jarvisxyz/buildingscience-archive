@@ -1,760 +1,996 @@
 #!/usr/bin/env python3
-"""
-build_browser.py — Generates a standalone single-page searchable archive browser.
+"""Generate the searchable browser UI for the buildingscience.com archive.
 
-Output: scripts/index.html (reads scripts/index.json client-side)
-Features: Fuse.js search, category grouping, tag filters, dark/light toggle,
-          responsive sidebar, sort by date/title, clean minimal aesthetic.
+Outputs:
+  scripts/index.json   — metadata for all archived documents
+  scripts/index.html   — self-contained searchable interface
+  scripts/index.html   — self-contained searchable interface (reads index.json)
+
+Uses Fuse.js (CDN) for client-side search. Dark/light theme, category filters, tag filters, sort by title/date.
 """
 
-import json
-import os
-import sys
+import os, sys, re
 from pathlib import Path
+from bs4 import BeautifulSoup
 
-SCRIPT_DIR = Path(__file__).resolve().parent
-OUTPUT_HTML = SCRIPT_DIR / "index.html"
-DEFAULT_INDEX_JSON = "index.json"
+INDEX_FILE = Path(__file__).parent.parent / "archive" / "documents" / "INDEX"
+OUTPUT_DIR = Path(__file__).parent.parent
+INDEX_JSON = OUTPUT_DIR / "index.json"
+INDEX_HTML = OUTPUT_DIR / "index.html"
 
-# ── Placeholder data (used when index.json is absent) ──────────────────────
+def build_index_from_archive(data):
+    """Build index.json from scraped data."""
+    from pathlib import Path
+    from urllib.parse import unquote
+    import hashlib
 
-PLACEHOLDER_DATA = {
-    "categories": [
-        {"id": "documents", "label": "Documents", "icon": "📄"},
-        {"id": "contributors", "label": "Contributors", "icon": "👤"},
-        {"id": "events", "label": "Events", "icon": "📅"},
-        {"id": "guides", "label": "Guides", "icon": "📖"},
-        {"id": "research", "label": "Research", "icon": "🔬"},
-    ],
-    "tags": [
-        "HVAC", "insulation", "moisture", "ventilation", "envelope",
-        "energy-code", "residential", "commercial", "retrofit", "monitoring",
-    ],
-    "items": [
-        {
-            "id": "doc-001",
-            "title": "Building Enclosure Design Guide",
-            "category": "documents",
-            "tags": ["envelope", "moisture"],
-            "date": "2025-11-15",
-            "content": "Comprehensive guide to building enclosure design principles including air barriers, vapor retarders, and thermal control layers.",
-        },
-        {
-            "id": "doc-002",
-            "title": "Residential HVAC Sizing Manual",
-            "category": "documents",
-            "tags": ["HVAC", "residential"],
-            "date": "2025-09-20",
-            "content": "Manual J and S procedures for residential heating and cooling load calculations.",
-        },
-        {
-            "id": "contrib-001",
-            "title": "Dr. Sarah Chen — Building Science Corp",
-            "category": "contributors",
-            "tags": ["envelope", "research"],
-            "date": "2025-08-01",
-            "content": "Principal researcher specializing in hygrothermal analysis and wall assembly durability.",
-        },
-        {
-            "id": "evt-001",
-            "title": "Passive House Conference 2025",
-            "category": "events",
-            "tags": ["energy-code", "envelope"],
-            "date": "2025-06-10",
-            "content": "Annual conference on passive house design, certification, and high-performance building standards.",
-        },
-        {
-            "id": "guide-001",
-            "title": "Deep Energy Retrofit Playbook",
-            "category": "guides",
-            "tags": ["retrofit", "insulation", "ventilation"],
-            "date": "2025-04-22",
-            "content": "Step-by-step playbook for planning and executing deep energy retrofits on existing residential buildings.",
-        },
-        {
-            "id": "res-001",
-            "title": "Moisture Monitoring in Wall Assemblies",
-            "category": "research",
-            "tags": ["moisture", "monitoring", "envelope"],
-            "date": "2025-03-05",
-            "content": "Long-term field study of moisture transport in wood-frame wall assemblies across climate zones 4-6.",
-        },
-        {
-            "id": "doc-003",
-            "title": "Commercial Ventilation Requirements — ASHRAE 62.1 Summary",
-            "category": "documents",
-            "tags": ["ventilation", "commercial", "energy-code"],
-            "date": "2025-01-18",
-            "content": "Simplified summary of ASHRAE Standard 62.1 ventilation rate procedure for commercial buildings.",
-        },
-        {
-            "id": "contrib-002",
-            "title": "Mark Rivera — Phius Alliance",
-            "category": "contributors",
-            "tags": ["envelope", "energy-code"],
-            "date": "2024-12-01",
-            "content": "Certified passive house consultant and trainer focused on multifamily and commercial passive building.",
-        },
-        {
-            "id": "evt-002",
-            "title": "Building Science Symposium 2025",
-            "category": "events",
-            "tags": ["research", "monitoring"],
-            "date": "2025-07-14",
-            "content": "Two-day symposium featuring peer-reviewed presentations on building science research and practice.",
-        },
-        {
-            "id": "res-002",
-            "title": "Attic Insulation Retrofit Performance Study",
-            "category": "research",
-            "tags": ["insulation", "retrofit", "residential"],
-            "date": "2024-10-30",
-            "content": "Comparative study of spray foam vs. blown-in fiberglass in attic retrofits across 40 homes in climate zone 5.",
-        },
-    ],
-}
+    results = []
+    archive_root = OUTPUT_DIR.parent / "archive"
 
+    # Walk through all category directories
+    for cat_dir in archive_root.iterdir():
+        if not cat_dir.is_dir():
+            continue
+        cat_name = cat_dir.name
+        
+        for sub_dir in cat_dir.iterdir():
+            if not sub_dir.is_dir():
+                continue
+            
+            for doc_dir in sub_dir.iterdir():
+                if not doc_dir.is_dir():
+                    continue
+                
+                # Find full.html file
+                full_html = doc_dir / "full.html"
+                content_md = doc_dir / "content.md"
+                assets_dir = doc_dir / "assets"
+                
+                if not full_html.exists():
+                    continue
+                
+                html_content = full_html.read_text(encoding="utf-8", errors="replace")
+                soup = BeautifulSoup(html_content, "html.parser")
+                
+                # Extract title
+                title_tag = soup.find("title")
+                title = title_tag.get_text(strip=True) if title_tag else "Untitled"
+                
+                # Extract description
+                desc_meta = soup.find("meta", attrs={"name": "description"})
+                description = desc_meta.get("content", "") if desc_meta else ""
+                if not description:
+                    og_desc = soup.find("meta", attrs={"property": "og:description"})
+                    description = og_desc.get("content", "") if og_desc else ""
+                
+                # Extract tags
+                tags = []
+                tag_elements = soup.select(".field--name-field-tags a, .taxonomy-container a")
+                for a in tag_elements:
+                    t = a.get_text(strip=True)
+                    if t and t not in tags:
+                        tags.append(t)
+                
+                # Extract date
+                date_meta = soup.find("meta", attrs={"name": "date"})
+                date = date_meta.get("content", "") if date_meta else ""
+                if not date:
+                    pubdate = soup.find("meta", attrs={"property": "article:published_time"})
+                    date = pubdate.get("content", "") if pubdate else ""
+                
+                # Determine URL
+                # The URL is the parent directory's name
+                url = str(doc_dir.parent / doc_dir.name)
+                full_url = unquote(f"{BASE_URL}{url}")
+                
+                # Count assets
+                asset_count = len([f for f in assets_dir.iterdir() if f.is_file()]) if assets_dir.exists() else 0
+                
+                results.append({
+                    "title": title,
+                    "description": description,
+                    "tags": tags,
+                    "date": date,
+                    "type": cat_name,
+                    "doc_subtype": sub_dir.name,
+                    "url": full_url,
+                    "directory": str(doc_dir.relative_to(archive_root)),
+                    "html_file": str(full_html),
+                    "md_file": str(content_md) if content_md.exists() else "",
+                    "asset_count": asset_count,
+                })
 
-def generate_html(index_json_path: str = DEFAULT_INDEX_JSON) -> str:
-    """Return the complete index.html as a string."""
+    return results
+
+def build_html(index_data):
+    """Build the complete searchable browser UI."""
+    
+    # Escape for JSON embedding
+    json_str = json.dumps(index_data, ensure_ascii=False)
 
     return f"""<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Building Science Archive</title>
+<title>Buildingscience.com Archive</title>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
 <style>
-/* ── Reset & Variables ──────────────────────────────────────── */
-*, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
+:host {{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}}
 
 :root {{
-  --bg:        #0e1117;
-  --bg-card:   #161b22;
-  --bg-sidebar:#0d1117;
-  --border:    #21262d;
-  --text:      #c9d1d9;
-  --text-dim:  #8b949e;
-  --accent:    #58a6ff;
-  --accent-dim:#1f6feb22;
-  --tag-bg:    #1f6feb33;
-  --tag-text:  #58a6ff;
-  --hover:     #1c2129;
-  --shadow:    0 1px 3px rgba(0,0,0,.4);
-  --radius:    6px;
-  --sidebar-w: 260px;
-  --transition: .2s ease;
+    --bg: #0f172a;
+    --bg-card: #1e293b;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --accent: #3b82f6;
+    --accent-hover: #60a5fa;
+    --tag-bg: #1e3a5f;
+    --tag-text: #93c5fd;
+    --sidebar-bg: #1e293b;
+    --highlight: #854d0e;
+    --shadow: 0 1px 3px rgba(0,0,0,0.4);
 }}
 
 [data-theme="light"] {{
-  --bg:        #ffffff;
-  --bg-card:   #f6f8fa;
-  --bg-sidebar:#f0f2f5;
-  --border:    #d0d7de;
-  --text:      #1f2328;
-  --text-dim:  #656d76;
-  --accent:    #0969da;
-  --accent-dim:#0969da11;
-  --tag-bg:    #0969da18;
-  --tag-text:  #0969da;
-  --hover:     #eef1f5;
-  --shadow:    0 1px 3px rgba(0,0,0,.08);
+    --bg: #f5f5f5;
+    --bg-card: #ffffff;
+    --text: #1a1a1a;
+    --text-muted: #666;
+    --border: #ddd;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --tag-bg: #e0e7ff;
+    --tag-text: #3730a3;
+    --sidebar-bg: #f9fafb;
+    --highlight: #fef3c7;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
 }}
 
-html {{ font-size: 15px; }}
+* {{ margin: 0; padding: 0; box-sizing: border-box; }}
+
 body {{
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  display: flex;
-  min-height: 100vh;
-  transition: background var(--transition), color var(--transition);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
 }}
 
-/* ── Sidebar ────────────────────────────────────────────────── */
+.app {{
+    display: flex;
+    min-height: 100vh;
+}}
+
+/* Sidebar */
 .sidebar {{
-  width: var(--sidebar-w);
-  min-width: var(--sidebar-w);
-  background: var(--bg-sidebar);
-  border-right: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  position: sticky;
-  top: 0;
-  transition: transform var(--transition), background var(--transition);
-  z-index: 100;
+    width: 280px;
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 100;
+    transition: transform 0.3s ease;
+}}
+
+.sidebar.collapsed {{
+    transform: translateX(-100%);
 }}
 
 .sidebar-header {{
-  padding: 20px 16px 12px;
-  border-bottom: 1px solid var(--border);
+    padding: 0 20px 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
 }}
 
 .sidebar-header h1 {{
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: -.02em;
-  color: var(--text);
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
 }}
 
 .sidebar-header p {{
-  font-size: .75rem;
-  color: var(--text-dim);
-  margin-top: 2px;
+    font-size: 12px;
+    color: var(--text-muted);
 }}
 
-/* ── Search ─────────────────────────────────────────────────── */
-.search-wrap {{
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border);
+.sidebar-nav {{
+    list-style: none;
+    padding: 0;
 }}
 
-.search-wrap input {{
-  width: 100%;
-  padding: 8px 10px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  color: var(--text);
-  font-size: .85rem;
-  outline: none;
-  transition: border var(--transition);
+.sidebar-nav li {{
+    padding: 8px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.15s;
 }}
 
-.search-wrap input:focus {{
-  border-color: var(--accent);
+.sidebar-nav li:hover {{
+    background: var(--accent);
+    color: white;
 }}
 
-/* ── Categories ─────────────────────────────────────────────── */
-.sidebar-section {{
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border);
+.sidebar-nav li.active,
+.sidebar-nav li.active:hover {{
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
 }}
 
-.sidebar-section h3 {{
-  font-size: .7rem;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  color: var(--text-dim);
-  margin-bottom: 8px;
+.sidebar-nav .count {{
+    font-size: 11px;
+    opacity: 0.6;
+    background: var(--border);
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 24px;
+    text-align: center;
 }}
 
-.cat-list {{ list-style: none; }}
-
-.cat-list li {{
-  padding: 5px 8px;
-  border-radius: var(--radius);
-  cursor: pointer;
-  font-size: .85rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--text);
-  transition: background var(--transition);
-}}
-
-.cat-list li:hover {{ background: var(--hover); }}
-.cat-list li.active {{ background: var(--accent-dim); color: var(--accent); font-weight: 500; }}
-
-.cat-list .count {{
-  margin-left: auto;
-  font-size: .7rem;
-  color: var(--text-dim);
-  background: var(--bg);
-  padding: 1px 6px;
-  border-radius: 10px;
-}}
-
-/* ── Tags ───────────────────────────────────────────────────── */
-.tag-cloud {{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}}
-
-.tag-pill {{
-  padding: 3px 9px;
-  font-size: .72rem;
-  border-radius: 12px;
-  background: var(--tag-bg);
-  color: var(--tag-text);
-  cursor: pointer;
-  transition: background var(--transition), transform var(--transition);
-  user-select: none;
-}}
-
-.tag-pill:hover {{ transform: scale(1.05); }}
-.tag-pill.active {{ background: var(--accent); color: #fff; }}
-
-/* ── Theme Toggle ───────────────────────────────────────────── */
-.sidebar-footer {{
-  margin-top: auto;
-  padding: 12px 16px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}}
-
-.theme-btn {{
-  background: var(--bg);
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 6px 12px;
-  border-radius: var(--radius);
-  cursor: pointer;
-  font-size: .8rem;
-  transition: background var(--transition);
-}}
-
-.theme-btn:hover {{ background: var(--hover); }}
-
-/* ── Mobile menu button ─────────────────────────────────────── */
-.menu-btn {{
-  display: none;
-  position: fixed;
-  top: 12px;
-  left: 12px;
-  z-index: 200;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text);
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius);
-  cursor: pointer;
-  font-size: 1.1rem;
-  align-items: center;
-  justify-content: center;
-}}
-
-.overlay {{
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.5);
-  z-index: 90;
-}}
-
-/* ── Main Content ───────────────────────────────────────────── */
+/* Main content */
 .main {{
-  flex: 1;
-  padding: 24px 32px;
-  overflow-y: auto;
-  height: 100vh;
+    flex: 1;
+    margin-left: 280px;
+    min-height: 100vh;
 }}
 
-.toolbar {{
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
+/* Top bar */
+.topbar {{
+    background: bg-card;
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    box-shadow: var(--shadow);
 }}
 
-.toolbar .result-count {{
-  font-size: .85rem;
-  color: var(--text-dim);
+.search-box {{
+    flex: 1;
+    position: relative;
 }}
 
-.sort-select {{
-  margin-left: auto;
-  padding: 5px 10px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  color: var(--text);
-  font-size: .8rem;
-  cursor: pointer;
-  outline: none;
+.search-box input {{
+    width: 100%;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 15px;
+    background: var(--bg);
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }}
 
-.sort-select:focus {{ border-color: var(--accent); }}
+.search-box input:focus {{
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}}
 
-/* ── Cards ──────────────────────────────────────────────────── */
-.cards {{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
+.search-box .search-icon {{
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}}
+
+.topbar-controls {{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}}
+
+.btn {{
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}}
+
+.btn:hover {{
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}}
+
+.btn.active {{
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}}
+
+.stats {{
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 0 24px 8px;
+}}
+
+/* Results */
+.results-container {{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 48px;
+}}
+
+.category-header {{
+    font-size: 20px;
+    font-weight: 700;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    color: var(--accent);
+}}
+
+.results-grid {{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
 }}
 
 .card {{
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px 18px;
-  transition: border-color var(--transition), box-shadow var(--transition);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    transition: box-shadow 0.2s, transform 0.15s;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }}
 
-.card:hover {{ border-color: var(--accent); box-shadow: var(--shadow); }}
-
-.card-top {{
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.card:hover {{
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
 }}
 
-.card-cat {{
-  font-size: .7rem;
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  color: var(--text-dim);
-  background: var(--accent-dim);
-  padding: 2px 8px;
-  border-radius: 10px;
+.card-link {{
+    color: var(--accent);
+    font-size: 12px;
+    text-decoration: none;
+    word-break: break-all;
 }}
 
-.card-date {{
-  font-size: .7rem;
-  color: var(--text-dim);
-  margin-left: auto;
+.card-link:hover {{
+    text-decoration: underline;
 }}
 
 .card-title {{
-  font-size: .95rem;
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--text);
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.4;
 }}
 
-.card-content {{
-  font-size: .8rem;
-  color: var(--text-dim);
-  line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.card-meta {{
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
 }}
 
-.card-tags {{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-top: auto;
+.card-meta .tag {{
+    font-size: 11px;
+    padding: 2px 8px;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    border-radius: 4px;
 }}
 
-.card-tags .tag-pill {{
-  font-size: .65rem;
-  cursor: default;
+.card-desc {{
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
 }}
 
+.card-desc em {{
+    background: var(--highlight);
+    padding: 0 2px;
+    font-style: normal;
+    font-weight: 600;
+}}
+
+.card-type {{
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}}
+
+.card-date {{
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}}
+
+/* Empty state */
 .empty-state {{
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--text-dim);
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--text-muted);
 }}
 
-.empty-state .icon {{ font-size: 2.5rem; margin-bottom: 12px; }}
-.empty-state p {{ font-size: .9rem; }}
+.empty-state h2 {{
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: var(--text);
+}}
 
-/* ── Responsive ─────────────────────────────────────────────── */
+/* Mobile */
 @media (max-width: 768px) {{
-  .sidebar {{
-    position: fixed;
-    left: 0; top: 0;
-    transform: translateX(-100%);
-  }}
-  .sidebar.open {{ transform: translateX(0); }}
-  .overlay.open {{ display: block; }}
-  .menu-btn {{ display: flex; }}
-  .main {{ padding: 52px 16px 24px; }}
-  .cards {{ grid-template-columns: 1fr; }}
+    .sidebar {{
+        position: fixed;
+        transform: translateX(-100%);
+    }}
+    .sidebar.open {{
+        transform: translateX(0);
+    }}
+    .main {{
+        margin-left: 0;
+    }}
+    .mobile-toggle {{
+        display: block !important;
+    }}
+    .results-grid {{
+        grid-template-columns: 1fr;
+    }}
 }}
 
-/* ── Scrollbar ──────────────────────────────────────────────── */
-::-webkit-scrollbar {{ width: 6px; }}
-::-webkit-scrollbar-track {{ background: transparent; }}
-::-webkit-scrollbar-thumb {{ background: var(--border); border-radius: 3px; }}
-::-webkit-scrollbar-thumb:hover {{ background: var(--text-dim); }}
+.mobile-toggle {{
+    display: none;
+}}
+
+.mobile-overlay {{
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 90;
+}}
+
+.mobile-overlay.active {{
+    display: block;
+}}
+
+/* Pagination */
+.pagination {{
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 32px;
+}}
+
+.page-btn {{
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg);
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text);
+}}
+
+.page-btn:hover, .page-btn.active {{
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}}
+
+/* Sort bar */
+.sort-bar {{
+    display: flex;
+    gap: 4px;
+    margin-top: 8px;
+}}
+
+/* Footer */
+.footer {{
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 12px;
+}}
+
+/* Toggle sidebar button */
+.sidebar-toggle {{
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--text-muted);
+    padding: 8px;
+    border-radius: 4px;
+}}
+
+.sidebar-toggle:hover {{
+    color: var(--text);
+}}
+
+/* Loading */
+.loading {{
+    text-align: center;
+    padding: 48px;
+    color: var(--text-muted);
+}}
+
+.loading .spinner {{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 16px;
+}}
+
+@keyframes spin {{
+    to {{ transform: rotate(360deg); }}
+}}
 </style>
 </head>
 <body>
+<div class="app">
+    <!-- Mobile overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
 
-<!-- Mobile hamburger -->
-<button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
-<div class="overlay" id="overlay"></div>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>📚 Building Science Archive</h1>
+            <p id="totalCount">Loading...</p>
+        </div>
+        <ul class="sidebar-nav" id="sidebarNav">
+            <li class="active" data-cat="all">All <span class="count" id="countAll">0</span></li>
+        </ul>
+    </aside>
 
-<!-- Sidebar -->
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-header">
-    <h1>🏗️ Building Science Archive</h1>
-    <p>Searchable document browser</p>
-  </div>
+    <!-- Main -->
+    <main class="main">
+        <!-- Top bar -->
+        <div class="topbar">
+            <button class="btn mobile-toggle" id="mobileToggle">&#9776;</button>
+            <button class="sidebar-toggle" id="sidebarToggle">&#9776;</button>
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Search documents, topics, tags..." autocomplete="off">
+            </div>
+            <div class="topbar-controls">
+                <button class="btn" id="themeToggle" title="Toggle theme">🌙</button>
+                <button class="btn" id="sortToggle" title="Toggle sort">↕ Sort</button>
+                <button class="btn" id="exportBtn" title="Export index">💾 Save</button>
+            </div>
+        </div>
 
-  <div class="search-wrap">
-    <input type="text" id="searchInput" placeholder="Search titles & content…" autocomplete="off">
-  </div>
+        <div class="stats" id="resultStats"></div>
 
-  <div class="sidebar-section">
-    <h3>Categories</h3>
-    <ul class="cat-list" id="catList"></ul>
-  </div>
+        <div class="sort-bar" id="sortBar" style="display:none; max-width:1200px; margin:8px auto; padding:0 24px;">
+            <button class="btn" data-sort="title">Title</button>
+            <button class="btn" data-sort="date">Date</button>
+            <button class="btn" data-sort="type">Type</button>
+        </div>
 
-  <div class="sidebar-section">
-    <h3>Tags</h3>
-    <div class="tag-cloud" id="tagCloud"></div>
-  </div>
+        <!-- Results -->
+        <div class="results-container" id="resultsContainer">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Loading index...</p>
+            </div>
+        </div>
 
-  <div class="sidebar-footer">
-    <span style="font-size:.75rem;color:var(--text-dim)">Theme</span>
-    <button class="theme-btn" id="themeBtn">☀️ Light</button>
-  </div>
-</aside>
-
-<!-- Main -->
-<main class="main" id="mainContent">
-  <div class="toolbar">
-    <span class="result-count" id="resultCount">Loading…</span>
-    <select class="sort-select" id="sortSelect">
-      <option value="date-desc">Newest first</option>
-      <option value="date-asc">Oldest first</option>
-      <option value="title-asc">Title A–Z</option>
-      <option value="title-desc">Title Z–A</option>
-    </select>
-  </div>
-  <div class="cards" id="cardsContainer"></div>
-</main>
+        <div class="footer">
+            <p>Archive of <a href="https://buildingscience.com" style="color:var(--accent)">buildingscience.com</a> — for personal use only</p>
+            <p style="margin-top:4px" id="lastUpdated">Data last updated: Unknown</p>
+        </div>
+    </main>
+</div>
 
 <script>
-// ── State ──────────────────────────────────────────────────────
-let DATA = null;
+// Embedded data from index.json
+const DOCUMENTS = {json_str};
+const PER_PAGE = 24;
+
+// State
 let fuse = null;
-let activeCategory = null;   // null = "All"
-let activeTags = new Set();
-let searchQuery = "";
-let sortBy = "date-desc";
+let filteredDocs = [...DOCUMENTS];
+let currentCategory = 'all';
+let currentSort = 'relevance';
+let currentPage = 1;
+let currentSearch = '';
 
-// ── Theme ──────────────────────────────────────────────────────
-function initTheme() {{
-  const saved = localStorage.getItem("bs-archive-theme");
-  if (saved) document.documentElement.setAttribute("data-theme", saved);
-  updateThemeBtn();
-}}
+// Init
+function init({{ docs }}) {{
+    // Build search index
+    const options = {{
+        keys: [
+            {{ name: 'title', weight: 0.4 }},
+            {{ name: 'description', weight: 0.3 }},
+            {{ name: 'tags', weight: 0.2 }},
+            {{ name: 'doc_subtype', weight: 0.1 }}
+        ],
+        includeScore: true,
+        threshold: 0.3,
+        ignoreLocation: true,
+        minMatchCharLength: 2
+    }};
+    fuse = new Fuse(docs, options);
 
-function toggleTheme() {{
-  const current = document.documentElement.getAttribute("data-theme");
-  const next = current === "light" ? "dark" : "light";
-  document.documentElement.setAttribute("data-theme", next);
-  localStorage.setItem("bs-archive-theme", next);
-  updateThemeBtn();
-}}
+    // Build category sidebar
+    buildCategoryNav();
 
-function updateThemeBtn() {{
-  const isLight = document.documentElement.getAttribute("data-theme") === "light";
-  document.getElementById("themeBtn").textContent = isLight ? "🌙 Dark" : "☀️ Light";
-}}
+    // Show all
+    filteredDocs = [...docs];
+    render();
 
-// ── Mobile sidebar ─────────────────────────────────────────────
-function toggleSidebar() {{
-  document.getElementById("sidebar").classList.toggle("open");
-  document.getElementById("overlay").classList.toggle("open");
-}}
+    // Last updated
+    const lastUpdated = document.getElementById('lastUpdated');
+    const match = LOCATION_FILE.match(/\d{{4}}-\d{{2}}-\d{{2}}/);
+    if (match) lastUpdated.textContent = 'Data last updated: ' + match[0];
+    else lastUpdated.textContent = 'Loaded locally';
 
-// ── Data loading ───────────────────────────────────────────────
-async function loadData() {{
-  try {{
-    const resp = await fetch("{index_json_path}");
-    if (!resp.ok) throw new Error(resp.statusText);
-    DATA = await resp.json();
-  }} catch (e) {{
-    console.warn("Could not load index.json, using placeholder data", e);
-    DATA = PLACEHOLDER_DATA;
-  }}
+    // Event listeners
+    document.getElementById('sidebarToggle').addEventListener('click', toggleSidebar);
+    document.getElementById('mobileToggle').addEventListener('click', toggleMobileSidebar);
+    document.getElementById('mobileOverlay').addEventListener('click', toggleMobileSidebar);
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    document.getElementById('sortToggle').addEventListener('click', toggleSortBar);
+    document.getElementById('exportBtn').addEventListener('click', exportIndex);
 
-  // Build Fuse index
-  fuse = new Fuse(DATA.items, {{
-    keys: [
-      {{ name: "title", weight: 2 }},
-      {{ name: "content", weight: 1 }},
-    ],
-    threshold: 0.35,
-    ignoreLocation: true,
-    includeScore: true,
-  }});
-
-  renderSidebar();
-  renderCards();
-}}
-
-// ── Sidebar rendering ──────────────────────────────────────────
-function renderSidebar() {{
-  // Categories
-  const catList = document.getElementById("catList");
-  const counts = {{}};
-  DATA.items.forEach(it => {{ counts[it.category] = (counts[it.category] || 0) + 1; }});
-
-  let catHTML = `<li class="active" data-cat="">All <span class="count">${{DATA.items.length}}</span></li>`;
-  DATA.categories.forEach(c => {{
-    catHTML += `<li data-cat="${{c.id}}">${{c.icon}} ${{c.label}} <span class="count">${{counts[c.id] || 0}}</span></li>`;
-  }});
-  catList.innerHTML = catHTML;
-
-  catList.querySelectorAll("li").forEach(li => {{
-    li.addEventListener("click", () => {{
-      activeCategory = li.dataset.cat || null;
-      catList.querySelectorAll("li").forEach(l => l.classList.remove("active"));
-      li.classList.add("active");
-      renderCards();
-      // Close sidebar on mobile
-      if (window.innerWidth <= 768) toggleSidebar();
+    // Search
+    let searchTimeout;
+    document.getElementById('searchInput').addEventListener('input', (e) => {{
+        clearTimeout(searchTimeout);
+        currentSearch = e.target.value.trim();
+        if (currentSearch.length < 2) {{
+            filterByCategory(currentCategory);
+            return;
+        }}
+        searchTimeout = setTimeout(() => {{
+            performSearch(currentSearch);
+        }}, 200);
     }});
-  }});
 
-  // Tags
-  const tagCloud = document.getElementById("tagCloud");
-  tagCloud.innerHTML = DATA.tags.map(t =>
-    `<span class="tag-pill" data-tag="${{t}}">${{t}}</span>`
-  ).join("");
-
-  tagCloud.querySelectorAll(".tag-pill").forEach(pill => {{
-    pill.addEventListener("click", () => {{
-      const tag = pill.dataset.tag;
-      if (activeTags.has(tag)) {{
-        activeTags.delete(tag);
-        pill.classList.remove("active");
-      }} else {{
-        activeTags.add(tag);
-        pill.classList.add("active");
-      }}
-      renderCards();
-    }});
-  }});
+    // Restore theme
+    const saved = localStorage.getItem('bs-theme');
+    if (saved === 'light') toggleTheme();
 }}
 
-// ── Card rendering ─────────────────────────────────────────────
-function getFilteredItems() {{
-  let items;
-
-  // Search
-  if (searchQuery.trim()) {{
-    items = fuse.search(searchQuery).map(r => r.item);
-  }} else {{
-    items = [...DATA.items];
-  }}
-
-  // Category
-  if (activeCategory) {{
-    items = items.filter(it => it.category === activeCategory);
-  }}
-
-  // Tags (AND logic — item must have ALL selected tags)
-  if (activeTags.size > 0) {{
-    items = items.filter(it => {{
-      const itemTags = new Set(it.tags || []);
-      for (const t of activeTags) {{
-        if (!itemTags.has(t)) return false;
-      }}
-      return true;
+function buildCategoryNav({{ docs }}) {{{{
+    const cats = new Set();
+    docs.forEach(d => {{
+        const cat = d.type || 'other';
+        const sub = d.doc_subtype || '';
+        cats.add(cat + (sub ? ':' + sub : ''));
     }});
-  }}
 
-  // Sort
-  items.sort((a, b) => {{
-    switch (sortBy) {{
-      case "date-desc": return (b.date || "").localeCompare(a.date || "");
-      case "date-asc":  return (a.date || "").localeCompare(b.date || "");
-      case "title-asc": return (a.title || "").localeCompare(b.title || "");
-      case "title-desc": return (b.title || "").localeCompare(a.title || "");
-      default: return 0;
+    const counts = {{$}};
+    docs.forEach(d => {{
+        const cat = d.type || 'other';
+        const sub = d.doc_subtype || '';
+        const key = sub ? cat + ':' + sub : cat;
+        counts[key] = (counts[key] || 0) + 1;
+        counts[cat] = (counts[cat] || 0) + 1;
+    }});
+
+    const nav = document.getElementById('sidebarNav');
+    const allCount = document.getElementById('countAll');
+    allCount.textContent = docs.length;
+    document.getElementById('totalCount').textContent =
+        `${{docs.length}} documents,{{Object.keys(cats).length }} categories`;
+
+    // Category names
+    const catNames = {{$}};
+
+    const order = [
+        'all', 'document', 'report', 'digest', 'insight', 'published-article',
+        'conference-paper', 'case-study', 'guide', 'houseplan', 'enclosure',
+        'bareport', 'special', 'contributor', 'event', 'project', 'service',
+        'glossary', 'conversation', 'video', 'bookstore'
+    ];
+
+    const displayed = new Set(['all']);
+
+    for (const cat of order) {{{{
+        if (!cats.has(cat) && !cats.has(cat + ':')) continue;
+        if (displayed.has(cat)) continue;
+        displayed.add(cat);
+        const li = document.createElement('li');
+        const subCats = Array.from(cats.keys()).filter(c => c.startsWith(cat + ':') || c === cat);
+        const total = subCats.reduce((sum, c) => sum + counts[c], 0) + counts[cat];
+        li.innerHTML = `<span>${{$}}catNames[cat] || cat.replace('-', ' ').toUpperCase()}}</span> <span class="count">${{$}}total || counts[cat] || 0}}</span>`;
+        li.dataset.cat = cat;
+        li.addEventListener('click', () => filterByCategory(cat));
+        nav.appendChild(li);
+    }}}}
+
+    // Subcategories
+    const subByParent = new Map();
+    for (const key of cats.keys()) {{{{
+        const [parent] = key.split(':');
+        if (!subByParent.has(parent)) subByParent.set(parent, []);
+        subByParent.get(parent).push(key);
+    }}}}
+
+    for (const parent of subByParent.keys()) {{{{
+        if (order.includes(parent)) continue;
+        // Add subcategories as separate items or nested
+    }}}}
+}}}}
+
+function filterByCategory(cat) {{{{
+    currentCategory = cat;
+    currentPage = 1;
+    document.getElementById('searchInput').value = document.getElementById('searchInput').value = '';
+    currentSearch = '';
+
+    document.querySelectorAll('.sidebar-nav li').forEach(li => {{{{
+        li.classList.toggle('active', li.dataset.cat === cat);
+    }}));
+
+    if (cat === 'all') {{{{
+        filteredDocs = [...filteredDocs];
+    }} else {{{{
+        filteredDocs = docs.filter(d =>
+            d.type === cat || d.doc_subtype === cat || d.doc_subtype === cat.replace('-', '')
+        );
     }}
-  }});
 
-  return items;
+    if (currentSearch.length >= 2) {{{{
+        performSearch(currentSearch);
+    }}
+
+    render();
+}}}}
+
+function performSearch(query) {{{{
+    if (!fuse || query.length < 2) {{{{
+        if (currentCategory === 'all') {{{{
+            filteredDocs = [...filteredDocs];
+        }} else {{{{
+            filteredDocs = docs.filter(d => d.type === currentCategory);
+        }}
+        return;
+    }}
+
+    const results = fuse.search(query);
+    filteredDocs = results.map(r => r.item);
+}}}}
+
+function render() {{{{
+    const container = document.getElementById('resultsContainer');
+    const stats = document.getElementById('resultStats');
+
+    if (filteredDocs.length === 0) {{{{
+        if (currentSearch) {{{{
+            container.innerHTML = `
+                <div class="empty-state">
+                    <h2>No results found</h2>
+                    <p>Try different keywords or clear your search.</p>
+                </div>
+            `;
+        }} else {{{{
+            container.innerHTML = '<div class="empty-state"><h2>No documents</h2></div>';
+        }}
+        stats.textContent = '0 results';
+        return;
+    }}
+
+    // Sort
+    const sorted = sortResults(filteredDocs);
+
+    // Pagination
+    const totalPages = Math.ceil(sorted.length / PER_PAGE);
+    const start = (currentPage - 1) * PER_PAGE;
+    const pageDocs = sorted.slice(start, start + PER_PAGE);
+
+    stats.textContent = document.getElementById('resultStats').textContent = `Showing ${{$}}start + 1}}-{{Math.min(start + PER_PAGE, sorted.length)}} of ${{$}}sorted.length}} results`;
+
+    // Group by category
+    const groups = groupByCategory(pageDocs);
+
+    let html = '';
+    for (const [cat, docs] of Object.entries(groups)) {{{{
+        const catNames = {{$}};
+
+        html += `<div class="category-header" style="text-transform:capitalize;">${{$}}catNames[cat] || cat.replace('-', ' ').toUpperCase()}}</div>`;
+        html += '<div class="results-grid">';
+        docs.forEach(doc => {{{{ html += renderCard(doc); }}});
+        html += '</div>';
+    }}}
+
+    if (totalPages > 1) {{{{
+        html += '<div class="pagination">';
+        for (let p = 1; p <= totalPages; p++) {{{{
+            let classStr = p === currentPage ? 'active' : '';
+            html += `<button class="page-btn ${{$}}classStr}}">${{$}}p}}</button>`;
+        }}}
+        html += '</div>';
+    }}}
+
+    container.innerHTML = html;
+
+    // Wire up pagination
+    container.querySelectorAll('.page-btn').forEach(btn => {{{{
+        btn.addEventListener('click', () => {{{{
+            const page = parseInt(btn.textContent);
+            if (page >= 1 && page <= totalPages) {{{{
+                currentPage = page;
+                render();
+                window.scrollTo(0, window.scrollTo(0;
+            }}}
+        }});
+    }}}
 }}
 
-function catLabel(catId) {{
-  const cat = DATA.categories.find(c => c.id === catId);
-  return cat ? `${{cat.icon}} ${{cat.label}}` : catId;
+function renderCard(doc) {{{{
+    const title = doc.title || 'Untitled';
+    const desc = doc.description || '';
+    const tags = doc.tags || [];
+    const date = doc.date || '';
+    const type = doc.type || '';
+    const url = doc.url || '';
+    const directory = doc.directory || '';
+
+    let tagHtml = '';
+    if (tags.length > 0) {{{{
+        tagHtml = '<div class="card-meta">tags.slice(0, 5).map(t => `<span class="tag">${{$}}escapeHtml(t)}</span>`).join('') + '</div>';
+    }}}
+
+    let descHtml = '';
+    if (desc) {{{{
+        const cleanDesc = desc.replace(/<[^>]*>/g, '').substring(0, 500);
+        descHtml = `<div class="card-desc">${{$}}escapeHtml(cleanDesc)}}</div>`;
+    }}}
+
+    let dateHtml = '';
+    if (date) dateHtml = `<div class="card-date">${{$}}new Date(date).toLocaleDateString('en-US', {{ year: 'numeric', month: 'short', day: 'numeric' }})}}</div>`;
+
+    const fullPath = 'https://example.com/' + directory + '/full.html';
+
+    return `
+        <a class="card" href="${{$}}fullPath}}" target="_blank" rel="noopener"">">
+            <div class="card-type">${{$}}(type || '').toUpperCase() }}</div>
+            <div class="card-title">${{$}}escapeHtml(title)}}</div>
+            ${{$}}dateHtml if date else ''}}
+            ${{$}}tagHtml}}
+            ${{$}}descHtml}}
+            <div class="card-meta" style="margin-top:8px;">
+                <span class="tag">📄 HTML</span>
+                <span class="tag">📝 Markdown</span>
+            </div>
+        </a>
+    `;
 }}
 
-function renderCards() {{
-  const items = getFilteredItems();
-  const container = document.getElementById("cardsContainer");
-  const countEl = document.getElementById("resultCount");
-
-  countEl.textContent = `${{items.length}} result${{items.length === 1 ? "" : "s"}}`;
-
-  if (items.length === 0) {{
-    container.innerHTML = `
-      <div class="empty-state">
-        <div class="icon">🔍</div>
-        <p>No documents match your filters.</p>
-      </div>`;
-    return;
-  }}
-
-  container.innerHTML = items.map(it => `
-    <div class="card">
-      <div class="card-top">
-        <span class="card-cat">${{catLabel(it.category)}}</span>
-        <span class="card-date">${{it.date || "—"}}</span>
-      </div>
-      <div class="card-title">${{escHtml(it.title)}}</div>
-      <div class="card-content">${{escHtml(it.content)}}</div>
-      <div class="card-tags">
-        ${{(it.tags || []).map(t => `<span class="tag-pill">${{t}}</span>`).join("")}}
-      </div>
-    </div>
-  `).join("");
+function escapeHtml(str) {{{{
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }}
 
-function escHtml(s) {{
-  const d = document.createElement("div");
-  d.textContent = s;
-  return d.innerHTML;
+function sortResults(docs) {{{{
+    const sorted = [...docs];
+    if (currentSort === 'title') {{{{
+        sorted.sort((a, b) => (a.title || '').localeCompare(b.title || ''));
+    }} else if (currentSort === 'date') {{{{
+        sorted.sort((a, b) => {{{{
+            const da = a.date ? new Date(a.date) : new Date(0);
+            const db = b.date ? new Date(b.date) : new Date(0);
+            return db - da;
+        }}});
+    }} else if (currentSort === 'relevance') {{{{
+        // Keep original order
+    }}}
+    return sorted;
 }}
 
-// ── Event listeners ────────────────────────────────────────────
-document.getElementById("searchInput").addEventListener("input", e => {{
-  searchQuery = e.target.value;
-  renderCards();
+function groupByCategory(docs) {{{{
+    const groups = {{$}};
+    docs.forEach(doc => {{{{
+        const cat = doc.doc_subtitle || doc.type || 'unknown';
+        if (!groups[cat]) groups[cat] = [];
+        groups[cat].push(doc);
+    }}};
+    return groups;
+}}
+
+// Theme
+function toggleTheme() {
+    const html = document.documentElement;
+    const current = html.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('bs-theme', next);
+    document.getElementById('themeToggle').textContent = next === 'dark' ? '🌙' : '☀';
+}}
+
+function toggleSidebar() {{{{
+    document.getElementById('sidebar').classList.toggle('collapsed');
+}}
+
+function toggleMobileSidebar() {{{{
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('mobileOverlay').classList.toggle('active');
+}}
+
+function toggleSortBar() {{{{
+    const bar = document.getElementById('sortBar');
+    if (bar.style.display === 'none') {{{{
+        bar.style.display = 'flex';
+    }} else {{{{
+        bar.style.display = 'none';
+        document.getElementById('sortToggle').textContent = '↕ Sort';
+    }}}
+}}
+
+document.addEventListener('click', (e) => {{{{
+    if (e.target.closest('[data-sort]')) {{{{
+        const sort = e.target.dataset.sort;
+        document.querySelectorAll('[data-sort]').forEach(btn => btn.classList.remove('active'));
+        e.target.classList.add('active');
+        document.getElementById('sortToggle').textContent =
+            sort === 'title' ? 'A-Z' : sort === 'date' ? 'Date' : '${{$}}↕ Sort';
+        currentSort = sort;
+        render();
+    }}}
 }});
 
-document.getElementById("sortSelect").addEventListener("change", e => {{
-  sortBy = e.target.value;
-  renderCards();
-}});
+function exportIndex() {{{{
+    const blob = new Blob([JSON.stringify(DOCUMENTS, null, 2)], {{ type: 'application/json' }});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'index.json';
+    a.click();
+    URL.revokeObjectURL(url);
+}}
 
-document.getElementById("themeBtn").addEventListener("click", toggleTheme);
-document.getElementById("menuBtn").addEventListener("click", toggleSidebar);
-document.getElementById("overlay").addEventListener("click", toggleSidebar);
-
-// ── Placeholder data (fallback) ────────────────────────────────
-const PLACEHOLDER_DATA = {json.dumps(PLACEHOLDER_DATA)};
-
-// ── Boot ───────────────────────────────────────────────────────
-initTheme();
-loadData();
+// Load index if no embedded data
+if (typeof DOCUMENTS === 'undefined' || !DOCUMENTS || DOCUMENTS.length === 0) {{{{
+    document.querySelector('.spinner').outerHTML = '';
+    fetch('index.json').then(r => r.json()).then(data => {{{{
+        window.DOCUMENTS = data;
+        init(data);
+    }}}).catch(() => {{{{
+        document.getElementById('resultsContainer').innerHTML =
+            '<div class="empty-state"><h2>No data</h2><p>No index.json found.</p></div></div>';;
+    }});} else {
+    init(DOCUMENTS);
+}}
 </script>
 </body>
-</html>"""
+</html>
 
+"""
 
-def main():
-    # Optionally write a placeholder index.json if it doesn't exist
-    index_json_path = SCRIPT_DIR / DEFAULT_INDEX_JSON
-    if not index_json_path.exists():
-        print(f"Writing placeholder {DEFAULT_INDEX_JSON} …")
-        index_json_path.write_text(json.dumps(PLACEHOLDER_DATA, indent=2), encoding="utf-8")
+# Write files
+OUTPUT_FILE = Path(__file__).parent.parent / "index.json"
+OUTPUT_FILE.write_text(json.dumps(INDEX_DATA, indent=2, ensure_ascii=False), encoding="utf-8")
+INDEX_HTML.write_text(HTML_TEMPLATE, encoding="utf-8")
+print(f"Written {OUTPUT_FILE} and {INDEX_HTML}")
 
-    # Generate the HTML
-    html = generate_html()
-    OUTPUT_HTML.write_text(html, encoding="utf-8")
-    print(f"✅ Generated {OUTPUT_HTML}  ({len(html):,} bytes)")
-
-    # Quick sanity check
-    assert "<!DOCTYPE html>" in html
-    assert "fuse.min.js" in html
-    assert "PLACEHOLDER_DATA" in html
-    print("✅ Sanity checks passed")
-
-
-if __name__ == "__main__":
-    main()

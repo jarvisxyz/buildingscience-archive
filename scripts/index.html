@@ -1,616 +1,878 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Building Science Archive</title>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
 <style>
-/* ── Reset & Variables ──────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── Reset & Variables ── */
+*, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
 
-:root {
-  --bg:        #0e1117;
-  --bg-card:   #161b22;
-  --bg-sidebar:#0d1117;
-  --border:    #21262d;
-  --text:      #c9d1d9;
-  --text-dim:  #8b949e;
-  --accent:    #58a6ff;
-  --accent-dim:#1f6feb22;
-  --tag-bg:    #1f6feb33;
-  --tag-text:  #58a6ff;
-  --hover:     #1c2129;
-  --shadow:    0 1px 3px rgba(0,0,0,.4);
-  --radius:    6px;
-  --sidebar-w: 260px;
-  --transition: .2s ease;
-}
+:root {{
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --radius: 8px;
+  --transition: 0.2s ease;
+}}
 
-[data-theme="light"] {
-  --bg:        #ffffff;
-  --bg-card:   #f6f8fa;
-  --bg-sidebar:#f0f2f5;
-  --border:    #d0d7de;
-  --text:      #1f2328;
-  --text-dim:  #656d76;
-  --accent:    #0969da;
-  --accent-dim:#0969da11;
-  --tag-bg:    #0969da18;
-  --tag-text:  #0969da;
-  --hover:     #eef1f5;
-  --shadow:    0 1px 3px rgba(0,0,0,.08);
-}
+[data-theme="dark"] {{
+  --bg-primary: #0f1117;
+  --bg-secondary: #161922;
+  --bg-tertiary: #1e2230;
+  --bg-hover: #252a3a;
+  --bg-card: #1a1e2c;
+  --border: #2a2f40;
+  --text-primary: #e4e7ef;
+  --text-secondary: #9498a8;
+  --text-muted: #636778;
+  --accent: #6c8cff;
+  --accent-hover: #8da6ff;
+  --accent-dim: rgba(108,140,255,0.12);
+  --tag-bg: rgba(108,140,255,0.12);
+  --tag-text: #8da6ff;
+  --shadow: 0 2px 12px rgba(0,0,0,0.3);
+  --search-bg: #1a1e2c;
+}}
 
-html { font-size: 15px; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
+[data-theme="light"] {{
+  --bg-primary: #f7f8fb;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #eef0f5;
+  --bg-hover: #e8eaf0;
+  --bg-card: #ffffff;
+  --border: #d8dbe5;
+  --text-primary: #1a1e2c;
+  --text-secondary: #5a5f72;
+  --text-muted: #8a8fa2;
+  --accent: #4466e0;
+  --accent-hover: #3355cc;
+  --accent-dim: rgba(68,102,224,0.08);
+  --tag-bg: rgba(68,102,224,0.08);
+  --tag-text: #4466e0;
+  --shadow: 0 2px 12px rgba(0,0,0,0.06);
+  --search-bg: #eef0f5;
+}}
+
+html {{ font-size: 15px; }}
+body {{
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
   line-height: 1.6;
-  display: flex;
   min-height: 100vh;
   transition: background var(--transition), color var(--transition);
-}
+}}
 
-/* ── Sidebar ────────────────────────────────────────────────── */
-.sidebar {
-  width: var(--sidebar-w);
-  min-width: var(--sidebar-w);
-  background: var(--bg-sidebar);
+a {{ color: var(--accent); text-decoration: none; }}
+a:hover {{ color: var(--accent-hover); }}
+
+/* ── Layout ── */
+.app {{ display: flex; min-height: 100vh; }}
+
+.sidebar {{
+  width: 280px;
+  min-width: 280px;
+  background: var(--bg-secondary);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  position: sticky;
+  position: fixed;
   top: 0;
-  transition: transform var(--transition), background var(--transition);
+  left: 0;
+  bottom: 0;
   z-index: 100;
-}
+  transition: transform 0.3s ease, background var(--transition);
+}}
 
-.sidebar-header {
-  padding: 20px 16px 12px;
+.main {{
+  flex: 1;
+  margin-left: 280px;
+  padding: 2rem 2.5rem;
+  max-width: 100%;
+  transition: margin var(--transition);
+}}
+
+/* ── Sidebar Header ── */
+.sidebar-header {{
+  padding: 1.25rem 1.25rem 1rem;
   border-bottom: 1px solid var(--border);
-}
+}}
 
-.sidebar-header h1 {
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: -.02em;
-  color: var(--text);
-}
-
-.sidebar-header p {
-  font-size: .75rem;
-  color: var(--text-dim);
-  margin-top: 2px;
-}
-
-/* ── Search ─────────────────────────────────────────────────── */
-.search-wrap {
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border);
-}
-
-.search-wrap input {
-  width: 100%;
-  padding: 8px 10px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  color: var(--text);
-  font-size: .85rem;
-  outline: none;
-  transition: border var(--transition);
-}
-
-.search-wrap input:focus {
-  border-color: var(--accent);
-}
-
-/* ── Categories ─────────────────────────────────────────────── */
-.sidebar-section {
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border);
-}
-
-.sidebar-section h3 {
-  font-size: .7rem;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  color: var(--text-dim);
-  margin-bottom: 8px;
-}
-
-.cat-list { list-style: none; }
-
-.cat-list li {
-  padding: 5px 8px;
-  border-radius: var(--radius);
-  cursor: pointer;
-  font-size: .85rem;
+.sidebar-header h1 {{
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: var(--text);
-  transition: background var(--transition);
-}
+  gap: 0.5rem;
+}}
 
-.cat-list li:hover { background: var(--hover); }
-.cat-list li.active { background: var(--accent-dim); color: var(--accent); font-weight: 500; }
+.sidebar-header h1 .icon {{
+  width: 22px;
+  height: 22px;
+  background: var(--accent);
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: #fff;
+}}
 
-.cat-list .count {
-  margin-left: auto;
-  font-size: .7rem;
-  color: var(--text-dim);
-  background: var(--bg);
-  padding: 1px 6px;
-  border-radius: 10px;
-}
+/* ── Search ── */
+.search-wrap {{
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}}
 
-/* ── Tags ───────────────────────────────────────────────────── */
-.tag-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
+.search-input {{
+  width: 100%;
+  padding: 0.55rem 0.75rem 0.55rem 2.2rem;
+  background: var(--search-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  outline: none;
+  transition: border var(--transition), background var(--transition);
+}}
 
-.tag-pill {
-  padding: 3px 9px;
-  font-size: .72rem;
-  border-radius: 12px;
-  background: var(--tag-bg);
-  color: var(--tag-text);
+.search-input:focus {{ border-color: var(--accent); }}
+
+.search-wrap {{
+  position: relative;
+}}
+
+.search-wrap::before {{
+  content: "⌕";
+  position: absolute;
+  left: 1.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  pointer-events: none;
+}}
+
+/* ── Sidebar Sections ── */
+.sidebar-section {{
+  padding: 1rem 1.25rem 0.5rem;
+}}
+
+.sidebar-section h3 {{
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}}
+
+.category-list, .tag-list {{ list-style: none; }}
+
+.category-list li, .tag-list li {{
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background var(--transition), transform var(--transition);
-  user-select: none;
-}
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  transition: background var(--transition), color var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}}
 
-.tag-pill:hover { transform: scale(1.05); }
-.tag-pill.active { background: var(--accent); color: #fff; }
+.category-list li:hover, .tag-list li:hover {{
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}}
 
-/* ── Theme Toggle ───────────────────────────────────────────── */
-.sidebar-footer {
+.category-list li.active, .tag-list li.active {{
+  background: var(--accent-dim);
+  color: var(--accent);
+  font-weight: 500;
+}}
+
+.category-list li .count {{
+  margin-left: auto;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background: var(--bg-tertiary);
+  padding: 0.05rem 0.45rem;
+  border-radius: 10px;
+}}
+
+.tag-list li {{ display: inline-flex; margin: 0 0.25rem 0.3rem 0; }}
+
+/* ── Sidebar Footer ── */
+.sidebar-footer {{
   margin-top: auto;
-  padding: 12px 16px;
+  padding: 0.75rem 1.25rem;
   border-top: 1px solid var(--border);
+}}
+
+.theme-toggle {{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  width: 100%;
+  padding: 0.4rem 0;
+  transition: color var(--transition);
+}}
+
+.theme-toggle:hover {{ color: var(--text-primary); }}
+
+.theme-toggle .toggle-track {{
+  width: 36px;
+  height: 20px;
+  background: var(--bg-tertiary);
+  border-radius: 10px;
+  position: relative;
+  transition: background var(--transition);
+}}
+
+.theme-toggle .toggle-thumb {{
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform var(--transition);
+}}
+
+[data-theme="light"] .toggle-thumb {{ transform: translateX(16px); }}
+
+/* ── Main Content ── */
+.main-header {{
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}}
 
-.theme-btn {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 6px 12px;
+.main-header h2 {{
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}}
+
+.main-header .result-count {{
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-left: 0.5rem;
+}}
+
+.sort-controls {{
+  display: flex;
+  gap: 0.25rem;
+  background: var(--bg-secondary);
   border-radius: var(--radius);
+  padding: 3px;
+  border: 1px solid var(--border);
+}}
+
+.sort-btn {{
+  padding: 0.3rem 0.7rem;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
   cursor: pointer;
-  font-size: .8rem;
-  transition: background var(--transition);
-}
+  transition: background var(--transition), color var(--transition);
+}}
 
-.theme-btn:hover { background: var(--hover); }
+.sort-btn.active {{
+  background: var(--accent-dim);
+  color: var(--accent);
+  font-weight: 500;
+}}
 
-/* ── Mobile menu button ─────────────────────────────────────── */
-.menu-btn {
-  display: none;
-  position: fixed;
-  top: 12px;
-  left: 12px;
-  z-index: 200;
+/* ── Cards ── */
+.card-grid {{
+  display: grid;
+  gap: 0.75rem;
+}}
+
+.card {{
   background: var(--bg-card);
   border: 1px solid var(--border);
-  color: var(--text);
-  width: 36px;
-  height: 36px;
   border-radius: var(--radius);
-  cursor: pointer;
-  font-size: 1.1rem;
-  align-items: center;
-  justify-content: center;
-}
+  padding: 1.1rem 1.25rem;
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+  cursor: default;
+}}
 
-.overlay {
+.card:hover {{
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+}}
+
+.card-header {{
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}}
+
+.card-category {{
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-dim);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  margin-top: 2px;
+}}
+
+.card-title {{
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  flex: 1;
+}}
+
+.card-content {{
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 0.65rem;
+}}
+
+.card-meta {{
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}}
+
+.card-date {{
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}}
+
+.card-tags {{
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}}
+
+.card-tag {{
+  font-size: 0.7rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  cursor: pointer;
+  transition: opacity var(--transition);
+}}
+
+.card-tag:hover {{ opacity: 0.8; }}
+
+.card-author {{
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}}
+
+/* ── Empty State ── */
+.empty-state {{
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-muted);
+}}
+
+.empty-state .icon {{ font-size: 2.5rem; margin-bottom: 1rem; }}
+.empty-state p {{ font-size: 0.9rem; }}
+
+/* ── Mobile hamburger ── */
+.mobile-header {{
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 54px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  z-index: 90;
+  align-items: center;
+  padding: 0 1rem;
+  gap: 0.75rem;
+}}
+
+.hamburger {{
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0.3rem;
+}}
+
+.sidebar-overlay {{
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.5);
-  z-index: 90;
-}
+  background: rgba(0,0,0,0.5);
+  z-index: 99;
+}}
 
-/* ── Main Content ───────────────────────────────────────────── */
-.main {
-  flex: 1;
-  padding: 24px 32px;
-  overflow-y: auto;
-  height: 100vh;
-}
+/* ── Responsive ── */
+@media (max-width: 768px) {{
+  .mobile-header {{ display: flex; }}
+  .sidebar {{ transform: translateX(-100%); }}
+  .sidebar.open {{ transform: translateX(0); }}
+  .sidebar-overlay.open {{ display: block; }}
+  .main {{ margin-left: 0; padding: 4.5rem 1rem 1.5rem; }}
+}}
 
-.toolbar {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
-
-.toolbar .result-count {
-  font-size: .85rem;
-  color: var(--text-dim);
-}
-
-.sort-select {
-  margin-left: auto;
-  padding: 5px 10px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  color: var(--text);
-  font-size: .8rem;
-  cursor: pointer;
-  outline: none;
-}
-
-.sort-select:focus { border-color: var(--accent); }
-
-/* ── Cards ──────────────────────────────────────────────────── */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
-}
-
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px 18px;
-  transition: border-color var(--transition), box-shadow var(--transition);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
-
-.card-top {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.card-cat {
-  font-size: .7rem;
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  color: var(--text-dim);
+/* ── Highlight search matches ── */
+mark {{
   background: var(--accent-dim);
-  padding: 2px 8px;
-  border-radius: 10px;
-}
-
-.card-date {
-  font-size: .7rem;
-  color: var(--text-dim);
-  margin-left: auto;
-}
-
-.card-title {
-  font-size: .95rem;
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--text);
-}
-
-.card-content {
-  font-size: .8rem;
-  color: var(--text-dim);
-  line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-top: auto;
-}
-
-.card-tags .tag-pill {
-  font-size: .65rem;
-  cursor: default;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--text-dim);
-}
-
-.empty-state .icon { font-size: 2.5rem; margin-bottom: 12px; }
-.empty-state p { font-size: .9rem; }
-
-/* ── Responsive ─────────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .sidebar {
-    position: fixed;
-    left: 0; top: 0;
-    transform: translateX(-100%);
-  }
-  .sidebar.open { transform: translateX(0); }
-  .overlay.open { display: block; }
-  .menu-btn { display: flex; }
-  .main { padding: 52px 16px 24px; }
-  .cards { grid-template-columns: 1fr; }
-}
-
-/* ── Scrollbar ──────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+  color: var(--accent);
+  padding: 0 2px;
+  border-radius: 2px;
+}}
 </style>
 </head>
 <body>
 
-<!-- Mobile hamburger -->
-<button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
-<div class="overlay" id="overlay"></div>
+<!-- Mobile header -->
+<div class="mobile-header">
+  <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">☰</button>
+  <span style="font-weight:600;font-size:0.95rem;">Building Science Archive</span>
+</div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-<!-- Sidebar -->
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-header">
-    <h1>🏗️ Building Science Archive</h1>
-    <p>Searchable document browser</p>
-  </div>
+<div class="app">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h1><span class="icon">B</span> Building Science Archive</h1>
+    </div>
 
-  <div class="search-wrap">
-    <input type="text" id="searchInput" placeholder="Search titles & content…" autocomplete="off">
-  </div>
+    <div class="search-wrap">
+      <input class="search-input" id="searchInput" type="text" placeholder="Search titles & content…" autocomplete="off">
+    </div>
 
-  <div class="sidebar-section">
-    <h3>Categories</h3>
-    <ul class="cat-list" id="catList"></ul>
-  </div>
+    <div class="sidebar-section">
+      <h3>Categories</h3>
+      <ul class="category-list" id="categoryList"></ul>
+    </div>
 
-  <div class="sidebar-section">
-    <h3>Tags</h3>
-    <div class="tag-cloud" id="tagCloud"></div>
-  </div>
+    <div class="sidebar-section">
+      <h3>Tags</h3>
+      <div class="tag-list" id="tagList"></div>
+    </div>
 
-  <div class="sidebar-footer">
-    <span style="font-size:.75rem;color:var(--text-dim)">Theme</span>
-    <button class="theme-btn" id="themeBtn">☀️ Light</button>
-  </div>
-</aside>
+    <div class="sidebar-footer">
+      <button class="theme-toggle" id="themeToggle">
+        <div class="toggle-track"><div class="toggle-thumb"></div></div>
+        <span id="themeLabel">Dark mode</span>
+      </button>
+    </div>
+  </aside>
 
-<!-- Main -->
-<main class="main" id="mainContent">
-  <div class="toolbar">
-    <span class="result-count" id="resultCount">Loading…</span>
-    <select class="sort-select" id="sortSelect">
-      <option value="date-desc">Newest first</option>
-      <option value="date-asc">Oldest first</option>
-      <option value="title-asc">Title A–Z</option>
-      <option value="title-desc">Title Z–A</option>
-    </select>
-  </div>
-  <div class="cards" id="cardsContainer"></div>
-</main>
+  <!-- Main content -->
+  <main class="main">
+    <div class="main-header">
+      <h2 id="mainTitle">All Items <span class="result-count" id="resultCount"></span></h2>
+      <div class="sort-controls">
+        <button class="sort-btn active" data-sort="date">Date ↓</button>
+        <button class="sort-btn" data-sort="title">Title A–Z</button>
+      </div>
+    </div>
+    <div class="card-grid" id="cardGrid"></div>
+  </main>
+</div>
 
 <script>
-// ── State ──────────────────────────────────────────────────────
-let DATA = null;
+// ── State ──
+let allItems = [];
 let fuse = null;
-let activeCategory = null;   // null = "All"
-let activeTags = new Set();
+let activeCategory = null;
+let activeTag = null;
+let currentSort = "date";
 let searchQuery = "";
-let sortBy = "date-desc";
 
-// ── Theme ──────────────────────────────────────────────────────
-function initTheme() {
-  const saved = localStorage.getItem("bs-archive-theme");
-  if (saved) document.documentElement.setAttribute("data-theme", saved);
-  updateThemeBtn();
-}
+// ── Theme ──
+function initTheme() {{
+  const saved = localStorage.getItem("bsa-theme") || "dark";
+  document.documentElement.setAttribute("data-theme", saved);
+  updateThemeLabel(saved);
+}}
 
-function toggleTheme() {
+function toggleTheme() {{
   const current = document.documentElement.getAttribute("data-theme");
-  const next = current === "light" ? "dark" : "light";
+  const next = current === "dark" ? "light" : "dark";
   document.documentElement.setAttribute("data-theme", next);
-  localStorage.setItem("bs-archive-theme", next);
-  updateThemeBtn();
-}
+  localStorage.setItem("bsa-theme", next);
+  updateThemeLabel(next);
+}}
 
-function updateThemeBtn() {
-  const isLight = document.documentElement.getAttribute("data-theme") === "light";
-  document.getElementById("themeBtn").textContent = isLight ? "🌙 Dark" : "☀️ Light";
-}
+function updateThemeLabel(theme) {{
+  document.getElementById("themeLabel").textContent = theme === "dark" ? "Dark mode" : "Light mode";
+}}
 
-// ── Mobile sidebar ─────────────────────────────────────────────
-function toggleSidebar() {
-  document.getElementById("sidebar").classList.toggle("open");
-  document.getElementById("overlay").classList.toggle("open");
-}
+document.getElementById("themeToggle").addEventListener("click", toggleTheme);
+initTheme();
 
-// ── Data loading ───────────────────────────────────────────────
-async function loadData() {
-  try {
-    const resp = await fetch("index.json");
-    if (!resp.ok) throw new Error(resp.statusText);
-    DATA = await resp.json();
-  } catch (e) {
-    console.warn("Could not load index.json, using placeholder data", e);
-    DATA = PLACEHOLDER_DATA;
-  }
+// ── Mobile sidebar ──
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("sidebarOverlay");
 
-  // Build Fuse index
-  fuse = new Fuse(DATA.items, {
+document.getElementById("hamburgerBtn").addEventListener("click", () => {{
+  sidebar.classList.toggle("open");
+  overlay.classList.toggle("open");
+}});
+
+overlay.addEventListener("click", () => {{
+  sidebar.classList.remove("open");
+  overlay.classList.remove("open");
+}});
+
+// ── Load data ──
+async function loadData() {{
+  try {{
+    const res = await fetch("index.json");
+    if (!res.ok) throw new Error("Failed to load index.json");
+    allItems = await res.json();
+  }} catch (e) {{
+    console.warn("Could not load index.json, using embedded placeholder data.", e);
+    allItems = PLACEHOLDER_DATA;
+  }}
+  initFuse();
+  buildSidebar();
+  render();
+}}
+
+// ── Fuse.js ──
+function initFuse() {{
+  fuse = new Fuse(allItems, {{
     keys: [
-      { name: "title", weight: 2 },
-      { name: "content", weight: 1 },
+      {{ name: "title", weight: 2 }},
+      {{ name: "content", weight: 1 }},
     ],
     threshold: 0.35,
-    ignoreLocation: true,
-    includeScore: true,
-  });
+    includeMatches: true,
+    minMatchCharLength: 2,
+  }});
+}}
 
-  renderSidebar();
-  renderCards();
-}
-
-// ── Sidebar rendering ──────────────────────────────────────────
-function renderSidebar() {
+// ── Build sidebar ──
+function buildSidebar() {{
   // Categories
-  const catList = document.getElementById("catList");
-  const counts = {};
-  DATA.items.forEach(it => { counts[it.category] = (counts[it.category] || 0) + 1; });
+  const cats = {{}};
+  allItems.forEach(item => {{
+    const c = item.category || "uncategorized";
+    cats[c] = (cats[c] || 0) + 1;
+  }});
 
-  let catHTML = `<li class="active" data-cat="">All <span class="count">${DATA.items.length}</span></li>`;
-  DATA.categories.forEach(c => {
-    catHTML += `<li data-cat="${c.id}">${c.icon} ${c.label} <span class="count">${counts[c.id] || 0}</span></li>`;
-  });
-  catList.innerHTML = catHTML;
+  const catList = document.getElementById("categoryList");
+  catList.innerHTML = `<li class="active" data-cat="">All <span class="count">${{allItems.length}}</span></li>`;
+  Object.keys(cats).sort().forEach(cat => {{
+    catList.innerHTML += `<li data-cat="${{cat}}">${{capitalize(cat)}} <span class="count">${{cats[cat]}}</span></li>`;
+  }});
 
-  catList.querySelectorAll("li").forEach(li => {
-    li.addEventListener("click", () => {
+  catList.querySelectorAll("li").forEach(li => {{
+    li.addEventListener("click", () => {{
       activeCategory = li.dataset.cat || null;
       catList.querySelectorAll("li").forEach(l => l.classList.remove("active"));
       li.classList.add("active");
-      renderCards();
-      // Close sidebar on mobile
-      if (window.innerWidth <= 768) toggleSidebar();
-    });
-  });
+      render();
+      closeMobileSidebar();
+    }});
+  }});
 
   // Tags
-  const tagCloud = document.getElementById("tagCloud");
-  tagCloud.innerHTML = DATA.tags.map(t =>
-    `<span class="tag-pill" data-tag="${t}">${t}</span>`
-  ).join("");
+  const tags = new Set();
+  allItems.forEach(item => (item.tags || []).forEach(t => tags.add(t)));
 
-  tagCloud.querySelectorAll(".tag-pill").forEach(pill => {
-    pill.addEventListener("click", () => {
-      const tag = pill.dataset.tag;
-      if (activeTags.has(tag)) {
-        activeTags.delete(tag);
-        pill.classList.remove("active");
-      } else {
-        activeTags.add(tag);
-        pill.classList.add("active");
-      }
-      renderCards();
-    });
-  });
-}
+  const tagList = document.getElementById("tagList");
+  tagList.innerHTML = "";
+  Array.from(tags).sort().forEach(tag => {{
+    const li = document.createElement("li");
+    li.textContent = tag;
+    li.dataset.tag = tag;
+    li.addEventListener("click", () => {{
+      if (activeTag === tag) {{
+        activeTag = null;
+        li.classList.remove("active");
+      }} else {{
+        tagList.querySelectorAll("li").forEach(l => l.classList.remove("active"));
+        activeTag = tag;
+        li.classList.add("active");
+      }}
+      render();
+      closeMobileSidebar();
+    }});
+    tagList.appendChild(li);
+  }});
+}}
 
-// ── Card rendering ─────────────────────────────────────────────
-function getFilteredItems() {
-  let items;
+function closeMobileSidebar() {{
+  sidebar.classList.remove("open");
+  overlay.classList.remove("open");
+}}
 
-  // Search
-  if (searchQuery.trim()) {
-    items = fuse.search(searchQuery).map(r => r.item);
-  } else {
-    items = [...DATA.items];
-  }
+// ── Search ──
+document.getElementById("searchInput").addEventListener("input", (e) => {{
+  searchQuery = e.target.value.trim();
+  render();
+}});
 
-  // Category
-  if (activeCategory) {
-    items = items.filter(it => it.category === activeCategory);
-  }
+// ── Sort ──
+document.querySelectorAll(".sort-btn").forEach(btn => {{
+  btn.addEventListener("click", () => {{
+    currentSort = btn.dataset.sort;
+    document.querySelectorAll(".sort-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    render();
+  }});
+}});
 
-  // Tags (AND logic — item must have ALL selected tags)
-  if (activeTags.size > 0) {
-    items = items.filter(it => {
-      const itemTags = new Set(it.tags || []);
-      for (const t of activeTags) {
-        if (!itemTags.has(t)) return false;
-      }
-      return true;
-    });
-  }
+// ── Render ──
+function render() {{
+  let items = searchQuery ? fuse.search(searchQuery).map(r => r.item) : [...allItems];
+
+  // Filter by category
+  if (activeCategory) {{
+    items = items.filter(i => i.category === activeCategory);
+  }}
+
+  // Filter by tag
+  if (activeTag) {{
+    items = items.filter(i => (i.tags || []).includes(activeTag));
+  }}
 
   // Sort
-  items.sort((a, b) => {
-    switch (sortBy) {
-      case "date-desc": return (b.date || "").localeCompare(a.date || "");
-      case "date-asc":  return (a.date || "").localeCompare(b.date || "");
-      case "title-asc": return (a.title || "").localeCompare(b.title || "");
-      case "title-desc": return (b.title || "").localeCompare(a.title || "");
-      default: return 0;
-    }
-  });
+  if (currentSort === "date") {{
+    items.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  }} else {{
+    items.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
+  }}
 
-  return items;
-}
-
-function catLabel(catId) {
-  const cat = DATA.categories.find(c => c.id === catId);
-  return cat ? `${cat.icon} ${cat.label}` : catId;
-}
-
-function renderCards() {
-  const items = getFilteredItems();
-  const container = document.getElementById("cardsContainer");
+  // Update title
+  const titleEl = document.getElementById("mainTitle");
+  const catLabel = activeCategory ? capitalize(activeCategory) : "All Items";
   const countEl = document.getElementById("resultCount");
+  countEl.textContent = `(${{items.length}})`;
+  titleEl.innerHTML = `${{catLabel}} <span class="result-count">${{items.length}}</span>`;
 
-  countEl.textContent = `${items.length} result${items.length === 1 ? "" : "s"}`;
-
-  if (items.length === 0) {
-    container.innerHTML = `
-      <div class="empty-state">
-        <div class="icon">🔍</div>
-        <p>No documents match your filters.</p>
-      </div>`;
+  // Render cards
+  const grid = document.getElementById("cardGrid");
+  if (items.length === 0) {{
+    grid.innerHTML = `<div class="empty-state"><div class="icon">🔍</div><p>No items match your search or filters.</p></div>`;
     return;
+  }}
+
+  grid.innerHTML = items.map(item => {{
+    const tags = (item.tags || []).map(t =>
+      `<span class="card-tag" data-tag="${{t}}">${{t}}</span>`
+    ).join("");
+
+    return `
+      <div class="card">
+        <div class="card-header">
+          <span class="card-category">${{item.category || "general"}}</span>
+          <div class="card-title">${{highlight(item.title)}}</div>
+        </div>
+        <div class="card-content">${{highlight(item.content)}}</div>
+        <div class="card-meta">
+          ${{item.date ? `<span class="card-date">${{item.date}}</span>` : ""}}
+          ${{item.author ? `<span class="card-author">by ${{item.author}}</span>` : ""}}
+          ${{tags ? `<div class="card-tags">${{tags}}</div>` : ""}}
+        </div>
+      </div>
+    `;
+  }}).join("");
+
+  // Wire card tags
+  grid.querySelectorAll(".card-tag").forEach(el => {{
+    el.addEventListener("click", () => {{
+      const tag = el.dataset.tag;
+      if (activeTag === tag) {{
+        activeTag = null;
+        document.querySelectorAll("#tagList li").forEach(l => l.classList.remove("active"));
+      }} else {{
+        activeTag = tag;
+        document.querySelectorAll("#tagList li").forEach(l => {{
+          l.classList.toggle("active", l.dataset.tag === tag);
+        }});
+      }}
+      render();
+    }});
+  }});
+}}
+
+function highlight(text) {{
+  if (!searchQuery || !text) return escapeHtml(text || "");
+  // Simple highlight — wrap matched substrings
+  const escaped = escapeHtml(text);
+  const query = escapeHtml(searchQuery);
+  const regex = new RegExp(`(${{query.replace(/[.*+?^${{}}()|[\]\\]/g, "\\$&")}})`, "gi");
+  return escaped.replace(regex, "<mark>$1</mark>");
+}}
+
+function escapeHtml(str) {{
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}}
+
+function capitalize(s) {{
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}}
+
+// ── Embedded placeholder data (fallback) ──
+const PLACEHOLDER_DATA = [
+  {
+    "id": "doc-001",
+    "category": "documents",
+    "title": "Building Envelope Design Guide",
+    "content": "Comprehensive guide covering wall assemblies, air barriers, vapor retarders, and thermal bridging mitigation strategies for residential and commercial construction.",
+    "tags": [
+      "envelope",
+      "design",
+      "guide"
+    ],
+    "date": "2025-08-12",
+    "author": "Sarah Chen"
+  },
+  {
+    "id": "doc-002",
+    "category": "documents",
+    "title": "Moisture Analysis Report — Pacific Northwest",
+    "content": "Hygrothermal simulation results for typical wall assemblies in Climate Zone 4C, including drying potential and condensation risk analysis.",
+    "tags": [
+      "moisture",
+      "analysis",
+      "climate-zone-4"
+    ],
+    "date": "2025-06-03",
+    "author": "James Whitfield"
+  },
+  {
+    "id": "doc-003",
+    "category": "documents",
+    "title": "High-Performance HVAC Sizing Methodology",
+    "content": "Updated methodology for Manual J load calculations in tight enclosures, addressing sensible vs latent loads and equipment cycling concerns.",
+    "tags": [
+      "hvac",
+      "sizing",
+      "methodology"
+    ],
+    "date": "2025-11-20",
+    "author": "Maria Gonzalez"
+  },
+  {
+    "id": "contrib-001",
+    "category": "contributors",
+    "title": "Dr. Sarah Chen — Building Science Associates",
+    "content": "Principal at BSA specializing in building enclosure consulting, forensic moisture investigations, and hygrothermal modeling with WUFI.",
+    "tags": [
+      "envelope",
+      "consulting",
+      "contributor"
+    ],
+    "date": "2025-01-15",
+    "author": ""
+  },
+  {
+    "id": "contrib-002",
+    "category": "contributors",
+    "title": "James Whitfield — Pacific Energy Works",
+    "content": "Senior energy analyst focusing on residential energy modeling, HERS ratings, and Passive House certification support.",
+    "tags": [
+      "energy",
+      "modeling",
+      "contributor"
+    ],
+    "date": "2025-03-22",
+    "author": ""
+  },
+  {
+    "id": "event-001",
+    "category": "events",
+    "title": "Building Science Symposium 2025",
+    "content": "Annual symposium featuring presentations on deep energy retrofits, enclosure durability, and indoor air quality in high-performance homes.",
+    "tags": [
+      "symposium",
+      "retrofit",
+      "iaq"
+    ],
+    "date": "2025-09-18",
+    "author": ""
+  },
+  {
+    "id": "event-002",
+    "category": "events",
+    "title": "Workshop: WUFI Hygrothermal Modeling",
+    "content": "Hands-on workshop covering steady-state and transient moisture modeling using WUFI Pro, with case studies from mixed-humid climates.",
+    "tags": [
+      "workshop",
+      "moisture",
+      "modeling"
+    ],
+    "date": "2025-10-05",
+    "author": ""
+  },
+  {
+    "id": "res-001",
+    "category": "resources",
+    "title": "Climate Zone Map — Interactive Reference",
+    "content": "IECC climate zone map with county-level resolution, supporting lookup by ZIP code for quick determination of prescriptive requirements.",
+    "tags": [
+      "climate",
+      "reference",
+      "iecc"
+    ],
+    "date": "2025-04-10",
+    "author": ""
+  },
+  {
+    "id": "res-002",
+    "category": "resources",
+    "title": "R-Value Assemblies Lookup Table",
+    "content": "Searchable table of minimum R-values by assembly type and climate zone, cross-referenced with IECC 2021 and ASHRAE 90.1-2019.",
+    "tags": [
+      "r-value",
+      "reference",
+      "code"
+    ],
+    "date": "2025-07-28",
+    "author": ""
+  },
+  {
+    "id": "doc-004",
+    "category": "documents",
+    "title": "Passive House Certification Checklist",
+    "content": "Step-by-step checklist for PHIUS+ certification including airtightness targets, thermal bridge limits, and ventilation requirements.",
+    "tags": [
+      "passive-house",
+      "certification",
+      "checklist"
+    ],
+    "date": "2025-12-01",
+    "author": "Maria Gonzalez"
   }
+];
 
-  container.innerHTML = items.map(it => `
-    <div class="card">
-      <div class="card-top">
-        <span class="card-cat">${catLabel(it.category)}</span>
-        <span class="card-date">${it.date || "—"}</span>
-      </div>
-      <div class="card-title">${escHtml(it.title)}</div>
-      <div class="card-content">${escHtml(it.content)}</div>
-      <div class="card-tags">
-        ${(it.tags || []).map(t => `<span class="tag-pill">${t}</span>`).join("")}
-      </div>
-    </div>
-  `).join("");
-}
-
-function escHtml(s) {
-  const d = document.createElement("div");
-  d.textContent = s;
-  return d.innerHTML;
-}
-
-// ── Event listeners ────────────────────────────────────────────
-document.getElementById("searchInput").addEventListener("input", e => {
-  searchQuery = e.target.value;
-  renderCards();
-});
-
-document.getElementById("sortSelect").addEventListener("change", e => {
-  sortBy = e.target.value;
-  renderCards();
-});
-
-document.getElementById("themeBtn").addEventListener("click", toggleTheme);
-document.getElementById("menuBtn").addEventListener("click", toggleSidebar);
-document.getElementById("overlay").addEventListener("click", toggleSidebar);
-
-// ── Placeholder data (fallback) ────────────────────────────────
-const PLACEHOLDER_DATA = {"categories": [{"id": "documents", "label": "Documents", "icon": "\ud83d\udcc4"}, {"id": "contributors", "label": "Contributors", "icon": "\ud83d\udc64"}, {"id": "events", "label": "Events", "icon": "\ud83d\udcc5"}, {"id": "guides", "label": "Guides", "icon": "\ud83d\udcd6"}, {"id": "research", "label": "Research", "icon": "\ud83d\udd2c"}], "tags": ["HVAC", "insulation", "moisture", "ventilation", "envelope", "energy-code", "residential", "commercial", "retrofit", "monitoring"], "items": [{"id": "doc-001", "title": "Building Enclosure Design Guide", "category": "documents", "tags": ["envelope", "moisture"], "date": "2025-11-15", "content": "Comprehensive guide to building enclosure design principles including air barriers, vapor retarders, and thermal control layers."}, {"id": "doc-002", "title": "Residential HVAC Sizing Manual", "category": "documents", "tags": ["HVAC", "residential"], "date": "2025-09-20", "content": "Manual J and S procedures for residential heating and cooling load calculations."}, {"id": "contrib-001", "title": "Dr. Sarah Chen \u2014 Building Science Corp", "category": "contributors", "tags": ["envelope", "research"], "date": "2025-08-01", "content": "Principal researcher specializing in hygrothermal analysis and wall assembly durability."}, {"id": "evt-001", "title": "Passive House Conference 2025", "category": "events", "tags": ["energy-code", "envelope"], "date": "2025-06-10", "content": "Annual conference on passive house design, certification, and high-performance building standards."}, {"id": "guide-001", "title": "Deep Energy Retrofit Playbook", "category": "guides", "tags": ["retrofit", "insulation", "ventilation"], "date": "2025-04-22", "content": "Step-by-step playbook for planning and executing deep energy retrofits on existing residential buildings."}, {"id": "res-001", "title": "Moisture Monitoring in Wall Assemblies", "category": "research", "tags": ["moisture", "monitoring", "envelope"], "date": "2025-03-05", "content": "Long-term field study of moisture transport in wood-frame wall assemblies across climate zones 4-6."}, {"id": "doc-003", "title": "Commercial Ventilation Requirements \u2014 ASHRAE 62.1 Summary", "category": "documents", "tags": ["ventilation", "commercial", "energy-code"], "date": "2025-01-18", "content": "Simplified summary of ASHRAE Standard 62.1 ventilation rate procedure for commercial buildings."}, {"id": "contrib-002", "title": "Mark Rivera \u2014 Phius Alliance", "category": "contributors", "tags": ["envelope", "energy-code"], "date": "2024-12-01", "content": "Certified passive house consultant and trainer focused on multifamily and commercial passive building."}, {"id": "evt-002", "title": "Building Science Symposium 2025", "category": "events", "tags": ["research", "monitoring"], "date": "2025-07-14", "content": "Two-day symposium featuring peer-reviewed presentations on building science research and practice."}, {"id": "res-002", "title": "Attic Insulation Retrofit Performance Study", "category": "research", "tags": ["insulation", "retrofit", "residential"], "date": "2024-10-30", "content": "Comparative study of spray foam vs. blown-in fiberglass in attic retrofits across 40 homes in climate zone 5."}]};
-
-// ── Boot ───────────────────────────────────────────────────────
-initTheme();
+// ── Boot ──
 loadData();
 </script>
 </body>

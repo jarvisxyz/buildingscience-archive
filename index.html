@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building Science Archive</title>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<style>
+:root {
+    --bg: #0f172a;
+    --bg-card: #1e293b;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --accent: #3b82f6;
+    --accent-hover: #60a5fa;
+    --tag-bg: #1e3a5f;
+    --tag-text: #93c5fd;
+    --sidebar-bg: #1e293b;
+    --highlight: #854d0e;
+    --shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+[data-theme="light"] {
+    --bg: #f5f5f5;
+    --bg-card: #ffffff;
+    --text: #1a1a1a;
+    --text-muted: #666;
+    --border: #ddd;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --tag-bg: #e0e7ff;
+    --tag-text: #3730a3;
+    --sidebar-bg: #f9fafb;
+    --highlight: #fef3c7;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+.app { display: flex; min-height: 100vh; }
+
+/* Sidebar */
+.sidebar {
+    width: 280px;
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    overflow-y: auto;
+    z-index: 100;
+    transition: transform 0.3s ease;
+}
+.sidebar.collapsed { transform: translateX(-100%); }
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+}
+.sidebar-header h1 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+.sidebar-header p { font-size: 12px; color: var(--text-muted); }
+.sidebar-nav { list-style: none; padding: 0; }
+.sidebar-nav li {
+    padding: 8px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.15s;
+}
+.sidebar-nav li:hover { background: var(--accent); color: white; }
+.sidebar-nav li.active, .sidebar-nav li.active:hover {
+    background: var(--accent); color: white; font-weight: 600;
+}
+.sidebar-nav .count {
+    font-size: 11px; opacity: 0.6;
+    background: var(--border); padding: 2px 6px;
+    border-radius: 10px; min-width: 24px; text-align: center;
+}
+
+/* Main content */
+.main { flex: 1; margin-left: 280px; min-height: 100vh; }
+
+/* Top bar */
+.topbar {
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    position: sticky; top: 0; z-index: 50;
+    display: flex; gap: 12px; align-items: center;
+    box-shadow: var(--shadow);
+}
+.search-box { flex: 1; position: relative; }
+.search-box input {
+    width: 100%; padding: 10px 16px 10px 40px;
+    border: 1px solid var(--border); border-radius: 8px;
+    font-size: 15px; background: var(--bg); color: var(--text);
+    outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-box input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+.search-icon {
+    position: absolute; left: 12px; top: 50%;
+    transform: translateY(-50%); color: var(--text-muted);
+}
+.topbar-controls { display: flex; gap: 8px; align-items: center; }
+.btn {
+    padding: 8px 16px; border: 1px solid var(--border);
+    border-radius: 6px; background: var(--bg); color: var(--text);
+    cursor: pointer; font-size: 13px; transition: all 0.15s;
+    display: flex; align-items: center; gap: 4px;
+}
+.btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+.btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+.stats { font-size: 12px; color: var(--text-muted); padding: 0 24px 8px; }
+
+/* Results */
+.results-container { max-width: 1200px; margin: 0 auto; padding: 0 24px 48px; }
+.category-header {
+    font-size: 20px; font-weight: 700;
+    margin: 32px 0 16px; padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent); color: var(--accent);
+}
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px; margin-top: 16px;
+}
+.card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px;
+    transition: box-shadow 0.2s, transform 0.15s;
+    box-shadow: var(--shadow); cursor: pointer;
+    text-decoration: none; color: inherit; display: block;
+}
+.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.15); transform: translateY(-2px); }
+.card-type {
+    font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 4px;
+}
+.card-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; line-height: 1.4; }
+.card-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.card-meta .tag {
+    font-size: 11px; padding: 2px 8px;
+    background: var(--tag-bg); color: var(--tag-text); border-radius: 4px;
+}
+.card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+.card-date { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; }
+
+/* Empty/loading states */
+.empty-state { text-align: center; padding: 64px 24px; color: var(--text-muted); }
+.empty-state h2 { font-size: 24px; margin-bottom: 8px; color: var(--text); }
+.loading { text-align: center; padding: 48px; color: var(--text-muted); }
+.spinner {
+    display: inline-block; width: 40px; height: 40px;
+    border: 3px solid var(--border); border-top-color: var(--accent);
+    border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 16px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Pagination */
+.pagination { display: flex; justify-content: center; gap: 4px; margin-top: 32px; }
+.page-btn {
+    padding: 6px 12px; border: 1px solid var(--border);
+    border-radius: 4px; background: var(--bg); cursor: pointer;
+    font-size: 13px; color: var(--text);
+}
+.page-btn:hover, .page-btn.active {
+    background: var(--accent); color: white; border-color: var(--accent);
+}
+
+/* Sort bar */
+.sort-bar { display: flex; gap: 4px; max-width: 1200px; margin: 8px auto; padding: 0 24px; }
+
+/* Footer */
+.footer {
+    text-align: center; padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted); font-size: 12px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .sidebar { position: fixed; transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; }
+    .mobile-toggle { display: block !important; }
+    .results-grid { grid-template-columns: 1fr; }
+}
+.mobile-toggle { display: none; }
+.mobile-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5); z-index: 90;
+}
+.mobile-overlay.active { display: block; }
+</style>
+</head>
+<body>
+<div class="app">
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>Building Science Archive</h1>
+            <p id="totalCount">Loading...</p>
+        </div>
+        <ul class="sidebar-nav" id="sidebarNav">
+            <li class="active" data-cat="all">All <span class="count" id="countAll">0</span></li>
+        </ul>
+    </aside>
+    <main class="main">
+        <div class="topbar">
+            <button class="btn mobile-toggle" id="mobileToggle">&#9776;</button>
+            <button class="btn" id="sidebarToggle">&#9776;</button>
+            <div class="search-box">
+                <span class="search-icon">&#128269;</span>
+                <input type="text" id="searchInput" placeholder="Search documents, topics, tags..." autocomplete="off">
+            </div>
+            <div class="topbar-controls">
+                <button class="btn" id="themeToggle" title="Toggle theme">&#127769;</button>
+                <button class="btn" id="sortToggle" title="Toggle sort">&#8597; Sort</button>
+                <button class="btn" id="exportBtn" title="Export index">&#128190; Save</button>
+            </div>
+        </div>
+        <div class="stats" id="resultStats"></div>
+        <div class="sort-bar" id="sortBar" style="display:none;">
+            <button class="btn" data-sort="title">Title</button>
+            <button class="btn" data-sort="date">Date</button>
+            <button class="btn" data-sort="category">Type</button>
+        </div>
+        <div class="results-container" id="resultsContainer">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Loading archive index...</p>
+            </div>
+        </div>
+        <div class="footer">
+            <p>Archive of <a href="https://buildingscience.com" style="color:var(--accent)">buildingscience.com</a> &mdash; for personal reference only</p>
+            <p style="margin-top:4px" id="lastUpdated"></p>
+        </div>
+    </main>
+</div>
+
+<script>
+var APP = {
+    docs: [],
+    fuse: null,
+    filteredDocs: [],
+    currentCategory: 'all',
+    currentSort: 'relevance',
+    currentPage: 1,
+    currentSearch: '',
+    PER_PAGE: 24,
+    categories: {}
+};
+
+function init(data) {
+    APP.docs = data.items || [];
+    APP.categories = {};
+    (data.categories || []).forEach(function(c) { APP.categories[c.id] = c; });
+
+    // Build Fuse.js search index
+    APP.fuse = new Fuse(APP.docs, {
+        keys: [
+            { name: 'title', weight: 0.4 },
+            { name: 'description', weight: 0.3 },
+            { name: 'tags', weight: 0.2 },
+            { name: 'category', weight: 0.1 }
+        ],
+        includeScore: true,
+        threshold: 0.3,
+        ignoreLocation: true,
+        minMatchCharLength: 2
+    });
+
+    buildCategoryNav();
+    APP.filteredDocs = APP.docs.slice();
+    render();
+
+    // Last updated
+    var el = document.getElementById('lastUpdated');
+    if (data.last_updated) {
+        el.textContent = 'Data last updated: ' + data.last_updated.substring(0, 10);
+    }
+
+    // Wire events
+    document.getElementById('sidebarToggle').addEventListener('click', toggleSidebar);
+    document.getElementById('mobileToggle').addEventListener('click', toggleMobileSidebar);
+    document.getElementById('mobileOverlay').addEventListener('click', toggleMobileSidebar);
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    document.getElementById('sortToggle').addEventListener('click', toggleSortBar);
+    document.getElementById('exportBtn').addEventListener('click', exportIndex);
+
+    var searchTimeout;
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+        clearTimeout(searchTimeout);
+        APP.currentSearch = e.target.value.trim();
+        if (APP.currentSearch.length < 2) {
+            filterByCategory(APP.currentCategory);
+            return;
+        }
+        searchTimeout = setTimeout(function() { performSearch(APP.currentSearch); }, 200);
+    });
+
+    // Restore theme
+    if (localStorage.getItem('bs-theme') === 'light') toggleTheme();
+}
+
+function buildCategoryNav() {
+    var counts = {};
+    APP.docs.forEach(function(d) {
+        var cat = d.category || 'other';
+        counts[cat] = (counts[cat] || 0) + 1;
+    });
+
+    var nav = document.getElementById('sidebarNav');
+    nav.innerHTML = '<li class="active" data-cat="all">All <span class="count">' +
+        APP.docs.length + '</span></li>';
+
+    var catLabels = {
+        documents: 'Documents', contributors: 'Contributors', events: 'Events',
+        videos: 'Videos', bookstore: 'Bookstore', services: 'Services',
+        projects: 'Projects', guides: 'Guides', research: 'Research', other: 'Other'
+    };
+    var catIcons = {
+        documents: '\uD83D\uDCC4', contributors: '\uD83D\uDC64', events: '\uD83D\uDCC5',
+        videos: '\uD83D\uDCFA', bookstore: '\uD83D\uDCDA', services: '\uD83D\uDD27',
+        projects: '\uD83D\uDCCA', guides: '\uD83D\uDCD6', research: '\uD83D\uDD2C', other: '\uD83D\uDCC2'
+    };
+
+    var sorted = Object.keys(counts).sort(function(a, b) { return counts[b] - counts[a]; });
+    sorted.forEach(function(cat) {
+        var li = document.createElement('li');
+        li.dataset.cat = cat;
+        li.innerHTML = '<span>' + (catIcons[cat] || '') + ' ' + (catLabels[cat] || cat) +
+            '</span> <span class="count">' + counts[cat] + '</span>';
+        li.addEventListener('click', function() { filterByCategory(cat); });
+        nav.appendChild(li);
+    });
+
+    document.getElementById('totalCount').textContent = APP.docs.length + ' documents';
+}
+
+function filterByCategory(cat) {
+    APP.currentCategory = cat;
+    APP.currentPage = 1;
+    APP.currentSearch = '';
+    document.getElementById('searchInput').value = '';
+
+    document.querySelectorAll('.sidebar-nav li').forEach(function(li) {
+        li.classList.toggle('active', li.dataset.cat === cat);
+    });
+
+    if (cat === 'all') {
+        APP.filteredDocs = APP.docs.slice();
+    } else {
+        APP.filteredDocs = APP.docs.filter(function(d) { return d.category === cat; });
+    }
+    render();
+}
+
+function performSearch(query) {
+    if (!APP.fuse || query.length < 2) {
+        filterByCategory(APP.currentCategory);
+        return;
+    }
+    var results = APP.fuse.search(query);
+    APP.filteredDocs = results.map(function(r) { return r.item; });
+    APP.currentPage = 1;
+    render();
+}
+
+function render() {
+    var container = document.getElementById('resultsContainer');
+    var stats = document.getElementById('resultStats');
+
+    if (APP.filteredDocs.length === 0) {
+        container.innerHTML = '<div class="empty-state"><h2>No results found</h2>' +
+            '<p>Try different keywords or clear your search.</p></div>';
+        stats.textContent = '0 results';
+        return;
+    }
+
+    var sorted = sortResults(APP.filteredDocs);
+    var totalPages = Math.ceil(sorted.length / APP.PER_PAGE);
+    var start = (APP.currentPage - 1) * APP.PER_PAGE;
+    var pageDocs = sorted.slice(start, start + APP.PER_PAGE);
+
+    stats.textContent = 'Showing ' + (start + 1) + '-' + Math.min(start + APP.PER_PAGE, sorted.length) +
+        ' of ' + sorted.length + ' results';
+
+    // Group by category
+    var groups = {};
+    pageDocs.forEach(function(doc) {
+        var cat = doc.category || 'other';
+        if (!groups[cat]) groups[cat] = [];
+        groups[cat].push(doc);
+    });
+
+    var catLabels = {
+        documents: 'Documents', contributors: 'Contributors', events: 'Events',
+        videos: 'Videos', bookstore: 'Bookstore', services: 'Services',
+        projects: 'Projects', other: 'Other'
+    };
+
+    var html = '';
+    Object.keys(groups).forEach(function(cat) {
+        html += '<div class="category-header">' + (catLabels[cat] || cat) + '</div>';
+        html += '<div class="results-grid">';
+        groups[cat].forEach(function(doc) { html += renderCard(doc); });
+        html += '</div>';
+    });
+
+    if (totalPages > 1) {
+        html += '<div class="pagination">';
+        for (var p = 1; p <= totalPages; p++) {
+            html += '<button class="page-btn' + (p === APP.currentPage ? ' active' : '') +
+                '" data-page="' + p + '">' + p + '</button>';
+        }
+        html += '</div>';
+    }
+
+    container.innerHTML = html;
+
+    // Wire pagination
+    container.querySelectorAll('.page-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var page = parseInt(btn.dataset.page);
+            if (page >= 1 && page <= totalPages) {
+                APP.currentPage = page;
+                render();
+                window.scrollTo(0, 0);
+            }
+        });
+    });
+}
+
+function renderCard(doc) {
+    var title = escapeHtml(doc.title || 'Untitled');
+    var desc = escapeHtml((doc.description || '').substring(0, 300));
+    var tags = (doc.tags || []).slice(0, 5);
+    var date = doc.date || '';
+    var cat = (doc.category || '').toUpperCase();
+    var localPath = doc.local_path || '';
+
+    var tagHtml = tags.map(function(t) {
+        return '<span class="tag">' + escapeHtml(t) + '</span>';
+    }).join('');
+
+    var dateHtml = date ? '<div class="card-date">' +
+        new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) +
+        '</div>' : '';
+
+    var mdLink = localPath ? 'archive/' + localPath + '/content.md' : '#';
+    var htmlLink = localPath ? 'archive/' + localPath + '/full.html' : '#';
+    var sourceLink = doc.url || '#';
+
+    return '<a class="card" href="' + mdLink + '">' +
+        '<div class="card-type">' + cat + '</div>' +
+        '<div class="card-title">' + title + '</div>' +
+        dateHtml +
+        (tagHtml ? '<div class="card-meta">' + tagHtml + '</div>' : '') +
+        (desc ? '<div class="card-desc">' + desc + '</div>' : '') +
+        '<div class="card-meta" style="margin-top:8px;">' +
+            '<span class="tag">Markdown</span>' +
+            '<span class="tag">HTML</span>' +
+        '</div>' +
+    '</a>';
+}
+
+function escapeHtml(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function sortResults(docs) {
+    var sorted = docs.slice();
+    if (APP.currentSort === 'title') {
+        sorted.sort(function(a, b) { return (a.title || '').localeCompare(b.title || ''); });
+    } else if (APP.currentSort === 'date') {
+        sorted.sort(function(a, b) {
+            var da = a.date ? new Date(a.date) : new Date(0);
+            var db = b.date ? new Date(b.date) : new Date(0);
+            return db - da;
+        });
+    } else if (APP.currentSort === 'category') {
+        sorted.sort(function(a, b) { return (a.category || '').localeCompare(b.category || ''); });
+    }
+    return sorted;
+}
+
+function toggleTheme() {
+    var html = document.documentElement;
+    var current = html.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('bs-theme', next);
+    document.getElementById('themeToggle').textContent = next === 'dark' ? '\uD83C\uDF19' : '\u2600\uFE0F';
+}
+
+function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('collapsed');
+}
+
+function toggleMobileSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('mobileOverlay').classList.toggle('active');
+}
+
+function toggleSortBar() {
+    var bar = document.getElementById('sortBar');
+    bar.style.display = bar.style.display === 'none' ? 'flex' : 'none';
+}
+
+document.addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-sort]');
+    if (btn) {
+        var sort = btn.dataset.sort;
+        document.querySelectorAll('[data-sort]').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        APP.currentSort = sort;
+        APP.currentPage = 1;
+        render();
+    }
+});
+
+function exportIndex() {
+    var blob = new Blob([JSON.stringify({ items: APP.docs }, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'buildingscience-index.json';
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+// Load index.json
+fetch('index.json')
+    .then(function(r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+    })
+    .then(function(data) { init(data); })
+    .catch(function(err) {
+        document.getElementById('resultsContainer').innerHTML =
+            '<div class="empty-state"><h2>Could not load archive</h2>' +
+            '<p>Error: ' + escapeHtml(err.message) + '</p>' +
+            '<p>Make sure index.json exists in the same directory.</p></div>';
+    });
+</script>
+</body>
+</html>
