@@ -2,7 +2,7 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Building Science Archive</title>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -42,6 +42,7 @@ body {
     color: var(--text);
     line-height: 1.6;
     min-height: 100vh;
+    -webkit-text-size-adjust: 100%;
 }
 .app { display: flex; min-height: 100vh; }
 
@@ -278,17 +279,80 @@ body {
 
 /* Mobile */
 @media (max-width: 768px) {
-    .sidebar { position: fixed; transform: translateX(-100%); }
+    .sidebar {
+        position: fixed; transform: translateX(-100%);
+        width: 280px; z-index: 110;
+    }
     .sidebar.open { transform: translateX(0); }
     .main { margin-left: 0; }
-    .mobile-toggle { display: block !important; }
-    .results-grid { grid-template-columns: 1fr; }
-    .viewer-panel { width: 100%; max-width: 100%; }
+    .mobile-toggle { display: flex !important; }
+    #sidebarToggle { display: none; }
+
+    /* Topbar: stack controls below search on mobile */
+    .topbar {
+        flex-wrap: wrap; padding: 12px 16px; gap: 8px;
+    }
+    .search-box { order: 1; flex-basis: 100%; }
+    .mobile-toggle { order: 0; }
+    .topbar-controls { order: 2; margin-left: auto; }
+    .topbar-controls .btn { padding: 6px 10px; font-size: 16px; }
+    /* Hide text labels on mobile buttons */
+    .topbar-controls .btn-text { display: none; }
+
+    .stats { padding: 0 16px 8px; }
+    .results-container { padding: 0 12px 32px; }
+    .results-grid { grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    .category-header { font-size: 16px; margin: 20px 0 10px; }
+
+    .card { padding: 12px; }
+    .card-title { font-size: 14px; }
+    .card-desc { font-size: 12px; -webkit-line-clamp: 3; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
+
+    /* Pagination: compact on mobile */
+    .pagination {
+        flex-wrap: wrap; gap: 4px; margin-top: 20px;
+        justify-content: center;
+    }
+    .page-btn { padding: 4px 8px; font-size: 12px; min-width: 32px; }
+
+    .sort-bar { padding: 0 12px; flex-wrap: wrap; }
+
+    /* Viewer: full screen on mobile */
+    .viewer-panel {
+        width: 100%; max-width: 100%;
+        top: 0; bottom: 0; left: 0; right: 0;
+    }
+    .viewer-header { padding: 12px 16px; }
+    .viewer-title { font-size: 16px; }
+    .viewer-body { padding: 16px 16px 32px; max-width: 100%; }
+    .viewer-body .md-content h1 { font-size: 20px; }
+    .viewer-body .md-content h2 { font-size: 17px; }
+    .viewer-body .md-content h3 { font-size: 15px; }
+    .viewer-body .md-content table { font-size: 13px; }
+    .viewer-body .md-content th, .viewer-body .md-content td { padding: 6px 8px; }
+    .viewer-body .md-content pre { padding: 12px; font-size: 13px; }
+
+    .footer { padding: 24px 16px; }
+
+    /* Safe area for notched phones */
+    .sidebar { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+    .viewer-header { padding-top: calc(12px + env(safe-area-inset-top)); padding-right: calc(16px + env(safe-area-inset-right)); }
+    .viewer-body { padding-left: calc(16px + env(safe-area-inset-left)); padding-right: calc(16px + env(safe-area-inset-right)); padding-bottom: calc(32px + env(safe-area-inset-bottom)); }
+    .topbar { padding-top: calc(12px + env(safe-area-inset-top)); padding-left: calc(16px + env(safe-area-inset-left)); padding-right: calc(16px + env(safe-area-inset-right)); }
 }
+/* Small phones */
+@media (max-width: 400px) {
+    .topbar { padding: 10px 12px; }
+    .search-box input { font-size: 14px; padding: 8px 12px 8px 36px; }
+    .results-container { padding: 0 8px 24px; }
+    .card { padding: 10px; }
+    .viewer-body { padding: 12px 12px 24px; }
+}
+
 .mobile-toggle { display: none; }
 .mobile-overlay {
     display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.5); z-index: 90;
+    background: rgba(0,0,0,0.5); z-index: 100;
 }
 .mobile-overlay.active { display: block; }
 </style>
@@ -308,15 +372,15 @@ body {
     <main class="main">
         <div class="topbar">
             <button class="btn mobile-toggle" id="mobileToggle">&#9776;</button>
-            <button class="btn" id="sidebarToggle">&#9776;</button>
+            <button class="btn" id="sidebarToggle" title="Toggle sidebar">&#9776;</button>
             <div class="search-box">
                 <span class="search-icon">&#128269;</span>
                 <input type="text" id="searchInput" placeholder="Search documents, topics, tags..." autocomplete="off">
             </div>
             <div class="topbar-controls">
                 <button class="btn" id="themeToggle" title="Toggle theme">&#127769;</button>
-                <button class="btn" id="sortToggle" title="Toggle sort">&#8597; Sort</button>
-                <button class="btn" id="exportBtn" title="Export index">&#128190; Save</button>
+                <button class="btn" id="sortToggle" title="Toggle sort">&#8597;<span class="btn-text"> Sort</span></button>
+                <button class="btn" id="exportBtn" title="Export index">&#128190;<span class="btn-text"> Save</span></button>
             </div>
         </div>
         <div class="stats" id="resultStats"></div>
@@ -526,10 +590,23 @@ function render() {
 
     if (totalPages > 1) {
         html += '<div class="pagination">';
+        // Smart pagination: first, last, current ± 2, ellipsis
+        var pages = [];
         for (var p = 1; p <= totalPages; p++) {
-            html += '<button class="page-btn' + (p === APP.currentPage ? ' active' : '') +
-                '" data-page="' + p + '">' + p + '</button>';
+            if (p === 1 || p === totalPages || (p >= APP.currentPage - 2 && p <= APP.currentPage + 2)) {
+                pages.push(p);
+            } else if (pages[pages.length - 1] !== '...') {
+                pages.push('...');
+            }
         }
+        pages.forEach(function(p) {
+            if (p === '...') {
+                html += '<span class="page-btn" style="cursor:default;border:none;">&hellip;</span>';
+            } else {
+                html += '<button class="page-btn' + (p === APP.currentPage ? ' active' : '') +
+                    '" data-page="' + p + '">' + p + '</button>';
+            }
+        });
         html += '</div>';
     }
 
